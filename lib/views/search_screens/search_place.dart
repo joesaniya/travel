@@ -35,7 +35,7 @@ class _SearchPlaceState extends State<SearchPlace>
         controller: controller,
         builder: (controller) {
           return Container(
-            // padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 48),
+            padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 99),
             child: Column(
               children: <Widget>[
                 Container(
