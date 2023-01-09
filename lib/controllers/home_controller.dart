@@ -65,8 +65,8 @@ class HomeController extends FxController {
       widgetBuilder: StepWidgetBuilder.useDefaultTheme(
         texts: [
           'Get your notifications from here',
-          'Get latest & trending products here',
-          'Get category wise products here',
+          'Attractions of the hotel',
+          'Search Your best Hotels',
         ],
         buttonTextBuilder: (currPage, totalPage) {
           return currPage < totalPage - 1 ? 'Next' : 'Finish';

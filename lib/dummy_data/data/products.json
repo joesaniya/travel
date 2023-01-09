@@ -1,112 +1,132 @@
 [
   {
-    "name": "Pink & Blue Top",
-    "image": "assets/images/apps/shopping2/images/photo2.jpg",
+    "name": "Ferrari World or Warner Bros",
+    "image": "assets/images/apps/shopping2/images/Ferraiworld.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 4.5,
     "review": 125,
     "price": 150.0,
     "color": "#FFADAD",
     "quantity": 8,
-    "favorite": true
+    "favorite": true,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "White off shoulder",
-    "image": "assets/images/apps/shopping2/images/photo3.jpg",
+    "name": "Dubai Parks and Resorts",
+    "image": "assets/images/apps/shopping2/images/dubaiparks.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 3.5,
     "review": 125,
     "price": 135.5,
     "color": "#B1D4F8",
     "quantity": 5,
-    "favorite": false
+    "favorite": false,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "Red & Blue Jacket",
-    "image": "assets/images/apps/shopping2/images/photo5.jpg",
+    "name": "Bollywood Theme Park with Meal + Motion Gate",
+    "image": "assets/images/apps/shopping2/images/bollwoodthemepark.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 4.0,
     "review": 125,
     "price": 170.0,
     "color": "#FFC6FF",
     "quantity": 6,
-    "favorite": true
+    "favorite": true,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "Trendy White Top",
-    "image": "assets/images/apps/shopping2/images/photo10.jpg",
+    "name": "IMG Worlds of Adventure Dubai",
+    "image": "assets/images/apps/shopping2/images/img.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 3.0,
     "review": 125,
     "price": 129.9,
     "color": "#FFADAD",
     "quantity": 3,
-    "favorite": true
+    "favorite": true,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "Black Men's Wear",
-    "image": "assets/images/apps/shopping2/images/photo8.jpg",
+    "name": "Flying Cup",
+    "image": "assets/images/apps/shopping2/images/flyingcup.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 4.5,
     "review": 125,
     "price": 140.0,
     "color": "#A0C4FF",
     "quantity": 5,
-    "favorite": false
+    "favorite": false,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "Couple Tshirts",
-    "image": "assets/images/apps/shopping2/images/photo7.jpg",
+    "name": "Ski Dubai",
+    "image": "assets/images/apps/shopping2/images/ski_dubai.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 4.2,
     "review": 125,
     "price": 135.5,
     "color": "#fdffb6",
     "quantity": 9,
-    "favorite": false
+    "favorite": false,
+    "location": "Abu Dhabi",
+    "types": "Theme Park"
   },
   {
-    "name": "White Men's Wear",
-    "image": "assets/images/apps/shopping2/images/photo4.jpg",
+    "name": "Sky View Observatory",
+    "image": "assets/images/apps/shopping2/images/sky_view.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 4.0,
     "review": 125,
     "price": 125.5,
     "color": "#9BF6FF",
     "quantity": 4,
-    "favorite": false
+    "favorite": false,
+    "location": "Abu Dhabi",
+    "types": "Attractions"
   },
   {
-    "name": "Black Men's Jacket",
-    "image": "assets/images/apps/shopping2/images/photo6.jpg",
+    "name": "Global Village",
+    "image": "assets/images/apps/shopping2/images/global_village.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 3.7,
     "review": 125,
     "price": 180.0,
     "color": "#CAFFBF",
     "quantity": 8,
-    "favorite": true
+    "favorite": true,
+    "location": "Abu Dhabi",
+    "types": "Attractions"
   },
   {
-    "name": "White tshirt",
-    "image": "assets/images/apps/shopping2/images/photo1.jpg",
+    "name": "Miracle Garden",
+    "image": "assets/images/apps/shopping2/images/miracle_garden.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 3.8,
     "review": 125,
     "price": 120.0,
     "color": "#BDB2FF",
     "quantity": 6,
-    "favorite": true
+    "favorite": true,
+    "location": "Abu Dhabi",
+    "types": "Attractions"
   },
   {
-    "name": "Men's White Formal",
-    "image": "assets/images/apps/shopping2/images/photo9.jpg",
+    "name": "Dubai Dolphinarium",
+    "image": "assets/images/apps/shopping2/images/dubai_dolphinarium.jpg",
     "description": "Cool, Windy weather is on its way. Send him out the door in a jacket he wants to wear. Warm Zipper Hoodie Jacket. Try it out to feel comfy",
     "rating": 3.5,
     "review": 125,
     "price": 99.99,
     "color": "#ffd6a5",
     "quantity": 10,
-    "favorite": false
+    "favorite": false,
+    "location": "Abu Dhabi",
+    "types": "Attractions"
   }
 ]

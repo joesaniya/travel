@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/search_screens/search_place.dart';
 
 import '../controllers/home_controller.dart';
 import '../images.dart';
 import '../models/category.dart';
 import '../models/product.dart';
 import '../theme/app_theme.dart';
-import '../widgets/build_Search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   // const HomeScreen({required this.size});
@@ -33,24 +35,46 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
+//top suggestion
   Widget _buildSingleCategory(Category category) {
     bool selected = category == controller.selectedCategory;
     bool last = controller.categories!.last == category;
     return FxContainer(
+      // width: MediaQuery.of(context).size.width / controller.categories!.length,
+      width: 110,
       margin: FxSpacing.right(last ? 0 : 12),
       onTap: () {
         controller.changeSelectedCategory(category);
+        // selected = !selected;
+        // setState(() {});
+        log(selected.toString());
       },
       borderRadiusAll: 4,
+      // color: Colors.red,
       color: selected ? theme.colorScheme.primaryContainer : null,
       paddingAll: 12,
-      child: Image(
-        image: AssetImage(category.icon),
-        height: 20,
-        color: selected
-            ? theme.colorScheme.primary
-            : theme.colorScheme.onBackground.withAlpha(220),
-        width: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Image(
+            image: AssetImage(category.icon),
+            height: 20,
+            color: selected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.onBackground.withAlpha(220),
+            width: 20,
+          ),
+          FxText.titleMedium(
+            category.name,
+            letterSpacing: 0.3,
+            fontWeight: 700,
+            color: selected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.onBackground.withAlpha(220),
+            // color: theme.colorScheme.primary,
+          ),
+        ],
       ),
     );
   }
@@ -67,93 +91,122 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           },
           borderRadiusAll: 4,
           paddingAll: 16,
+          // color: Colors.green,
           margin: FxSpacing.bottom(20),
-          child: Row(
+          child: Column(
             children: [
-              FxContainer(
-                paddingAll: 0,
-                borderRadiusAll: 4,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
+              Align(
+                alignment: Alignment.centerRight,
                 child: Hero(
-                  tag: "product_image_" + product.name,
-                  child: Image(
-                    image: AssetImage(product.image),
-                    height: 80,
-                    fit: BoxFit.cover,
+                  tag: product.types,
+                  child: FxContainer(
+                    borderRadiusAll: 2,
+                    padding: FxSpacing.xy(8, 4),
+                    color: theme.colorScheme.primary,
+                    child: FxText.bodySmall(
+                      product.types.toString(),
+                      fontWeight: 600,
+                      color: theme.colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ),
-              FxSpacing.width(20),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Hero(
-                          tag: "product_" + product.name,
-                          child: FxText.bodyMedium(
-                            product.name,
-                          ),
-                        ),
-                        Icon(
-                          product.favorite
-                              ? Icons.favorite_rounded
-                              : Icons.favorite_outline_rounded,
-                          size: 18,
-                          color: theme.colorScheme.primary,
-                        ),
-                      ],
-                    ),
-                    FxSpacing.height(4),
-                    Hero(
-                      tag: product.name + "_" + product.price.toString(),
-                      child: FxText.labelLarge(
-                        '\$' + product.price.toString(),
-                        fontWeight: 700,
+              Row(
+                children: [
+                  FxContainer(
+                    paddingAll: 0,
+                    borderRadiusAll: 4,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Hero(
+                      tag: "product_image_" + product.name,
+                      child: Image(
+                        image: AssetImage(product.image),
+                        height: 80,
+                        width: 150,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    FxSpacing.height(6),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  FxSpacing.width(20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Hero(
-                          tag: product.name + "_" + product.rating.toString(),
-                          child: FxContainer(
-                            borderRadiusAll: 2,
-                            padding: FxSpacing.xy(8, 4),
-                            color: theme.colorScheme.primary,
-                            child: Row(
-                              children: [
-                                Icon(
-                                  FeatherIcons.star,
-                                  color: theme.colorScheme.onPrimary,
-                                  size: 12,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: Hero(
+                                tag: "product_" + product.name,
+                                child: FxText.bodyMedium(
+                                  product.name,
                                 ),
-                                FxSpacing.width(4),
-                                FxText.bodySmall(
-                                  product.rating.toString(),
-                                  fontWeight: 600,
-                                  color: theme.colorScheme.onPrimary,
-                                ),
-                              ],
+                              ),
                             ),
+                            // Icon(
+                            //   product.favorite
+                            //       ? Icons.favorite_rounded
+                            //       : Icons.favorite_outline_rounded,
+                            //   size: 18,
+                            //   color: theme.colorScheme.primary,
+                            // ),
+                          ],
+                        ),
+                        FxSpacing.height(4),
+                        Hero(
+                          tag: product.name + "_" + product.price.toString(),
+                          child: FxText.labelLarge(
+                            // '\$' + product.price.toString(),
+                            product.price.toString() + " " + "USD",
+                            // "\$" + product.price.toString() + "/hour",
+                            fontWeight: 700,
                           ),
                         ),
-                        FxContainer.bordered(
-                          paddingAll: 4,
-                          borderRadiusAll: 4,
-                          child: Icon(
-                            FeatherIcons.plus,
-                            size: 14,
-                            color: theme.colorScheme.onBackground,
-                          ),
+                        FxSpacing.height(6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Hero(
+                              tag: product.name +
+                                  "_" +
+                                  product.rating.toString(),
+                              child: FxContainer(
+                                borderRadiusAll: 2,
+                                padding: FxSpacing.xy(8, 4),
+                                color: theme.colorScheme.primary,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      FeatherIcons.star,
+                                      color: theme.colorScheme.onPrimary,
+                                      size: 12,
+                                    ),
+                                    FxSpacing.width(4),
+                                    FxText.bodySmall(
+                                      product.rating.toString(),
+                                      fontWeight: 600,
+                                      color: theme.colorScheme.onPrimary,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            // FxContainer.bordered(
+                            //   paddingAll: 4,
+                            //   borderRadiusAll: 4,
+                            //   child: Icon(
+                            //     FeatherIcons.plus,
+                            //     size: 14,
+                            //     color: theme.colorScheme.onBackground,
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -165,6 +218,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       children: list,
     );
   }
+
+  //top suggestionss
 
   Future<void> addCategories() async {
     Future ft = Future(() {});
@@ -267,9 +322,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.35,
                   fit: BoxFit.fill,
-                  image: AssetImage("assets/images/apps/hotel/hotel-1.jpg"),
+                  image: AssetImage("assets/images/apps/hotel/hotelbg.jpg"),
                 ),
-                buildSearchBar(MediaQuery.of(context).size, "long"),
+                SearchPlace()
+                // LogInScreen()
+                // buildSearchBar(MediaQuery.of(context).size, "long"),
                 // buildTitle(size),
               ],
             ),
@@ -337,7 +394,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FxText.bodyLarge(
-                      'Top Categories',
+                      'Top Suggestions',
                       letterSpacing: 0,
                       fontWeight: 600,
                     ),
@@ -354,7 +411,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             FxSpacing.height(20),
             Container(
               key: controller.intro.keys[2],
-              height: 50,
+              // height: 50,
+              height: 70,
+              // color: Colors.amber,
               child: AnimatedList(
                   scrollDirection: Axis.horizontal,
                   key: controller.listKey,
@@ -362,7 +421,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   itemBuilder: (context, index, animation) {
                     return SlideTransition(
                         position: animation.drive(controller.offset),
-                        child: controller.newCategories[index]);
+                        child: controller.newCategories[index]
+                        // child: Container(
+                        //   color: Colors.green,
+                        // ),
+                        );
                   }),
             ),
             FxSpacing.height(20),
@@ -373,7 +436,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FxText.bodyLarge(
-                      'New Arrivals',
+                      // 'Best Selling Attractions',
+                      'Best Attractions',
                       letterSpacing: 0,
                       fontWeight: 600,
                     ),
@@ -392,6 +456,43 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               scrollDirection: Axis.vertical,
               child: _buildProductList(),
             ),
+            // FxSpacing.height(20),
+            // FadeTransition(
+            //   opacity: controller.fadeAnimation,
+            //   child: Container(
+            //     child: FxText.bodyLarge(
+            //       // 'Best Selling Attractions',
+            //       'Top Attractions',
+            //       letterSpacing: 0,
+            //       fontWeight: 600,
+            //     ),
+            //   ),
+            // ),
+            // FxSpacing.height(20),
+            // // SizedBox(
+            // //   height: 500,
+            // //   width: MediaQuery.of(context).size.width,
+            // //   child: GridView.custom(
+            // //       gridDelegate:
+            // //           SliverQuiltedGridDelegate(crossAxisCount: 4, pattern: [
+            // //         QuiltedGridTile(
+            // //           4,
+            // //           2,
+            // //         ),
+            // //         QuiltedGridTile(2, 1),
+            // //         QuiltedGridTile(2, 1),
+            // //         QuiltedGridTile(2, 1),
+            // //         QuiltedGridTile(2, 1)
+            // //       ]),
+            // //       childrenDelegate: SliverChildBuilderDelegate(
+            // //           childCount: 5,
+            // //           (context, index) => Container(
+            // //                 color: Colors.red,
+            // //               ))
+            // //               ),
+            // // )
+            // PlacesStaggeredView(
+            //     size: MediaQuery.of(context).size, places: places)
           ],
         ),
       ),

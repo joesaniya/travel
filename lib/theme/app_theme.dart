@@ -173,6 +173,7 @@ class AppTheme {
   static ThemeData shoppingLightTheme = createTheme(
     ColorScheme.fromSeed(
       seedColor: Color(0xff1c8c8c),
+      // seedColor: Color(0xff3C4EC5),
       primaryContainer: Color(0xffdafafa),
       secondary: Color(0xfff15f5f),
       onSecondary: Color(0xffffffff),
@@ -184,6 +185,7 @@ class AppTheme {
     ColorScheme.fromSeed(
         seedColor: Color(0xffcaffff),
         primary: Color(0xffcaffff),
+        // primary: Color(0xff3C4EC5),
         onPrimary: Color(0xff0b7777),
         primaryContainer: Color(0xff18a6a6),
         onPrimaryContainer: Color(0xffe5fdfd),

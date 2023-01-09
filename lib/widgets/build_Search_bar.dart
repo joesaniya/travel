@@ -21,11 +21,13 @@ Padding buildSearchBar(Size size, String length) {
           ),
           child: Padding(
             padding: EdgeInsets.only(
-                left: size.width * 0.05, top: size.height * 0.007),
+                left: size.width * 0.05, top: size.height * 0.003),
             // padding: EdgeInsets.only(
             //     left: size.width * 0.05, top: size.height * 0.025),
             child: TextField(
               decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 16),
+                suffixIcon: Icon(Icons.search),
                 border: InputBorder.none,
                 hintText: "Where Next?",
                 hintStyle: FxTextStyle.bodyMedium(),
@@ -33,21 +35,21 @@ Padding buildSearchBar(Size size, String length) {
             ),
           ),
         ),
-        Positioned(
-          right: 0.0,
-          child: Container(
-            width: size.width * 0.17,
-            height: size.height * 0.06,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.all(Radius.circular(114.0)),
-            ),
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-          ),
-        )
+        // Positioned(
+        //   right: 0.0,
+        //   child: Container(
+        //     width: size.width * 0.17,
+        //     height: size.height * 0.06,
+        //     decoration: BoxDecoration(
+        //       color: Colors.black,
+        //       borderRadius: BorderRadius.all(Radius.circular(114.0)),
+        //     ),
+        //     child: Icon(
+        //       Icons.search,
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        // )
       ],
     ),
   );
