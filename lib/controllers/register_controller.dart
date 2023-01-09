@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/controllers/auth_controller.dart';
 
 import '../views/login_Screens/login_screen.dart';
-import '../views/splash_screens/splash_screen2.dart';
 
 class RegisterController extends FxController {
   TickerProvider ticker;
@@ -118,10 +118,11 @@ class RegisterController extends FxController {
     if (text == null || text.isEmpty) {
       emailController.forward();
       return "Please enter email";
-    } else if (FxStringValidator.isEmail(text)) {
-      emailController.forward();
-      return "Please enter valid email";
     }
+    //else if (FxStringValidator.isEmail(text)) {
+    //   emailController.forward();
+    //   return "Please enter valid email";
+    // }
     return null;
   }
 
@@ -169,11 +170,18 @@ class RegisterController extends FxController {
     if (formKey.currentState!.validate()) {
       arrowController.forward();
       await Future.delayed(Duration(milliseconds: 500));
-      Navigator.of(context, rootNavigator: true).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => SplashScreen2(),
-        ),
-      );
+      await AuthController().register(
+          nameTE.text,
+          emailTE.text,
+          // int.parse(phoneTE.text)
+          91,
+          phoneTE.text,
+          passwordTE.text);
+      // Navigator.of(context, rootNavigator: true).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => SplashScreen2(),
+      //   ),
+      // );
     }
   }
 
