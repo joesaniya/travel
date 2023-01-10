@@ -135,7 +135,9 @@ class _LogInScreenState extends State<LogInScreen>
                       child: Text(
                         "Forgot Password ?",
                         style: FxTextStyle.bodySmall(
-                            color: theme.colorScheme.primary),
+                          color: Color(0xff1529e8),
+                          // color: theme.colorScheme.primary
+                        ),
                       ),
                     ),
                   ),
@@ -147,7 +149,8 @@ class _LogInScreenState extends State<LogInScreen>
                       controller.login();
                     },
                     splashColor: theme.colorScheme.onPrimary.withAlpha(28),
-                    backgroundColor: theme.colorScheme.primary,
+                    // backgroundColor: theme.colorScheme.primary,
+                    backgroundColor: Color(0xff1529e8),
                     child: Container(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       decoration: BoxDecoration(),
@@ -228,9 +231,12 @@ class _LogInScreenState extends State<LogInScreen>
                         onPressed: () {
                           controller.goToRegisterScreen();
                         },
-                        child: FxText.labelLarge("Create an Account",
-                            decoration: TextDecoration.underline,
-                            color: theme.colorScheme.primary)),
+                        child: FxText.labelLarge(
+                          "Create an Account",
+                          decoration: TextDecoration.underline,
+                          color: Color(0xff1529e8),
+                          // color: theme.colorScheme.primary
+                        )),
                   ),
                 ],
               ),

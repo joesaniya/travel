@@ -392,9 +392,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                   controller.goToLogInScreen();
                 },
                 splashColor: theme.colorScheme.primary.withAlpha(40),
-                child: FxText.labelLarge("I have an Account",
-                    decoration: TextDecoration.underline,
-                    color: theme.colorScheme.primary),
+                child: FxText.labelLarge(
+                  "I have an Account",
+                  decoration: TextDecoration.underline,
+                  // color: theme.colorScheme.primary
+                  color: Color(0xff1529e8),
+                ),
               ),
             ),
           ],

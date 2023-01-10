@@ -103,7 +103,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                 controller.goToResetPasswordScreen();
               },
               splashColor: theme.colorScheme.onPrimary.withAlpha(30),
-              backgroundColor: theme.colorScheme.primary,
+              // backgroundColor: theme.colorScheme.primary,
+              backgroundColor: Color(0xff1529e8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -131,9 +132,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
                   controller.goToRegisterScreen();
                 },
                 splashColor: theme.colorScheme.primary.withAlpha(40),
-                child: FxText.labelLarge("I haven\'t an account",
-                    decoration: TextDecoration.underline,
-                    color: theme.colorScheme.primary),
+                child: FxText.labelLarge(
+                  "I haven\'t an account",
+                  decoration: TextDecoration.underline,
+                  // color: theme.colorScheme.primary
+                  color: Color(0xff1529e8),
+                ),
               ),
             ),
           ],

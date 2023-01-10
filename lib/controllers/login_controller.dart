@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
@@ -112,16 +114,40 @@ class LogInController extends FxController {
   Future<void> login() async {
     emailCounter = 0;
     passwordCounter = 0;
-    if (formKey.currentState!.validate()) {
+    if (emailTE.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Please enter name")));
+    } else if (emailTE.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Please enter email")));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("success")));
       arrowController.forward();
-      await Future.delayed(Duration(milliseconds: 1000));
-      await AuthController().login(emailTE.text, passwordTE.text);
-      // Navigator.of(context, rootNavigator: true).pushReplacement(
-      //   MaterialPageRoute(
-      //     builder: (context) => SplashScreen2(),
-      //   ),
-      // );
+      await Future.delayed(Duration(milliseconds: 500));
+      await AuthController()
+          .login(emailTE.text, passwordTE.text)
+          .then((value) =>
+              // Navigator.of(context, rootNavigator: true).pushReplacement(
+              //   MaterialPageRoute(
+              //     builder: (context) => SplashScreen2(),
+              //   ),
+              // )
+              log(value));
     }
+    // if (formKey.currentState!.validate()) {
+    //   arrowController.forward();
+    //   await Future.delayed(Duration(milliseconds: 1000));
+    //   await AuthController()
+    //       .login(emailTE.text, passwordTE.text)
+    //       .then((value) => log(emailTE.text));
+
+    //   // Navigator.of(context, rootNavigator: true).pushReplacement(
+    //   //   MaterialPageRoute(
+    //   //     builder: (context) => SplashScreen2(),
+    //   //   ),
+    //   // );
+    // }
   }
 
   void goToRegisterScreen() {
