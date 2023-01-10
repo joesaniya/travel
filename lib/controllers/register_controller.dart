@@ -126,6 +126,17 @@ class RegisterController extends FxController {
     return null;
   }
 
+  String? validateMobile(String? text) {
+    if (text == null || text.isEmpty) {
+      emailController.forward();
+      return "Please enter phone number";
+    } else if (text != 10) {
+      emailController.forward();
+      return "Please enter 10digits";
+    }
+    return null;
+  }
+
   String? validatePassword(String? text) {
     if (text == null || text.isEmpty) {
       passwordController.forward();
@@ -177,6 +188,7 @@ class RegisterController extends FxController {
           91,
           phoneTE.text,
           passwordTE.text);
+      // log('message');
       // Navigator.of(context, rootNavigator: true).pushReplacement(
       //   MaterialPageRoute(
       //     builder: (context) => SplashScreen2(),

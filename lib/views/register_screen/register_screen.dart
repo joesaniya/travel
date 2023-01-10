@@ -24,6 +24,13 @@ class _RegisterScreenState extends State<RegisterScreen>
   String initialCountry = 'IN';
   PhoneNumber number = PhoneNumber(isoCode: 'IN');
 
+  //manual
+  final TextEditingController _phnocontroller = TextEditingController();
+  final bool _isLoading = false;
+
+  String? _selectedCountryCode;
+  final List<String> _countryCodes = ['+91', '+23'];
+
   @override
   void initState() {
     super.initState();
@@ -130,54 +137,138 @@ class _RegisterScreenState extends State<RegisterScreen>
                     ),
                   ),
                   FxSpacing.height(20),
+                  Row(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xff1529e8),
+                            borderRadius: BorderRadius.circular(0)),
+                        height: 45.0,
+                        width: 68,
+                        // margin: const EdgeInsets.all(3.0),
+                        //width: 300.0,
+                        child: DropdownButtonHideUnderline(
+                          child: ButtonTheme(
+                            alignedDropdown: true,
+                            child: DropdownButton(
+                              iconSize: 0.0,
+                              dropdownColor: Colors.blueAccent,
+                              // icon: Icon(icon),
+                              value: _selectedCountryCode,
+                              hint: const Center(
+                                child: Text(
+                                  'code',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              items: _countryCodes.map((String value) {
+                                return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Center(
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ));
+                              }).toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedCountryCode = value.toString();
+                                });
+                              },
+                              style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: SlideTransition(
+                          position: controller.phoneAnimation,
+                          child: TextFormField(
+                            style: FxTextStyle.bodyMedium(),
+                            decoration: InputDecoration(
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                filled: true,
+                                isDense: true,
+                                fillColor: theme.cardTheme.color,
+                                hintText: "Phone Number",
+                                enabledBorder: outlineInputBorder,
+                                focusedBorder: outlineInputBorder,
+                                border: outlineInputBorder,
+                                contentPadding: FxSpacing.all(16),
+                                hintStyle: FxTextStyle.bodyMedium(),
+                                isCollapsed: true),
+                            maxLines: 1,
+                            controller: controller.phoneTE,
+                            validator: controller.validateMobile,
+                            cursorColor: theme.colorScheme.onBackground,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // SizedBox(
+                  //   width: 4,
+                  // ),
+
                   //phone
 
-                  SlideTransition(
-                    position: controller.phoneAnimation,
-                    child: Container(
-                      // height: 20,
-                      // width: 298,
-                      // margin: const EdgeInsets.only(left: 48, right: 79),
-                      color: theme.cardTheme.color,
-                      padding: FxSpacing.only(left: 16),
-                      child: InternationalPhoneNumberInput(
-                        textStyle: FxTextStyle.bodyMedium(),
-                        //                        autoValidate: false,
-                        autoValidateMode: AutovalidateMode.disabled,
-                        selectorTextStyle: FxTextStyle.bodyMedium(),
-                        initialValue: number,
+                  // SlideTransition(
+                  //   position: controller.phoneAnimation,
+                  //   child: Container(
+                  //     // height: 20,
+                  //     // width: 298,
+                  //     // margin: const EdgeInsets.only(left: 48, right: 79),
+                  //     color: theme.cardTheme.color,
+                  //     padding: FxSpacing.only(left: 16),
+                  //     child: InternationalPhoneNumberInput(
+                  //       textStyle: FxTextStyle.bodyMedium(),
+                  //       //                        autoValidate: false,
+                  //       autoValidateMode: AutovalidateMode.disabled,
+                  //       selectorTextStyle: FxTextStyle.bodyMedium(),
+                  //       initialValue: number,
 
-                        textFieldController: controller.phoneTE,
+                  //       textFieldController: controller.phoneTE,
 
-                        inputDecoration: InputDecoration(
-                          focusedBorder:
-                              UnderlineInputBorder(borderSide: BorderSide.none),
-                          focusedErrorBorder:
-                              UnderlineInputBorder(borderSide: BorderSide.none),
-                          errorBorder:
-                              UnderlineInputBorder(borderSide: BorderSide.none),
-                          disabledBorder:
-                              UnderlineInputBorder(borderSide: BorderSide.none),
-                          border:
-                              UnderlineInputBorder(borderSide: BorderSide.none),
-                          // enabledBorder: UnderlineInputBorder(
-                          //     borderSide:
-                          //         BorderSide(color: Colors.pink)),
-                          //                          contentPadding: EdgeInsets.only(left: 0.0),
-                          hintText: 'Phone Number',
-                          hintStyle: FxTextStyle.bodyMedium(),
+                  //       inputDecoration: InputDecoration(
+                  //         focusedBorder:
+                  //             UnderlineInputBorder(borderSide: BorderSide.none),
+                  //         focusedErrorBorder:
+                  //             UnderlineInputBorder(borderSide: BorderSide.none),
+                  //         errorBorder:
+                  //             UnderlineInputBorder(borderSide: BorderSide.none),
+                  //         disabledBorder:
+                  //             UnderlineInputBorder(borderSide: BorderSide.none),
+                  //         border:
+                  //             UnderlineInputBorder(borderSide: BorderSide.none),
+                  //         // enabledBorder: UnderlineInputBorder(
+                  //         //     borderSide:
+                  //         //         BorderSide(color: Colors.pink)),
+                  //         //                          contentPadding: EdgeInsets.only(left: 0.0),
+                  //         hintText: 'Phone Number',
+                  //         hintStyle: FxTextStyle.bodyMedium(),
 
-                          isDense: true,
-                        ),
+                  //         isDense: true,
+                  //       ),
 
-                        selectorConfig: const SelectorConfig(
-                            selectorType: PhoneInputSelectorType.DIALOG),
-                        onInputChanged: (PhoneNumber number) {
-                          print(number.phoneNumber);
-                        },
-                      ),
-                    ),
-                  ),
+                  //       selectorConfig: const SelectorConfig(
+                  //           selectorType: PhoneInputSelectorType.DIALOG),
+                  //       onInputChanged: (PhoneNumber number) {
+                  //         print(number.phoneNumber);
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   FxSpacing.height(20),
                   SlideTransition(
                     position: controller.passwordAnimation,

@@ -25,7 +25,8 @@ class FullAppController extends FxController {
     navItems = [
       NavItem('Search', FeatherIcons.search),
       NavItem('Saved', FeatherIcons.heart),
-      NavItem('Booking', FeatherIcons.shoppingBag),
+      NavItem(
+          'Booking', Icons.luggage), //--->offerpage indicating percentage icon
       NavItem('Profile', FeatherIcons.user),
     ];
   }

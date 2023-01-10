@@ -57,7 +57,7 @@ class HomeController extends FxController {
     bellController.repeat(reverse: true);
 
     intro = Intro(
-      stepCount: 3,
+      stepCount: 2,
       maskClosable: true,
       onHighlightWidgetTap: (introStatus) {
         print(introStatus);
@@ -65,7 +65,7 @@ class HomeController extends FxController {
       widgetBuilder: StepWidgetBuilder.useDefaultTheme(
         texts: [
           'Get your notifications from here',
-          'Attractions of the hotel',
+          // 'Attractions of the hotel',
           'Search Your best Hotels',
         ],
         buttonTextBuilder: (currPage, totalPage) {

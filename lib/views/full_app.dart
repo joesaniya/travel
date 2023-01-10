@@ -49,6 +49,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
         controller: controller,
         builder: (controller) {
           return Scaffold(
+            backgroundColor: Color(0xfff5f5f5),
             body: Column(
               children: [
                 Expanded(

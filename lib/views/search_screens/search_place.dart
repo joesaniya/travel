@@ -35,13 +35,16 @@ class _SearchPlaceState extends State<SearchPlace>
         controller: controller,
         builder: (controller) {
           return Container(
-            padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 99),
+            // color: Colors.yellow,
+            // padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 99),
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 24, right: 24, top: 36),
+                  // color: Colors.yellow,
+                  // margin: EdgeInsets.only(left: 24, right: 24, top: 36),
                   child: FxContainer.none(
                     borderRadiusAll: 4,
+                    // border: Border.all(color: Colors.blue),
                     child: Column(
                       children: <Widget>[
                         SlideTransition(
@@ -75,9 +78,17 @@ class _SearchPlaceState extends State<SearchPlace>
                                   color: theme.colorScheme.onBackground,
                                 ),
                                 hintText: "Where do you want to see?",
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8),
+                                        // color: Colors.lightBlueAccent,
+                                        width: 1)),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8), width: 1)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8), width: 1)),
                                 contentPadding: FxSpacing.all(16),
                                 hintStyle: FxTextStyle.bodyMedium(),
                                 isCollapsed: true),
@@ -87,11 +98,11 @@ class _SearchPlaceState extends State<SearchPlace>
                             cursorColor: theme.colorScheme.onBackground,
                           ),
                         ),
-                        Divider(
-                          // color: theme.dividerColor,
-                          color: theme.colorScheme.secondary,
-                          height: 0.5,
-                        ),
+                        // Divider(
+                        //   // color: theme.dividerColor,
+                        //   color: theme.colorScheme.secondary,
+                        //   height: 0.5,
+                        // ),
                         SlideTransition(
                           position: controller.dateAnimation,
                           child: TextFormField(
