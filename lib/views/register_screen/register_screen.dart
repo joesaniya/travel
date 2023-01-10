@@ -155,14 +155,20 @@ class _RegisterScreenState extends State<RegisterScreen>
                               dropdownColor: Colors.blueAccent,
                               // icon: Icon(icon),
                               value: _selectedCountryCode,
-                              hint: const Center(
-                                child: Text(
-                                  'code',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w500),
+                              hint: Center(
+                                child: FxText.labelLarge(
+                                  "Code",
+                                  fontWeight: 600,
+                                  color: theme.colorScheme.onPrimary,
+                                  letterSpacing: 0.4,
                                 ),
+                                // child: Text(
+                                //   'code',
+                                //   style: TextStyle(
+                                //       color: Colors.white,
+                                //       fontSize: 20,
+                                //       fontWeight: FontWeight.w500),
+                                // ),
                               ),
                               items: _countryCodes.map((String value) {
                                 return DropdownMenuItem<String>(
@@ -307,7 +313,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                 controller.register();
               },
               splashColor: theme.colorScheme.onPrimary.withAlpha(30),
-              backgroundColor: theme.colorScheme.primary,
+              backgroundColor: Color(0xff1529e8),
+              // backgroundColor: theme.colorScheme.primary,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

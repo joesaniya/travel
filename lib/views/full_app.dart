@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/Home_Search_Screen.dart';
 
@@ -50,46 +51,159 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
         builder: (controller) {
           return Scaffold(
             backgroundColor: Color(0xfff5f5f5),
-            body: Column(
+            // body: Column(
+            //   children: [
+            //     Expanded(
+            //       child: TabBarView(
+            //         controller: controller.tabController,
+            //         children: <Widget>[
+            //           HomeScreen(),
+            //           // HomeScreen(size: size),
+            //           Text('home'),
+            //           Text('home'),
+            //           Text('home'),
+            //         ],
+            //       ),
+            //     ),
+            //     FxContainer(
+            //       bordered: true,
+            //       enableBorderRadius: false,
+            //       border: Border(
+            //           top: BorderSide(
+            //               color: theme.dividerColor,
+            //               width: 1,
+            //               style: BorderStyle.solid)),
+            //       padding: FxSpacing.xy(12, 16),
+            //       color: theme.scaffoldBackgroundColor,
+            //       child: TabBar(
+            //         controller: controller.tabController,
+            //         indicator: FxTabIndicator(
+            //             indicatorColor: theme.colorScheme.primary,
+            //             indicatorHeight: 3,
+            //             radius: 3,
+            //             indicatorStyle: FxTabIndicatorStyle.rectangle,
+            //             yOffset: -18),
+            //         indicatorSize: TabBarIndicatorSize.tab,
+            //         indicatorColor: theme.colorScheme.primary,
+            //         tabs: buildTab(),
+            //       ),
+            //     )
+            //   ],
+            // ),
+            body: Stack(
               children: [
-                Expanded(
-                  child: TabBarView(
-                    controller: controller.tabController,
-                    children: <Widget>[
-                      HomeScreen(),
-                      // HomeScreen(size: size),
-                      Text('home'),
-                      Text('home'),
-                      Text('home'),
-                    ],
-                  ),
+                TabBarView(
+                  controller: controller.tabController,
+                  children: <Widget>[
+                    HomeScreen(),
+                    // HomeScreen(size: size),
+                    Text('home'),
+                    Text('home'),
+                    Text('home'),
+                  ],
                 ),
-                FxContainer(
-                  bordered: true,
-                  enableBorderRadius: false,
-                  border: Border(
-                      top: BorderSide(
-                          color: theme.dividerColor,
-                          width: 1,
-                          style: BorderStyle.solid)),
-                  padding: FxSpacing.xy(12, 16),
-                  color: theme.scaffoldBackgroundColor,
-                  child: TabBar(
-                    controller: controller.tabController,
-                    indicator: FxTabIndicator(
-                        indicatorColor: theme.colorScheme.primary,
-                        indicatorHeight: 3,
-                        radius: 3,
-                        indicatorStyle: FxTabIndicatorStyle.rectangle,
-                        yOffset: -18),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorColor: theme.colorScheme.primary,
-                    tabs: buildTab(),
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: FxSpacing.xy(12, 8),
+                    child: PhysicalModel(
+                      color: theme.cardTheme.color!.withAlpha(200),
+                      elevation: 12,
+                      borderRadius: BorderRadius.all(Radius.circular(32)),
+                      shadowColor: theme.colorScheme.onBackground.withAlpha(12),
+                      shape: BoxShape.rectangle,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: theme.cardTheme.color!.withAlpha(200),
+                          borderRadius: BorderRadius.all(Radius.circular(32)),
+                        ),
+                        padding: FxSpacing.xy(16, 12),
+                        child: Row(
+                          children: <Widget>[
+                            singleItem(
+                                index: 0,
+                                iconData: FeatherIcons.search,
+                                activeIconData: FeatherIcons.search,
+                                title: "search"),
+                            singleItem(
+                                index: 1,
+                                iconData: FeatherIcons.heart,
+                                activeIconData: FeatherIcons.heart,
+                                title: "Saved"),
+                            singleItem(
+                                index: 2,
+                                activeIconData: Icons.luggage,
+                                iconData: Icons.luggage,
+                                title: "Booking"),
+                            singleItem(
+                                index: 3,
+                                iconData: FeatherIcons.user,
+                                activeIconData: FeatherIcons.user,
+                                title: "Profile"),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],
             ),
           );
         });
+  }
+
+  Widget singleItem(
+      {required int index,
+      required IconData iconData,
+      required IconData activeIconData,
+      required String title}) {
+    double width = MediaQuery.of(context).size.width - 64;
+    double selectedWidth = width * (1.5 / 4.5);
+    double unSelectedWidth = width * (1 / 4.5);
+
+    bool selected = index == controller.currentIndex;
+
+    if (selected) {
+      return Container(
+        width: selectedWidth,
+        padding: FxSpacing.y(8),
+        decoration: BoxDecoration(
+            // color: theme.colorScheme.primary,
+            color: Color(0xff1529e8),
+            borderRadius: BorderRadius.all(Radius.circular(24))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              activeIconData,
+              size: 20,
+              color: theme.colorScheme.onPrimary,
+            ),
+            FxSpacing.width(8),
+            FxText.bodyMedium(title,
+                color: theme.colorScheme.onPrimary,
+                letterSpacing: 0.3,
+                fontWeight: 600),
+          ],
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap: () {
+          controller.onTapped(index);
+        },
+        child: Container(
+          width: unSelectedWidth,
+          child: Center(
+              child: Icon(
+            iconData,
+            size: 20,
+            color: theme.colorScheme.onBackground,
+          )),
+        ),
+      );
+    }
   }
 }

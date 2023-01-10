@@ -17,6 +17,9 @@ class FullAppController extends FxController {
   final TickerProvider tickerProvider;
 
   late List<NavItem> navItems;
+  onTapped(value) {
+    tabController.animateTo(value);
+  }
 
   FullAppController(this.tickerProvider) {
     tabController =
