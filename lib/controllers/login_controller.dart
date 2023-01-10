@@ -3,7 +3,7 @@ import 'package:flutx/flutx.dart';
 
 import '../views/login_Screens/forgot_password_screen.dart';
 import '../views/register_screen/register_screen.dart';
-import '../views/splash_screens/splash_screen2.dart';
+import 'auth_controller.dart';
 
 class LogInController extends FxController {
   TickerProvider ticker;
@@ -18,8 +18,8 @@ class LogInController extends FxController {
   @override
   void initState() {
     super.initState();
-    emailTE = TextEditingController(text: 'shinchan@gmail.com');
-    passwordTE = TextEditingController(text: 'password');
+    emailTE = TextEditingController();
+    passwordTE = TextEditingController();
     arrowController = AnimationController(
         vsync: ticker, duration: Duration(milliseconds: 500));
     emailController = AnimationController(
@@ -115,11 +115,12 @@ class LogInController extends FxController {
     if (formKey.currentState!.validate()) {
       arrowController.forward();
       await Future.delayed(Duration(milliseconds: 1000));
-      Navigator.of(context, rootNavigator: true).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => SplashScreen2(),
-        ),
-      );
+      await AuthController().login(emailTE.text, passwordTE.text);
+      // Navigator.of(context, rootNavigator: true).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => SplashScreen2(),
+      //   ),
+      // );
     }
   }
 
