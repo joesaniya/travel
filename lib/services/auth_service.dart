@@ -3,6 +3,8 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 
+import '../models/Country_modal.dart';
+
 class AuthService {
   Future register(
       String name,
@@ -56,6 +58,29 @@ class AuthService {
       } else {
         var jsondata = jsonDecode(response.body);
         log(jsondata['error']);
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //getcountry
+
+  Future<CountryModal?> getCountry() async {
+    try {
+      var response = await http.get(
+        Uri.parse(
+          'https://a.walletbot.online/api/v1/home/initial-data',
+        ),
+        headers: {'Content-Type': 'application/json'},
+      );
+      if (response.statusCode == 200) {
+        log(response.body);
+        return countryModalFromJson(response.body);
+      } else {
+        var jsondata = jsonDecode(response.body);
+        log(jsondata['error']);
+        return null;
       }
     } catch (e) {
       rethrow;

@@ -3,6 +3,8 @@
 * Version : 1.0.0
 * */
 
+import 'package:hotel_travel/views/full_app.dart';
+
 import '/localizations/app_localization_delegate.dart';
 import '/localizations/language.dart';
 import '/theme/app_notifier.dart';
@@ -54,7 +56,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: Language.getLocales(),
-          home: LogInScreen(),
+          home: const LogInScreen(),
+          // home: const FullApp(),
           // home: MyHomePage(),
           // home: YourPage(),
         );

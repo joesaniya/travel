@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
-import 'package:hotel_travel/views/Home_Search_Screen.dart';
+import 'package:hotel_travel/views/Home_Screen.dart';
 
 import '../controllers/full_app_conrtoller.dart';
 import '../theme/app_theme.dart';
@@ -50,7 +50,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
         controller: controller,
         builder: (controller) {
           return Scaffold(
-            backgroundColor: Color(0xfff5f5f5),
+            backgroundColor: const Color(0xfff5f5f5),
             // body: Column(
             //   children: [
             //     Expanded(
@@ -97,9 +97,9 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                   children: <Widget>[
                     HomeScreen(),
                     // HomeScreen(size: size),
-                    Text('home'),
-                    Text('home'),
-                    Text('home'),
+                    const Text('home'),
+                    const Text('home'),
+                    const Text('home'),
                   ],
                 ),
                 Positioned(
@@ -111,13 +111,14 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                     child: PhysicalModel(
                       color: theme.cardTheme.color!.withAlpha(200),
                       elevation: 12,
-                      borderRadius: BorderRadius.all(Radius.circular(32)),
+                      borderRadius: const BorderRadius.all(Radius.circular(32)),
                       shadowColor: theme.colorScheme.onBackground.withAlpha(12),
                       shape: BoxShape.rectangle,
                       child: Container(
                         decoration: BoxDecoration(
                           color: theme.cardTheme.color!.withAlpha(200),
-                          borderRadius: BorderRadius.all(Radius.circular(32)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(32)),
                         ),
                         padding: FxSpacing.xy(16, 12),
                         child: Row(
@@ -169,7 +170,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
       return Container(
         width: selectedWidth,
         padding: FxSpacing.y(8),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             // color: theme.colorScheme.primary,
             color: Color(0xff1529e8),
             borderRadius: BorderRadius.all(Radius.circular(24))),
@@ -194,7 +195,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
         onTap: () {
           controller.onTapped(index);
         },
-        child: Container(
+        child: SizedBox(
           width: unSelectedWidth,
           child: Center(
               child: Icon(
