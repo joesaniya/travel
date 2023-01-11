@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 
 import '../theme/app_theme.dart';
@@ -49,54 +48,78 @@ class _AttractionTileState extends State<AttractionTile> {
                     fit: BoxFit.fill)),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Expanded(
-                //   child: Container(
-                //     // width: 200,
-                //     color: Color(0xff1529e8),
-                //     height: 20,
-                //     child: Text('Theme Park',sty),
-                //   ),
-                // ),
-                FxContainer(
-                  borderRadiusAll: 10,
-                  padding: FxSpacing.xy(8, 4),
-                  color: Color(0xff1529e8),
-                  child: FxText.bodySmall(
-                    'Theme Park',
-                    fontWeight: 600,
-                    color: Colors.white,
-                    // color: theme.colorScheme.onPrimary,
-                  ),
+                Row(
+                  children: [
+                    FxContainer(
+                      borderRadiusAll: 10,
+                      // padding: FxSpacing.xy(8, 4),
+                      padding: FxSpacing.xy(6, 2),
+                      // color: Color(0xff1529e8),
+                      color: Colors.blueGrey,
+                      child: FxText.bodySmall(
+                        'Theme Park',
+                        fontWeight: 300,
+                        color: Colors.white,
+                        // color: theme.colorScheme.onPrimary,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    FxContainer(
+                      borderRadiusAll: 10,
+                      // padding: FxSpacing.xy(8, 4),
+                      padding: FxSpacing.xy(6, 2),
+                      // color: Color(0xff1529e8),
+                      color: Colors.blueGrey,
+                      child: FxText.bodySmall(
+                        'Ticket',
+                        fontWeight: 300,
+                        color: Colors.white,
+                        // color: theme.colorScheme.onPrimary,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    FxContainer(
+                      borderRadiusAll: 10,
+                      // padding: FxSpacing.xy(8, 4),
+                      padding: FxSpacing.xy(6, 2),
+                      // color: Color(0xff1529e8),
+                      color: Colors.blueGrey,
+                      child: FxText.bodySmall(
+                        'Offer',
+                        fontWeight: 300,
+                        color: Colors.white,
+                        // color: theme.colorScheme.onPrimary,
+                      ),
+                    ),
+                  ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FxContainer(
-                      borderRadiusAll: 2,
-                      padding: FxSpacing.xy(8, 4),
-                      // color: Color(0xff5563e8),
-                      color: Color.fromARGB(255, 248, 223, 2),
-                      // color: theme.colorScheme.primary,
-                      child: Row(
-                        children: [
-                          Icon(
-                            FeatherIcons.star,
-                            color: theme1.colorScheme.onPrimary,
-                            size: 12,
-                          ),
-                          FxSpacing.width(4),
-                          FxText.bodySmall(
-                            '4.5',
-                            fontWeight: 600,
-                            color: theme.colorScheme.onPrimary,
-                          ),
-                        ],
-                      ),
+                    Row(
+                      children: [
+                        Icon(
+                          // FeatherIcons.star,
+                          Icons.star,
+                          color: Colors.yellow,
+                          size: 12,
+                        ),
+                        FxSpacing.width(4),
+                        FxText.bodySmall(
+                          '4.5',
+                          fontWeight: 600,
+                          color: Colors.black,
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -106,13 +129,15 @@ class _AttractionTileState extends State<AttractionTile> {
           FxSpacing.height(20),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
-            child: FxText.bodyMedium(
+            child: FxText.bodyLarge(
               'Ferrari world',
+              fontWeight: 800,
             ),
           ),
           FxSpacing.height(10),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            // padding: EdgeInsets.symmetric(horizontal: 0),
+            padding: EdgeInsets.only(right: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -139,7 +164,7 @@ class _AttractionTileState extends State<AttractionTile> {
                             'Abu Dhabi',
                             // product.price.toString() + " " + "USD",
                             // "\$" + product.price.toString() + "/hour",
-                            fontWeight: 700,
+                            // fontWeight: 700,
                           ),
                         ],
                       ),

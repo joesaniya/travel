@@ -87,131 +87,166 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     for (Product product in controller.products!) {
       list.add(FadeTransition(
         opacity: controller.fadeAnimation,
-        child: FxContainer(
-          onTap: () {
-            controller.goToSingleProduct(product);
-          },
-          borderRadiusAll: 4,
-          paddingAll: 16,
-          color: Colors.white,
-          // color: Colors.green,
-          margin: FxSpacing.bottom(20),
-          child: Column(
-            children: [
-              // Align(
-              //   alignment: Alignment.centerRight,
-              //   child: Hero(
-              //     tag: product.types,
-              //     child: FxContainer(
-              //       borderRadiusAll: 2,
-              //       padding: FxSpacing.xy(8, 4),
-              //       color: theme.colorScheme.primary,
-              //       child: FxText.bodySmall(
-              //         product.types.toString(),
-              //         fontWeight: 600,
-              //         color: theme.colorScheme.onPrimary,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Row(
-                children: [
-                  FxContainer(
-                    paddingAll: 0,
-                    borderRadiusAll: 4,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Hero(
-                      tag: "product_image_" + product.name,
-                      child: Image(
-                        image: AssetImage(product.image),
-                        height: 80,
-                        width: 150,
-                        fit: BoxFit.cover,
-                      ),
+        child: Container(
+          // onTap: () {
+          //   controller.goToSingleProduct(product);
+          // },
+          // borderRadiusAll: 4,
+          // // paddingAll: 16,
+          height: 120,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              border: Border.all(color: Colors.grey.shade300, width: 1)),
+          margin: EdgeInsets.only(
+            bottom: 20,
+          ),
+          // //margin: EdgeInsets.all(8),
+          // // color: Colors.green,
+          // margin: FxSpacing.bottom(20),
+
+          child: Container(
+            margin: EdgeInsets.all(8),
+            child: Row(
+              children: [
+                Container(
+                  // margin: EdgeInsets.all(8),
+                  // paddingAll: 0,
+                  // borderRadiusAll: 4,
+                  // margin: EdgeInsets.all(8),
+
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: Hero(
+                    tag: "product_image_" + product.name,
+                    child: Image(
+                      image: AssetImage(product.image),
+                      height: 100,
+                      width: 150,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  FxSpacing.width(20),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: Hero(
-                                tag: "product_" + product.name,
-                                child: FxText.bodyMedium(
-                                  product.name,
-                                ),
-                              ),
+                ),
+                FxSpacing.width(20),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          FxContainer(
+                            borderRadiusAll: 10,
+                            // padding: FxSpacing.xy(8, 4),
+                            padding: FxSpacing.xy(6, 2),
+                            // color: Color(0xff1529e8),
+                            color: Colors.blueGrey,
+                            child: FxText.bodySmall(
+                              'Theme Park',
+                              fontWeight: 300,
+                              color: Colors.white,
+                              // color: theme.colorScheme.onPrimary,
                             ),
-                            // Icon(
-                            //   product.favorite
-                            //       ? Icons.favorite_rounded
-                            //       : Icons.favorite_outline_rounded,
-                            //   size: 18,
-                            //   color: theme.colorScheme.primary,
-                            // ),
-                          ],
-                        ),
-                        FxSpacing.height(4),
-                        Hero(
-                          tag: product.name + "_" + product.price.toString(),
-                          child: FxText.labelLarge(
-                            // '\$' + product.price.toString(),
-                            product.price.toString() + " " + "USD",
-                            // "\$" + product.price.toString() + "/hour",
-                            fontWeight: 700,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          FxContainer(
+                            borderRadiusAll: 10,
+                            // padding: FxSpacing.xy(8, 4),
+                            padding: FxSpacing.xy(6, 2),
+                            // color: Color(0xff1529e8),
+                            color: Colors.blueGrey,
+                            child: FxText.bodySmall(
+                              'Ticket',
+                              fontWeight: 300,
+                              color: Colors.white,
+                              // color: theme.colorScheme.onPrimary,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          FxContainer(
+                            borderRadiusAll: 10,
+                            // padding: FxSpacing.xy(8, 4),
+                            padding: FxSpacing.xy(6, 2),
+                            // color: Color(0xff1529e8),
+                            color: Colors.blueGrey,
+                            child: FxText.bodySmall(
+                              'Offer',
+                              fontWeight: 300,
+                              color: Colors.white,
+                              // color: theme.colorScheme.onPrimary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      FxSpacing.height(8),
+                      Flexible(
+                        child: Hero(
+                          tag: "product_" + product.name,
+                          // child: FxText.bodyLarge(
+                          //   product.name,
+                          //   // fontWeight: 500,
+                          // ),
+                          child: FxText.bodyLarge(
+                            product.name,
+                            fontWeight: 800,
                           ),
                         ),
-                        FxSpacing.height(6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Hero(
-                              tag: product.name +
-                                  "_" +
-                                  product.rating.toString(),
-                              child: FxContainer(
-                                borderRadiusAll: 2,
-                                padding: FxSpacing.xy(8, 4),
-                                color: theme.colorScheme.primary,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      FeatherIcons.star,
-                                      color: theme.colorScheme.onPrimary,
-                                      size: 12,
-                                    ),
-                                    FxSpacing.width(4),
-                                    FxText.bodySmall(
-                                      product.rating.toString(),
-                                      fontWeight: 600,
-                                      color: theme.colorScheme.onPrimary,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            // FxContainer.bordered(
-                            //   paddingAll: 4,
-                            //   borderRadiusAll: 4,
-                            //   child: Icon(
-                            //     FeatherIcons.plus,
-                            //     size: 14,
-                            //     color: theme.colorScheme.onBackground,
-                            //   ),
-                            // ),
-                          ],
+                      ),
+                      FxSpacing.height(4),
+                      Hero(
+                        tag: product.name + "_" + product.price.toString(),
+                        child: FxText.labelLarge(
+                          // '\$' + product.price.toString(),
+                          product.price.toString() + " " + "USD",
+                          // "\$" + product.price.toString() + "/hour",
+                          fontWeight: 700,
                         ),
-                      ],
-                    ),
+                      ),
+                      FxSpacing.height(6),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Hero(
+                            tag: product.name + "_" + product.rating.toString(),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  // FeatherIcons.star,
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                  size: 12,
+                                ),
+                                FxSpacing.width(4),
+                                FxText.bodySmall(
+                                  '4.5',
+                                  fontWeight: 600,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                          // FxContainer.bordered(
+                          //   paddingAll: 4,
+                          //   borderRadiusAll: 4,
+                          //   child: Icon(
+                          //     FeatherIcons.plus,
+                          //     size: 14,
+                          //     color: theme.colorScheme.onBackground,
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ));

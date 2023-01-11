@@ -47,7 +47,7 @@ class AuthService {
       };
       var response = await http.post(
           Uri.parse(
-            'https://a.walletbot.online/api/v1/users/signup',
+            'https://a.walletbot.online/api/v1/users/login',
           ),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body));
