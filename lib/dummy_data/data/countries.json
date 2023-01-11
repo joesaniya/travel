@@ -1,0 +1,20 @@
+[
+    {
+        "countryCode": "AD",
+        "countryName": "Andorra",
+        "currencyCode": "EUR",
+        "isoNumeric": "020"
+    },
+    {
+        "countryCode": "AE",
+        "countryName": "United Arab Emirates",
+        "currencyCode": "AED",
+        "isoNumeric": "784"
+    },
+    {
+        "countryCode": "AF",
+        "countryName": "Afghanistan",
+        "currencyCode": "AFN",
+        "isoNumeric": "004"
+    }
+]

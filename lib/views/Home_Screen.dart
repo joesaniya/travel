@@ -96,9 +96,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           height: 120,
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               border: Border.all(color: Colors.grey.shade300, width: 1)),
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             bottom: 20,
           ),
           // //margin: EdgeInsets.all(8),
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           // margin: FxSpacing.bottom(20),
 
           child: Container(
-            margin: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
             child: Row(
               children: [
                 Container(
@@ -120,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Hero(
-                    tag: "product_image_" + product.name,
+                    tag: "product_image_${product.name}",
                     child: Image(
                       image: AssetImage(product.image),
                       height: 100,
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               // color: theme.colorScheme.onPrimary,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           FxContainer(
@@ -166,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               // color: theme.colorScheme.onPrimary,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           FxContainer(
@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       FxSpacing.height(8),
                       Flexible(
                         child: Hero(
-                          tag: "product_" + product.name,
+                          tag: "product_${product.name}",
                           // child: FxText.bodyLarge(
                           //   product.name,
                           //   // fontWeight: 500,
@@ -200,10 +200,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                       FxSpacing.height(4),
                       Hero(
-                        tag: product.name + "_" + product.price.toString(),
+                        tag: "${product.name}_${product.price}",
                         child: FxText.labelLarge(
                           // '\$' + product.price.toString(),
-                          product.price.toString() + " " + "USD",
+                          "${product.price} USD",
                           // "\$" + product.price.toString() + "/hour",
                           fontWeight: 700,
                         ),
@@ -213,10 +213,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Hero(
-                            tag: product.name + "_" + product.rating.toString(),
+                            tag: "${product.name}_${product.rating}",
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   // FeatherIcons.star,
                                   Icons.star,
                                   color: Colors.yellow,
@@ -257,23 +257,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  //top suggestionss
-
-  // Future<void> addCategories() async {
-  //   Future ft = Future(() {});
-  //   if (controller.newCategories.length == 0) {
-  //     for (int i = 0; i < controller.categories!.length; i++) {
-  //       ft = ft.then((_) {
-  //         return Future.delayed(Duration(milliseconds: 100), () {
-  //           controller.newCategories
-  //               .add(_buildSingleCategory(controller.categories![i]));
-  //           controller.listKey.currentState!.insertItem(i);
-  //         });
-  //       });
-  //     }
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -297,7 +280,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return WillPopScope(
       onWillPop: () => controller.onWillPop(),
       child: Scaffold(
-        backgroundColor: Color(0xfff5f5f5),
+        backgroundColor: const Color(0xfff5f5f5),
         body: ListView(
           padding: FxSpacing.fromLTRB(
               20, FxSpacing.safeAreaTop(context) + 20, 20, 0),
@@ -332,7 +315,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           right: -2,
                           child: FxContainer.rounded(
                             paddingAll: 3,
-                            color: theme.colorScheme.primary,
+                            color: const Color(0xff1529e8),
+                            // color: theme.colorScheme.primary,
                             child: Center(
                                 child: FxText.bodySmall(
                               '2',
@@ -371,23 +355,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             //     // buildTitle(size),
             //   ],
             // ),
-            SearchPlace(),
+            const SearchPlace(),
+
             FxSpacing.height(20),
             //scroll
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 50,
-              // color: Colors.yellow,
-              // child: Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   children: [
-              //     Container(width: containerWidth, color: Colors.red),
-              //     Container(width: containerWidth, color: Colors.green),
-              //     Container(width: containerWidth, color: Colors.blue),
-              //     Container(width: containerWidth, color: Colors.purple),
-              //   ],
-              // ),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -399,9 +373,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                     child: Container(
                       // width: 100,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                           color: _tabbed == '1'
-                              ? Color(0xff1529e8)
+                              ? const Color(0xff1529e8)
                               // theme1.colorScheme.primary
                               : Colors.transparent,
                           border: Border.all(
@@ -415,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           //     topLeft: Radius.circular(20),
                           //     topRight: Radius.circular(20))
                           borderRadius: BorderRadius.circular(20.0)),
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -426,7 +400,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               width: 20,
                               color:
                                   _tabbed == '1' ? Colors.white : Colors.black),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           Text(
@@ -441,7 +415,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   GestureDetector(
@@ -452,9 +426,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                     child: Container(
                         width: 120,
-                        decoration: new BoxDecoration(
+                        decoration: BoxDecoration(
                             color: _tabbed == '2'
-                                ? Color(0xff1529e8)
+                                ? const Color(0xff1529e8)
                                 // theme1.colorScheme.primary
                                 : Colors.transparent,
                             border: Border.all(
@@ -466,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             // borderRadius:
                             //     new BorderRadius.all(Radius.elliptical(90, 45)),
                             ),
-                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -478,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 color: _tabbed == '2'
                                     ? Colors.white
                                     : Colors.black),
-                            SizedBox(
+                            const SizedBox(
                               width: 7,
                             ),
                             Text(
@@ -493,7 +467,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ],
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   GestureDetector(
@@ -504,9 +478,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                     child: Container(
                       width: 120,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                           color: _tabbed == '3'
-                              ? Color(0xff1529e8)
+                              ? const Color(0xff1529e8)
                               // theme1.colorScheme.primary
                               : Colors.transparent,
                           border: Border.all(
@@ -515,7 +489,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   : theme1.colorScheme.primaryContainer,
                               width: _tabbed == '3' ? 0.0 : 1.0),
                           borderRadius: BorderRadius.circular(20.0)),
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -526,7 +500,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               width: 20,
                               color:
                                   _tabbed == '3' ? Colors.white : Colors.black),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           Text(
@@ -541,7 +515,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   GestureDetector(
@@ -552,9 +526,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                     child: Container(
                       width: 120,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                           color: _tabbed == '4'
-                              ? Color(0xff1529e8)
+                              ? const Color(0xff1529e8)
                               // theme1.colorScheme.primary
                               : Colors.transparent,
                           border: Border.all(
@@ -563,7 +537,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   : theme1.colorScheme.primaryContainer,
                               width: _tabbed == '4' ? 0.0 : 1.0),
                           borderRadius: BorderRadius.circular(20.0)),
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -574,7 +548,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               width: 20,
                               color:
                                   _tabbed == '4' ? Colors.white : Colors.black),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           Text(
@@ -589,7 +563,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   GestureDetector(
@@ -600,9 +574,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     },
                     child: Container(
                       width: 120,
-                      decoration: new BoxDecoration(
+                      decoration: BoxDecoration(
                           color: _tabbed == '5'
-                              ? Color(0xff1529e8)
+                              ? const Color(0xff1529e8)
                               // theme1.colorScheme.primary
                               : Colors.transparent,
                           border: Border.all(
@@ -614,7 +588,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           // borderRadius:
                           //     new BorderRadius.all(Radius.elliptical(90, 45)),
                           ),
-                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -625,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               width: 20,
                               color:
                                   _tabbed == '5' ? Colors.white : Colors.black),
-                          SizedBox(
+                          const SizedBox(
                             width: 7,
                           ),
                           Text(
@@ -644,65 +618,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
             FxSpacing.height(20),
-            TopAttraction(),
+            const TopAttractionCard(),
             FxSpacing.height(20),
 
-            // FadeTransition(
-            //   key: controller.intro.keys[1],
-            //   opacity: controller.fadeAnimation,
-            //   child: FxContainer(
-            //     clipBehavior: Clip.antiAliasWithSaveLayer,
-            //     borderRadiusAll: 4,
-            //     onTap: () {
-            //       controller.goToSubscription();
-            //     },
-            //     color: theme.colorScheme.primaryContainer,
-            //     border: Border.all(color: theme.colorScheme.primaryContainer),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: [
-            //             FxText.titleMedium(
-            //               'Enjoy Upto \n50% Discount',
-            //               letterSpacing: 0.3,
-            //               fontWeight: 700,
-            //               color: theme.colorScheme.primary,
-            //             ),
-            //             FxSpacing.height(4),
-            //             FxButton.small(
-            //               elevation: 0,
-            //               padding: FxSpacing.xy(20, 2),
-            //               borderRadiusAll: 4,
-            //               backgroundColor: theme.colorScheme.primary,
-            //               onPressed: () {
-            //                 controller.goToSubscription();
-            //               },
-            //               child: FxText.labelLarge(
-            //                 'Subscribe',
-            //                 letterSpacing: 0.3,
-            //                 color: theme.colorScheme.onPrimary,
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         FxContainer(
-            //           paddingAll: 0,
-            //           borderRadiusAll: 4,
-            //           height: 100,
-            //           width: 150,
-            //           clipBehavior: Clip.hardEdge,
-            //           child: Image(
-            //             fit: BoxFit.fill,
-            //             image: AssetImage(Images.shoppingBannerPhoto),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            // FxSpacing.height(20),
             FadeTransition(
               opacity: controller.fadeAnimation,
               key: controller.intro.keys[1],
@@ -763,43 +681,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               scrollDirection: Axis.vertical,
               child: _buildProductList(),
             ),
-            // FxSpacing.height(20),
-            // FadeTransition(
-            //   opacity: controller.fadeAnimation,
-            //   child: Container(
-            //     child: FxText.bodyLarge(
-            //       // 'Best Selling Attractions',
-            //       'Top Attractions',
-            //       letterSpacing: 0,
-            //       fontWeight: 600,
-            //     ),
-            //   ),
-            // ),
-            // FxSpacing.height(20),
-            // // SizedBox(
-            // //   height: 500,
-            // //   width: MediaQuery.of(context).size.width,
-            // //   child: GridView.custom(
-            // //       gridDelegate:
-            // //           SliverQuiltedGridDelegate(crossAxisCount: 4, pattern: [
-            // //         QuiltedGridTile(
-            // //           4,
-            // //           2,
-            // //         ),
-            // //         QuiltedGridTile(2, 1),
-            // //         QuiltedGridTile(2, 1),
-            // //         QuiltedGridTile(2, 1),
-            // //         QuiltedGridTile(2, 1)
-            // //       ]),
-            // //       childrenDelegate: SliverChildBuilderDelegate(
-            // //           childCount: 5,
-            // //           (context, index) => Container(
-            // //                 color: Colors.red,
-            // //               ))
-            // //               ),
-            // // )
-            // PlacesStaggeredView(
-            //     size: MediaQuery.of(context).size, places: places)
           ],
         ),
       ),

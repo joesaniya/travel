@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/SearchScreen.dart';
 import 'package:intl/intl.dart';
 
 class SearchController extends FxController {
@@ -7,8 +10,8 @@ class SearchController extends FxController {
   SearchController(this.ticker);
   late TextEditingController locationTE, dateTE;
   GlobalKey<FormState> formKey = GlobalKey();
-  late AnimationController locationController, dateController;
-  late Animation<Offset> locationAnimation, dateAnimation;
+  late AnimationController searchController, locationController, dateController;
+  late Animation<Offset> searchAnimation, locationAnimation, dateAnimation;
   int locationCounter = 0;
   int dateCounter = 0;
 
@@ -17,20 +20,27 @@ class SearchController extends FxController {
     super.initState();
     locationTE = TextEditingController();
     dateTE = TextEditingController();
-
+    searchController = AnimationController(
+        vsync: ticker, duration: const Duration(milliseconds: 500));
     locationController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     dateController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
-
+        vsync: ticker, duration: const Duration(milliseconds: 50));
+    searchAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
+            .animate(CurvedAnimation(
+      parent: searchController,
+      curve: Curves.easeIn,
+    ));
     locationAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: locationController,
       curve: Curves.easeIn,
     ));
-    dateAnimation = Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
-        .animate(CurvedAnimation(
+    dateAnimation =
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
+            .animate(CurvedAnimation(
       parent: dateController,
       curve: Curves.easeIn,
     ));
@@ -58,6 +68,7 @@ class SearchController extends FxController {
 
   @override
   void dispose() {
+    searchController.dispose();
     locationController.dispose();
     dateController.dispose();
     super.dispose();
@@ -120,19 +131,36 @@ class SearchController extends FxController {
   //   );
   // }
 
-  // Future<void> login() async {
-  //   emailCounter = 0;
-  //   passwordCounter = 0;
-  //   if (formKey.currentState!.validate()) {
-  //     arrowController.forward();
-  //     await Future.delayed(Duration(milliseconds: 1000));
-  //     Navigator.of(context, rootNavigator: true).pushReplacement(
-  //       MaterialPageRoute(
-  //         builder: (context) => SplashScreen2(),
-  //       ),
-  //     );
-  //   }
-  // }
+  Future<void> searchbtn() async {
+    log('search btn');
+    locationCounter = 0;
+    dateCounter = 0;
+    // if (formKey.currentState!.validate()) {
+    //   log('search');
+    //   searchController.forward();
+    //   await Future.delayed(const Duration(milliseconds: 1000));
+    //   Navigator.of(context, rootNavigator: true).pushReplacement(
+    //     MaterialPageRoute(
+    //       builder: (context) => const SplashScreen2(),
+    //     ),
+    //   );
+    // }
+    if (locationTE.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please select location")));
+    } else if (dateTE.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Please select date")));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Success")));
+      Navigator.of(context, rootNavigator: true).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const SearchScreen(),
+        ),
+      );
+    }
+  }
 
   // void goToRegisterScreen() {
   //   Navigator.of(context, rootNavigator: true).pushReplacement(

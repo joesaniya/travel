@@ -30,11 +30,11 @@ class HomeController extends FxController {
     super.initState();
     fetchData();
     animationController = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
       vsync: ticker,
     );
     bellController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       vsync: ticker,
     );
     fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -51,7 +51,7 @@ class HomeController extends FxController {
       ),
     );
 
-    offset = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
+    offset = Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0));
 
     animationController.forward();
     bellController.repeat(reverse: true);
@@ -76,7 +76,7 @@ class HomeController extends FxController {
 
     intro.setStepConfig(0, borderRadius: BorderRadius.circular(64));
     Timer(
-      Duration(milliseconds: 2000),
+      const Duration(milliseconds: 2000),
       () {
         if (HotelTravelCache.isFirstTime) {
           intro.start(context);

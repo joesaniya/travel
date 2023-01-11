@@ -1,9 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:searchfield/searchfield.dart';
 
 import '../../controllers/search_controller.dart';
 import '../../theme/app_theme.dart';
+import 'package:iconsax/iconsax.dart';
 
 class SearchPlace extends StatefulWidget {
   const SearchPlace({Key? key}) : super(key: key);
@@ -20,6 +24,26 @@ class _SearchPlaceState extends State<SearchPlace>
   // late LogInController controller;
   // late OutlineInputBorder outlineInputBorder;
   TextEditingController dateinput = TextEditingController();
+
+  String? _selectedItem;
+
+  final List<String> _countryCodes = [
+    'Afghanistan',
+    'Turkey',
+    'Germany',
+    'France',
+    'Italy',
+    'Spain',
+    'United Kingdom',
+    'United States',
+    'Canada',
+    'Australia',
+    'New Zealand',
+    'India',
+    'Indonesia',
+    'Bangladesh',
+    'Sri Lanka',
+  ];
 
   @override
   void initState() {
@@ -47,62 +71,117 @@ class _SearchPlaceState extends State<SearchPlace>
                     // border: Border.all(color: Colors.blue),
                     child: Column(
                       children: <Widget>[
+                        // SlideTransition(
+                        //   position: controller.locationAnimation,
+                        //   child: TextFormField(
+                        //     style: FxTextStyle.bodyMedium(),
+
+                        //     decoration: InputDecoration(
+                        //         floatingLabelBehavior:
+                        //             FloatingLabelBehavior.never,
+                        //         filled: true,
+                        //         isDense: true,
+                        //         fillColor: theme.cardTheme.color,
+                        //         suffixIcon: Icon(
+                        //           FeatherIcons.map,
+                        //           color: theme.colorScheme.onBackground,
+                        //         ),
+                        //         hintText: "Where do you want to see?",
+                        //         border: const OutlineInputBorder(
+                        //             borderSide: BorderSide(
+                        //                 color: Color(0xff1529e8),
+                        //                 // color: Colors.lightBlueAccent,
+                        //                 width: 1)),
+                        //         enabledBorder: const OutlineInputBorder(
+                        //             borderSide: BorderSide(
+                        //                 color: Color(0xff1529e8), width: 1)),
+                        //         focusedBorder: const OutlineInputBorder(
+                        //             borderSide: BorderSide(
+                        //                 color: Color(0xff1529e8), width: 1)),
+                        //         contentPadding: FxSpacing.all(16),
+                        //         hintStyle: FxTextStyle.bodyMedium(),
+                        //         isCollapsed: true),
+                        //     maxLines: 1,
+                        //     controller: controller.locationTE,
+                        //     // validator: controller.validatePassword,
+                        //     cursorColor: theme.colorScheme.onBackground,
+                        //   ),
+                        // ),
+
                         SlideTransition(
                           position: controller.locationAnimation,
-                          child: TextFormField(
-                            style: FxTextStyle.bodyMedium(),
-                            // style: FxTextStyle.bodyLarge(
-                            //     fontWeight: 600, letterSpacing: 0.2),
-                            // decoration: InputDecoration(
-                            //   suffixIcon: Icon(Icons.location_city),
-                            //   hintStyle: FxTextStyle.bodyLarge(
-                            //       fontWeight: 600,
-                            //       letterSpacing: 0,
-                            //       color: theme.colorScheme.onBackground
-                            //           .withAlpha(180)),
-                            //   hintText: "Where do you Want to see?",
-                            //   border: InputBorder.none,
-                            //   enabledBorder: InputBorder.none,
-                            //   focusedBorder: InputBorder.none,
-                            //   isDense: true,
-                            //   contentPadding: EdgeInsets.all(16),
-                            // ),
-                            decoration: InputDecoration(
+                          child: SearchField(
+                            searchStyle: FxTextStyle.bodyMedium(),
+                            suggestionStyle: FxTextStyle.bodyMedium(),
+                            controller: controller.locationTE,
+                            hint: 'Search',
+                            searchInputDecoration: InputDecoration(
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 filled: true,
                                 isDense: true,
                                 fillColor: theme.cardTheme.color,
                                 suffixIcon: Icon(
-                                  FeatherIcons.map,
+                                  Iconsax.location,
                                   color: theme.colorScheme.onBackground,
                                 ),
                                 hintText: "Where do you want to see?",
-                                border: OutlineInputBorder(
+                                border: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff1529e8),
                                         // color: Colors.lightBlueAccent,
                                         width: 1)),
-                                enabledBorder: OutlineInputBorder(
+                                enabledBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff1529e8), width: 1)),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Color(0xff1529e8), width: 1)),
                                 contentPadding: FxSpacing.all(16),
                                 hintStyle: FxTextStyle.bodyMedium(),
                                 isCollapsed: true),
-                            maxLines: 1,
-                            controller: controller.locationTE,
-                            // validator: controller.validatePassword,
-                            cursorColor: theme.colorScheme.onBackground,
+                            maxSuggestionsInViewPort: 6,
+                            itemHeight: 50,
+
+                            suggestionsDecoration: BoxDecoration(
+                              // color: Colors.white
+                              color: const Color(0xfff5f5f5),
+                              // color: const Color(0xff1529e8),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            onSubmit: (value) {
+                              setState(() {
+                                _selectedItem = value;
+                                // foundCompany = value as List<Search>?;
+                              });
+
+                              print(value);
+                              log(value);
+                            },
+                            // suggestions:
+                            //     //  _countryCodes
+                            //     searchResult
+                            //         .map((e) => SearchFieldListItem(e.toString(),
+                            //             child: foundCompany!.isNotEmpty
+                            //                 ? Text(e.codes.toString())
+                            //                 : Text(
+                            //                     'No data',
+                            //                     style: TextStyle(color: Colors.black),
+                            //                   )))
+                            //         .toList(),
+                            suggestions: _countryCodes
+                                .map((e) => SearchFieldListItem(e,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Text(
+                                        e,
+                                        style: FxTextStyle.bodyMedium(),
+                                      ),
+                                    )))
+                                .toList(),
                           ),
                         ),
-                        // Divider(
-                        //   // color: theme.dividerColor,
-                        //   color: theme.colorScheme.secondary,
-                        //   height: 0.5,
-                        // ),
                         SlideTransition(
                           position: controller.dateAnimation,
                           child: TextFormField(
@@ -147,9 +226,20 @@ class _SearchPlaceState extends State<SearchPlace>
                                   color: theme.colorScheme.onBackground,
                                 ),
                                 hintText: "yyyy-mm-dd",
-                                border: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
+                                // border: InputBorder.none,
+                                // enabledBorder: InputBorder.none,
+                                // focusedBorder: InputBorder.none,
+                                border: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8),
+                                        // color: Colors.lightBlueAccent,
+                                        width: 1)),
+                                enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8), width: 1)),
+                                focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Color(0xff1529e8), width: 1)),
                                 contentPadding: FxSpacing.all(16),
                                 hintStyle: FxTextStyle.bodyMedium(),
                                 isCollapsed: true),
@@ -157,59 +247,43 @@ class _SearchPlaceState extends State<SearchPlace>
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
-                        // Divider(
-                        //   // color: theme.dividerColor,
-                        //   color: theme.colorScheme.secondary,
-                        //   height: 0.5,
-                        // ),
-                        // SlideTransition(
-                        //   position: controller.locationAnimation,
-                        //   child: TextFormField(
-                        //     style: FxTextStyle.bodyMedium(),
-                        //     decoration: InputDecoration(
-                        //         floatingLabelBehavior:
-                        //             FloatingLabelBehavior.never,
-                        //         filled: true,
-                        //         isDense: true,
-                        //         fillColor: theme.cardTheme.color,
-                        //         prefixIcon: Icon(
-                        //           FeatherIcons.lock,
-                        //           color: theme.colorScheme.onBackground,
-                        //         ),
-                        //         hintText: "Password",
-                        //         // enabledBorder: outlineInputBorder,
-                        //         // focusedBorder: outlineInputBorder,
-                        //         // border: outlineInputBorder,
-                        //         contentPadding: FxSpacing.all(16),
-                        //         hintStyle: FxTextStyle.bodyMedium(),
-                        //         isCollapsed: true),
-                        //     maxLines: 1,
-                        //     controller: controller.locationTE,
-                        //     // validator: controller.validatePassword,
-                        //     cursorColor: theme.colorScheme.onBackground,
-                        //   ),
-                        // ),
-
-//demo
-                        // TextFormField(
-                        //   style: FxTextStyle.bodyLarge(
-                        //       fontWeight: 600, letterSpacing: 0.2),
-                        //   decoration: InputDecoration(
-                        //     hintStyle: FxTextStyle.bodyLarge(
-                        //         fontWeight: 600,
-                        //         letterSpacing: 0,
-                        //         color: theme.colorScheme.onBackground.withAlpha(180)),
-                        //     hintText: "Your Password",
-                        //     border: InputBorder.none,
-                        //     enabledBorder: InputBorder.none,
-                        //     focusedBorder: InputBorder.none,
-                        //     isDense: true,
-                        //     contentPadding: EdgeInsets.all(16),
-                        //   ),
-                        //   autofocus: false,
-                        //   textCapitalization: TextCapitalization.sentences,
-                        //   obscureText: true,
-                        // )
+                        SlideTransition(
+                          position: controller.locationAnimation,
+                          child: FxButton.block(
+                            elevation: 0,
+                            borderRadiusAll: 4,
+                            onPressed: () {
+                              controller.searchbtn();
+                            },
+                            splashColor:
+                                theme.colorScheme.onPrimary.withAlpha(28),
+                            // backgroundColor: theme.colorScheme.primary,
+                            backgroundColor: const Color(0xff1529e8),
+                            child: Container(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              decoration: const BoxDecoration(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  FxText.labelLarge(
+                                    "Search",
+                                    fontWeight: 600,
+                                    color: theme.colorScheme.onPrimary,
+                                    letterSpacing: 0.4,
+                                  ),
+                                  FxSpacing.width(8),
+                                  SlideTransition(
+                                      position: controller.searchAnimation,
+                                      child: Icon(
+                                        FeatherIcons.search,
+                                        color: theme.colorScheme.onPrimary,
+                                        size: 20,
+                                      )),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),

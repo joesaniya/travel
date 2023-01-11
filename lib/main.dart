@@ -7,12 +7,13 @@ import '/localizations/app_localization_delegate.dart';
 import '/localizations/language.dart';
 import '/theme/app_notifier.dart';
 import '/theme/app_theme.dart';
-import '/views/login_Screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutx/themes/app_theme_notifier.dart';
 import 'package:provider/provider.dart';
+
+import 'views/login_Screens/login_screen.dart';
 
 Future<void> main() async {
   //You will need to initialize AppThemeNotifier class for theme changes.
@@ -54,6 +55,8 @@ class MyApp extends StatelessWidget {
           ],
           supportedLocales: Language.getLocales(),
           home: LogInScreen(),
+          // home: MyHomePage(),
+          // home: YourPage(),
         );
       },
     );

@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
 import '../views/login_Screens/forgot_password_screen.dart';
 import '../views/register_screen/register_screen.dart';
 import '../views/splash_screens/splash_screen2.dart';
+import 'auth_controller.dart';
 
 class LogInController extends FxController {
   TickerProvider ticker;
@@ -21,25 +24,26 @@ class LogInController extends FxController {
     emailTE = TextEditingController();
     passwordTE = TextEditingController();
     arrowController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 500));
+        vsync: ticker, duration: const Duration(milliseconds: 500));
     emailController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     passwordController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
 
-    arrowAnimation = Tween<Offset>(begin: Offset(0, 0), end: Offset(8, 0))
-        .animate(CurvedAnimation(
+    arrowAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
+            .animate(CurvedAnimation(
       parent: arrowController,
       curve: Curves.easeIn,
     ));
     emailAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: emailController,
       curve: Curves.easeIn,
     ));
     passwordAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: passwordController,
       curve: Curves.easeIn,
@@ -104,7 +108,7 @@ class LogInController extends FxController {
   void goToForgotPasswordScreen() {
     Navigator.of(context, rootNavigator: true).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => ForgotPasswordScreen(),
+        builder: (context) => const ForgotPasswordScreen(),
       ),
     );
   }
@@ -133,14 +137,14 @@ class LogInController extends FxController {
     // }
     if (formKey.currentState!.validate()) {
       arrowController.forward();
-      await Future.delayed(Duration(milliseconds: 1000));
-      // await AuthController()
-      //     .login(emailTE.text, passwordTE.text)
-      //     .then((value) => log(emailTE.text));
+      await Future.delayed(const Duration(milliseconds: 1000));
+      await AuthController()
+          .login(emailTE.text, passwordTE.text)
+          .then((value) => log(emailTE.text));
 
       Navigator.of(context, rootNavigator: true).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => SplashScreen2(),
+          builder: (context) => const SplashScreen2(),
         ),
       );
     }
@@ -149,7 +153,7 @@ class LogInController extends FxController {
   void goToRegisterScreen() {
     Navigator.of(context, rootNavigator: true).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => RegisterScreen(),
+        builder: (context) => const RegisterScreen(),
       ),
     );
   }

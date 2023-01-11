@@ -54,41 +54,43 @@ class RegisterController extends FxController {
     phoneTE = TextEditingController();
 
     arrowController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 500));
+        vsync: ticker, duration: const Duration(milliseconds: 500));
     nameController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     emailController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     passwordController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     phoneController = AnimationController(
-        vsync: ticker, duration: Duration(milliseconds: 50));
+        vsync: ticker, duration: const Duration(milliseconds: 50));
 
-    arrowAnimation = Tween<Offset>(begin: Offset(0, 0), end: Offset(8, 0))
-        .animate(CurvedAnimation(
+    arrowAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
+            .animate(CurvedAnimation(
       parent: arrowController,
       curve: Curves.easeIn,
     ));
-    nameAnimation = Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
-        .animate(CurvedAnimation(
+    nameAnimation =
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
+            .animate(CurvedAnimation(
       parent: nameController,
       curve: Curves.easeIn,
     ));
     emailAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: emailController,
       curve: Curves.easeIn,
     ));
     passwordAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: passwordController,
       curve: Curves.easeIn,
     ));
 
     phoneAnimation =
-        Tween<Offset>(begin: Offset(-0.01, 0), end: Offset(0.01, 0))
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
             .animate(CurvedAnimation(
       parent: passwordController,
       curve: Curves.easeIn,
@@ -199,14 +201,21 @@ class RegisterController extends FxController {
     phoneCounter = 0;
     // if (formKey.currentState!.validate()) {
     //   arrowController.forward();
-    //   await Future.delayed(Duration(milliseconds: 500));
-    //   await AuthController().register(
-    //       nameTE.text,
-    //       emailTE.text,
-    //       // int.parse(phoneTE.text)
-    //       91,
-    //       phoneTE.text,
-    //       passwordTE.text);
+    //   await Future.delayed(const Duration(milliseconds: 500));
+    //   await AuthController()
+    //       .register(
+    //           nameTE.text,
+    //           emailTE.text,
+    //           // int.parse(phoneTE.text)
+    //           '63ac33c3ff04e5652a2583f1',
+    //           phoneTE.text,
+    //           passwordTE.text)
+    //       .then((value) =>
+    //           Navigator.of(context, rootNavigator: true).pushReplacement(
+    //             MaterialPageRoute(
+    //               builder: (context) => const SplashScreen2(),
+    //             ),
+    //           ));
     //   // log('message');
     //   // Navigator.of(context, rootNavigator: true).pushReplacement(
     //   //   MaterialPageRoute(
@@ -238,7 +247,7 @@ class RegisterController extends FxController {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("success")));
       arrowController.forward();
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
       await AuthController()
           .register(
               nameTE.text,
@@ -250,7 +259,7 @@ class RegisterController extends FxController {
           .then((value) =>
               Navigator.of(context, rootNavigator: true).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => SplashScreen2(),
+                  builder: (context) => const SplashScreen2(),
                 ),
               ));
     }
@@ -259,7 +268,7 @@ class RegisterController extends FxController {
   void goToLogInScreen() {
     Navigator.of(context, rootNavigator: true).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => LogInScreen(),
+        builder: (context) => const LogInScreen(),
       ),
     );
   }
