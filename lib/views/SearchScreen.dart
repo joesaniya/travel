@@ -93,22 +93,22 @@ class _SearchScreenState extends State<SearchScreen>
                   textCapitalization: TextCapitalization.sentences,
                 ),
               ),
-              FxSpacing.width(20),
-              FxContainer(
-                paddingAll: 12,
-                borderRadiusAll: 4,
-                onTap: () {
-                  controller.openEndDrawer();
-                },
-                color: const Color(0xffcfd2ff),
-                // color: theme.colorScheme.primaryContainer,
-                child: Icon(
-                  FeatherIcons.sliders,
-                  color: theme1.colorScheme.onSecondaryContainer,
-                  // color: theme.colorScheme.primary,
-                  size: 20,
-                ),
-              ),
+              // FxSpacing.width(20),
+              // FxContainer(
+              //   paddingAll: 12,
+              //   borderRadiusAll: 4,
+              //   onTap: () {
+              //     controller.openEndDrawer();
+              //   },
+              //   color: const Color(0xffcfd2ff),
+              //   // color: theme.colorScheme.primaryContainer,
+              //   child: Icon(
+              //     FeatherIcons.sliders,
+              //     color: theme1.colorScheme.onSecondaryContainer,
+              //     // color: theme.colorScheme.primary,
+              //     size: 20,
+              //   ),
+              // ),
             ],
           ),
           FxSpacing.height(20),
