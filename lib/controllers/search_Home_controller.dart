@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:intl/intl.dart';
 
 import '../models/product.dart';
 import '../views/hotel_travel_constants.dart';
@@ -14,8 +15,19 @@ class HomeSearchController extends FxController {
   late AnimationController animationController;
   late Animation<double> fadeAnimation;
   List<Product>? products;
+  late TextEditingController dateTE;
 
   late Tween<Offset> offset;
+  late AnimationController dateController;
+  late Animation<Offset> dateAnimation;
+
+  int dateCounter = 0;
+
+  @override
+  void dispose() {
+    dateController.dispose();
+    super.dispose();
+  }
 
   List<String> categoryList = [
     "Theme Park",
@@ -66,6 +78,50 @@ class HomeSearchController extends FxController {
     offset = Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0));
 
     animationController.forward();
+
+    dateTE = TextEditingController();
+
+    dateController = AnimationController(
+        vsync: ticker, duration: const Duration(milliseconds: 50));
+
+    dateAnimation =
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
+            .animate(CurvedAnimation(
+      parent: dateController,
+      curve: Curves.easeIn,
+    ));
+
+    dateController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        dateController.reverse();
+      }
+      if (status == AnimationStatus.dismissed && dateCounter < 2) {
+        dateController.forward();
+        dateCounter++;
+      }
+    });
+  }
+
+  Future<void> dateselect() async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(
+            1900), //DateTime.now() - not to allow to choose before today.
+        lastDate: DateTime(2101));
+
+    if (pickedDate != null) {
+      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(formattedDate);
+      dateTE.text = formattedDate;
+
+      // setState(() {
+      //   dateinput.text = formattedDate; //set output date to TextField value.
+      // });
+    } else {
+      print("Date is not selected");
+    }
   }
 
   void openEndDrawer() {

@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/controllers/auth_controller.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:searchfield/searchfield.dart';
 
 import '../../controllers/search_controller.dart';
-import '../../models/Country_modal.dart';
-import '../../services/auth_service.dart';
 import '../../theme/app_theme.dart';
-import 'package:iconsax/iconsax.dart';
 
 class SearchPlace extends StatefulWidget {
   const SearchPlace({Key? key}) : super(key: key);
@@ -76,25 +74,25 @@ class _SearchPlaceState extends State<SearchPlace>
     });
   }
 
-  List<CountryModal> countryList = <CountryModal>[];
-  bool isCountryListLoading = true;
-  Future getCountryList() async {
-    isCountryListLoading = true;
-    try {
-      var data = await AuthService().getCountry();
-      countryList.clear();
-      if (data != null) {
-        setState(() {});
-        countryList.add(data);
-        isCountryListLoading = false;
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
+  // List<CountryModal> countryList = <CountryModal>[];
+  // bool isCountryListLoading = true;
+  // Future getCountryList() async {
+  //   isCountryListLoading = true;
+  //   try {
+  //     var data = await AuthService().getCountry();
+  //     countryList.clear();
+  //     if (data != null) {
+  //       setState(() {});
+  //       countryList.add(data);
+  //       isCountryListLoading = false;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -223,9 +221,10 @@ class _SearchPlaceState extends State<SearchPlace>
                                     //     .countryList
                                     //     .first
                                     //     .countries!
+
                                     _countryCodes
                                         .map((e) => SearchFieldListItem(e,
-                                            // e!.countryName.toString(),
+                                            // e.countryName.toString(),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -303,7 +302,7 @@ class _SearchPlaceState extends State<SearchPlace>
                                     hintStyle: FxTextStyle.bodyMedium(),
                                     isCollapsed: true),
                                 autofocus: false,
-                                keyboardType: TextInputType.emailAddress,
+                                keyboardType: TextInputType.datetime,
                               ),
                             ),
                             SlideTransition(

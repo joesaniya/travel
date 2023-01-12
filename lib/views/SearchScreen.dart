@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/bottomSheet/Filter_Sheet.dart';
+import 'package:hotel_travel/views/bottomSheet/categories_Sheet.dart';
 
 import '../controllers/search_Home_controller.dart';
 import '../models/product.dart';
@@ -111,6 +113,63 @@ class _SearchScreenState extends State<SearchScreen>
               // ),
             ],
           ),
+          FxSpacing.height(20),
+          //btn
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext buildContext) {
+                        return const CategoriesBottomSheet();
+                      });
+                },
+                child: Container(
+                  height: 30,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff1529e8),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: FxText.bodyLarge(
+                      'Categories',
+                      fontWeight: 300,
+                      color: Colors.white,
+                      // color: theme.colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext buildContext) {
+                        return const FilterSheet();
+                      });
+                },
+                child: Container(
+                  height: 30,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: const Color(0xff1529e8),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: FxText.bodyLarge(
+                      'Filter',
+                      fontWeight: 300,
+                      color: Colors.white,
+                      // color: theme.colorScheme.onPrimary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
           FxSpacing.height(20),
           //content
           SingleChildScrollView(
