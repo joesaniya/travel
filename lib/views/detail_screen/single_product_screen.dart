@@ -150,7 +150,277 @@ class _SingleProductScreenState extends State<SingleProductScreen>
         controller: controller,
         builder: (controller) {
           return _buildBody();
+          // return _buildbody2();
         });
+  }
+
+  Widget _buildbody2() {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    var statusBarHeight = MediaQuery.of(context).size.height;
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.only(top: statusBarHeight * 0.8),
+            height: height * 0.4,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(controller.product.image),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: height * 0.3),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    SizedBox(
+                      height: height * 0.05,
+                    ),
+                    Container(
+                      width: width,
+                      margin: EdgeInsets.only(left: width * 0.03),
+                      child: const Text(
+                        'NYC Food Festival',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: width * 0.03),
+                      child: Row(
+                        children: <Widget>[
+                          const Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                            color: Color(0xff808080),
+                          ),
+                          SizedBox(width: width * 0.02), // give it width
+                          Column(
+                            children: const <Widget>[
+                              Text(
+                                'Sat, May 25, 2020',
+                                style: TextStyle(
+                                    color: Color(0xff000000),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: width * 0.03),
+                      child: Row(
+                        children: <Widget>[
+                          const Icon(
+                            Icons.attach_money,
+                            size: 20,
+                            color: Color(0xff808080),
+                          ),
+                          SizedBox(width: width * 0.02), // give it width
+                          Column(
+                            children: const <Widget>[
+                              Text(
+                                '25,000 PKR',
+                                style: TextStyle(
+                                    color: Color(0xff000000),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      width: width,
+                      margin: EdgeInsets.only(left: width * 0.03),
+                      child: const Text(
+                        'Snaps',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontSize: 25),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildbody1() {
+    return Scaffold(
+      backgroundColor: Colors.green,
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              height: MediaQuery.of(context).size.height * .8,
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.red,
+                image: DecorationImage(
+                  image: AssetImage(
+                    controller.product.image,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+          Stack(
+            alignment: Alignment.bottomRight,
+            children: <Widget>[
+              // Max Size
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Colors.red.shade50,
+                ),
+                alignment: const Alignment(1, 1),
+                height: 400,
+                width: 350,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 40, 100, 40),
+                      child: Text(
+                        "Summer  Collections",
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: Color(0xff262626),
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 270, 100),
+                      child: Text(
+                        "Sizes",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xff262626),
+                            fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            print('XS');
+                          },
+                          child: const Text('XS'),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            print('X');
+                          },
+                          child: const Text('S'),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            print('M');
+                          },
+                          child: const Text('M'),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            print('L');
+                          },
+                          child: const Text('L'),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            side: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          onPressed: () {
+                            print('XL');
+                          },
+                          child: const Text('XL'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(230, 110, 0, 40),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(15),
+                  ),
+                  child: const Text(
+                    "Add to Cart ",
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildBody() {
@@ -239,7 +509,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                     Expanded(
                       flex: 4,
                       child: Hero(
-                        tag: "product_" + controller.product.name,
+                        tag: "product_${controller.product.name}",
                         child: FxText.titleMedium(
                           controller.product.name,
                           fontWeight: 700,
@@ -291,76 +561,35 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
-                FxSpacing.height(20),
-                FxText.bodyMedium(
-                  'Size',
-                  fontWeight: 600,
-                ),
-                FxSpacing.height(8),
-                _buildSizeWidget(),
+                // FxSpacing.height(20),
+                // FxText.bodyMedium(
+                //   'Size',
+                //   fontWeight: 600,
+                // ),
+                // FxSpacing.height(8),
+                // _buildSizeWidget(),
               ],
             ),
           ),
           FxSpacing.height(20),
           Container(
             margin: FxSpacing.x(20),
-            child: Row(
-              children: [
-                AnimatedBuilder(
-                  animation: controller.cartController,
-                  builder: (BuildContext context, _) {
-                    return Stack(
-                      children: [
-                        FxContainer(
-                          color: theme.colorScheme.primaryContainer,
-                          paddingAll: controller.paddingAnimation.value,
-                          child: Icon(
-                            FeatherIcons.shoppingBag,
-                            color: theme.colorScheme.primary,
-                            size: controller.cartAnimation.value,
-                          ),
-                        ),
-                        controller.addCart
-                            ? Positioned(
-                                right: 10,
-                                top: 8,
-                                child: FxContainer.rounded(
-                                  color: theme.colorScheme.primary,
-                                  paddingAll: 4,
-                                  child: FxText.bodySmall(
-                                    "1",
-                                    color: theme.colorScheme.onPrimary,
-                                    fontSize: 8,
-                                    fontWeight: 700,
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                      ],
-                    );
-                  },
-                ),
-                FxSpacing.width(20),
-                Expanded(
-                  child: FxButton.block(
-                    splashColor: theme.colorScheme.onPrimary.withAlpha(40),
-                    backgroundColor: theme.colorScheme.primary,
-                    elevation: 0,
-                    borderRadiusAll: 4,
-                    onPressed: () {
-                      controller.addCart
-                          ? controller.cartController.reverse()
-                          : controller.cartController.forward();
-                      // controller.goToCheckout();
-                    },
-                    child: FxText.bodyLarge(
-                      'Add to Cart',
-                      fontWeight: 600,
-                      color: theme.colorScheme.onPrimary,
-                    ),
-                  ),
-                ),
-              ],
+            child: FxButton.block(
+              splashColor: theme.colorScheme.onPrimary.withAlpha(40),
+              backgroundColor: theme.colorScheme.primary,
+              elevation: 0,
+              borderRadiusAll: 4,
+              onPressed: () {
+                controller.addCart
+                    ? controller.cartController.reverse()
+                    : controller.cartController.forward();
+                // controller.goToCheckout();
+              },
+              child: FxText.bodyLarge(
+                'Book Now',
+                fontWeight: 600,
+                color: theme.colorScheme.onPrimary,
+              ),
             ),
           ),
           FxSpacing.height(20),
