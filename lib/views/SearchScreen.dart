@@ -115,10 +115,10 @@ class _SearchScreenState extends State<SearchScreen>
               // ),
             ],
           ),
-          Text(
-            widget.place.toString(),
-            style: const TextStyle(color: Colors.red),
-          ),
+          // Text(
+          //   widget.place.toString(),
+          //   style: const TextStyle(color: Colors.red),
+          // ),
           FxSpacing.height(20),
           //btn
           Row(
