@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 
 import '../models/category.dart';
 import '../models/product.dart';
@@ -122,11 +124,13 @@ class HomeController extends FxController {
   }
 
   void goToSingleProduct(Product product) {
-    // Navigator.of(context, rootNavigator: true).push(
-    //   PageRouteBuilder(
-    //       transitionDuration: Duration(seconds: 1),
-    //       pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-    // );
+    log(product.name);
+    log('message');
+    Navigator.of(context, rootNavigator: true).push(
+      PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+    );
   }
 
   void goToSubscription() {

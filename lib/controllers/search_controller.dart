@@ -156,7 +156,7 @@ class SearchController extends FxController {
           .showSnackBar(const SnackBar(content: Text("Success")));
       Navigator.of(context, rootNavigator: true).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const SearchScreen(),
+          builder: (context) => SearchScreen(),
         ),
       );
     }

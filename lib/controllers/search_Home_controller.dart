@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+
+import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 import 'package:intl/intl.dart';
 
 import '../models/product.dart';
@@ -122,6 +124,14 @@ class HomeSearchController extends FxController {
     } else {
       print("Date is not selected");
     }
+  }
+
+  void goToSingleProduct(Product product) {
+    Navigator.of(context, rootNavigator: true).push(
+      PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+    );
   }
 
   void openEndDrawer() {
