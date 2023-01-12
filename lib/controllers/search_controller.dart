@@ -131,7 +131,7 @@ class SearchController extends FxController {
   //   );
   // }
 
-  Future<void> searchbtn() async {
+  Future<void> searchbtn(selectedCountry) async {
     log('search btn');
     locationCounter = 0;
     dateCounter = 0;
@@ -156,7 +156,7 @@ class SearchController extends FxController {
           .showSnackBar(const SnackBar(content: Text("Success")));
       Navigator.of(context, rootNavigator: true).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => SearchScreen(),
+          builder: (context) => SearchScreen(place: selectedCountry),
         ),
       );
     }

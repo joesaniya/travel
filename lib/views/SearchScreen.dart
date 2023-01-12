@@ -11,10 +11,9 @@ import '../models/product.dart';
 import '../theme/app_theme.dart';
 
 class SearchScreen extends StatefulWidget {
+  String? place;
   // final BuildContext rootContext;
-//  SearchScreen({
-//   required this.rootContext
-//  });
+  SearchScreen({required this.place});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -115,6 +114,10 @@ class _SearchScreenState extends State<SearchScreen>
               //   ),
               // ),
             ],
+          ),
+          Text(
+            widget.place.toString(),
+            style: const TextStyle(color: Colors.red),
           ),
           FxSpacing.height(20),
           //btn

@@ -3,11 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
-import 'package:hotel_travel/controllers/auth_controller.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:searchfield/searchfield.dart';
 
 import '../../controllers/search_controller.dart';
+import '../../models/Country_modal.dart';
+import '../../services/auth_service.dart';
 import '../../theme/app_theme.dart';
 
 class SearchPlace extends StatefulWidget {
@@ -59,40 +60,41 @@ class _SearchPlaceState extends State<SearchPlace>
 
   fetchData() {
     Future.delayed(Duration.zero, () async {
-      // await getCountryList().then((value) {
-      //   if (value) {
-      //     isLoading = false;
-      //     setState(() {});
-      //   }
-      // });
-      await AuthController().getCountryList().then((value) {
+      await getCountryList().then((value) {
         if (value) {
           isLoading = false;
           setState(() {});
         }
       });
+      // await AuthController().getCountryList().then((value) {
+      //   if (value) {
+      //     isLoading = false;
+      //     setState(() {});
+      //   }
+      // });
     });
   }
 
-  // List<CountryModal> countryList = <CountryModal>[];
-  // bool isCountryListLoading = true;
-  // Future getCountryList() async {
-  //   isCountryListLoading = true;
-  //   try {
-  //     var data = await AuthService().getCountry();
-  //     countryList.clear();
-  //     if (data != null) {
-  //       setState(() {});
-  //       countryList.add(data);
-  //       isCountryListLoading = false;
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  String? _selectedCountry;
+  List<CountryModal> countryList = <CountryModal>[];
+  bool isCountryListLoading = true;
+  Future getCountryList() async {
+    isCountryListLoading = true;
+    try {
+      var data = await AuthService().getCountry();
+      countryList.clear();
+      if (data != null) {
+        setState(() {});
+        countryList.add(data);
+        isCountryListLoading = false;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -198,12 +200,14 @@ class _SearchPlaceState extends State<SearchPlace>
                                 ),
                                 onSubmit: (value) {
                                   setState(() {
-                                    _selectedItem = value;
+                                    // _selectedItem = value;
+                                    _selectedCountry = value;
                                     // foundCompany = value as List<Search>?;
                                   });
 
                                   print(value);
                                   log(value);
+                                  log('country');
                                 },
                                 // suggestions:
                                 //     //  _countryCodes
@@ -217,25 +221,46 @@ class _SearchPlaceState extends State<SearchPlace>
                                 //                   )))
                                 //         .toList(),
                                 suggestions:
-                                    // AuthController()
+                                    //  AuthController()
                                     //     .countryList
                                     //     .first
                                     //     .countries!
+                                    countryList.isEmpty ||
+                                            countryList.first.countries!.isEmpty
+                                        ? []
 
-                                    _countryCodes
-                                        .map((e) => SearchFieldListItem(e,
-                                            // e.countryName.toString(),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
+                                            // _countryCodes
+                                            .map((e) => SearchFieldListItem(
+                                                // e,
+                                                e!.countryName.toString(),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
                                                       horizontal: 8.0),
-                                              child: Text(
-                                                e,
-                                                // e.countryName.toString(),
-                                                style: FxTextStyle.bodyMedium(),
-                                              ),
-                                            )))
-                                        .toList(),
+                                                  child: Text(
+                                                    // e,
+                                                    e.countryName.toString(),
+                                                    style: FxTextStyle
+                                                        .bodyMedium(),
+                                                  ),
+                                                )))
+                                            .toList()
+                                        : countryList.first.countries!
+                                            .map((e) => SearchFieldListItem(
+                                                // e,
+                                                e!.countryName.toString(),
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 8.0),
+                                                  child: Text(
+                                                    // e,
+                                                    e.countryName.toString(),
+                                                    style: FxTextStyle
+                                                        .bodyMedium(),
+                                                  ),
+                                                )))
+                                            .toList(),
                               ),
                             ),
                             SlideTransition(
@@ -311,7 +336,7 @@ class _SearchPlaceState extends State<SearchPlace>
                                 elevation: 0,
                                 borderRadiusAll: 4,
                                 onPressed: () {
-                                  controller.searchbtn();
+                                  controller.searchbtn(_selectedCountry);
                                 },
                                 splashColor:
                                     theme.colorScheme.onPrimary.withAlpha(28),
