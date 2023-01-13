@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -19,6 +20,10 @@ class SingleProductController extends FxController {
   late Animation<Color?> colorAnimation;
   late Animation<double?> sizeAnimation, cartAnimation, paddingAnimation;
 
+  final PageController pageController = PageController(initialPage: 0);
+  int currentPage = 0, numPages = 3;
+  late Timer timerAnimation;
+
   bool isFav = false;
   bool addCart = false;
 
@@ -32,6 +37,19 @@ class SingleProductController extends FxController {
     super.initState();
     save = false;
     fetchData();
+    timerAnimation = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
+      if (currentPage < numPages - 1) {
+        currentPage++;
+      } else {
+        currentPage = 0;
+      }
+
+      pageController.animateToPage(
+        currentPage,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.ease,
+      );
+    });
     animationController = AnimationController(
         vsync: ticker, duration: const Duration(milliseconds: 500));
 
@@ -91,6 +109,7 @@ class SingleProductController extends FxController {
     animationController.dispose();
     cartController.dispose();
     super.dispose();
+    pageController.dispose();
   }
 
   void toggleFavorite() {

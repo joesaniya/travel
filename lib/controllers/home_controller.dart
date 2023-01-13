@@ -126,11 +126,23 @@ class HomeController extends FxController {
   void goToSingleProduct(Product product) {
     log(product.name);
     log('message');
-    Navigator.of(context, rootNavigator: true).push(
-      PageRouteBuilder(
-          transitionDuration: const Duration(seconds: 1),
-          pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-    );
+    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            transitionsBuilder: (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child,
+            ) =>
+                FadeTransition(
+                  opacity: animation,
+                  child: child,
+                ),
+            pageBuilder: (_, __, ___) => SingleProductScreen(product))
+        // PageRouteBuilder(
+        //     transitionDuration: const Duration(seconds: 1),
+        //     pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+        );
   }
 
   void goToSubscription() {

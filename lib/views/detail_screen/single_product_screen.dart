@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
+import 'package:hotel_travel/widgets/facilty_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../controllers/single_product_controller.dart';
 import '../../models/product.dart';
@@ -149,9 +151,514 @@ class _SingleProductScreenState extends State<SingleProductScreen>
     return FxBuilder<SingleProductController>(
         controller: controller,
         builder: (controller) {
-          return _buildBody();
+          // return _buildBody();
           // return _buildbody2();
+          return _buildDetail();
         });
+  }
+
+  Widget _buildDetail() {
+    return Scaffold(
+      backgroundColor: const Color(0xfff5f5f5),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+        child: FxButton.block(
+          onPressed: () {},
+          backgroundColor: Colors.indigo,
+          // backgroundColor: customTheme.estatePrimary,
+          borderRadiusAll: 12,
+
+          elevation: 0,
+          child: FxText.bodyMedium(
+            'Book Now',
+            color: Colors.black,
+            // color: customTheme.estateOnPrimary,
+            fontWeight: 700,
+          ),
+        ),
+      ),
+      body: Stack(
+        children: <Widget>[
+          SizedBox(
+            height: 400,
+            // height: MediaQuery.of(context).size.height / 3,
+            child: PageView(
+              pageSnapping: true,
+              physics: const ClampingScrollPhysics(),
+              controller: controller.pageController,
+              onPageChanged: (int page) {
+                setState(() {
+                  controller.currentPage = page;
+                });
+              },
+              children: <Widget>[
+                Container(
+                  child: Image(
+                    image: AssetImage(controller.product.image),
+                    // height: MediaQuery.of(context).size.height / 3,
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(
+                  child: Image(
+                    image: const AssetImage(
+                        './assets/images/apps/hotel/room-1.jpg'),
+                    // height: MediaQuery.of(context).size.height / 3,
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Container(
+                  child: Image(
+                    image: const AssetImage(
+                        './assets/images/apps/hotel/room-3.jpg'),
+                    // height: MediaQuery.of(context).size.height / 3,
+                    height: 400,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Container(
+          //     foregroundDecoration: const BoxDecoration(color: Colors.black26),
+          //     height: 400,
+          //     child: Image.asset(controller.product.image, fit: BoxFit.cover)),
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const SizedBox(height: 250),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    controller.product.name,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 28.0,
+                        fontWeight: FontWeight.w900),
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    // const SizedBox(width: 16.0),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 16.0,
+                      ),
+                      // decoration: BoxDecoration(
+                      //     color: Colors.grey,
+                      //     borderRadius: BorderRadius.circular(20.0)),
+                      child: Row(
+                        children: [
+                          FxText.bodyMedium(
+                            controller.product.rating.toString(),
+                            fontWeight: 900,
+                            color: Colors.white,
+                            // color: theme.colorScheme.onPrimary,
+                          ),
+                          const Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const Spacer(),
+                    // FxText.bodySmall(
+                    //   '23+',
+                    //   fontWeight: 900,
+                    //   color: Colors.white,
+                    //   // color: theme.colorScheme.onPrimary,
+                    // ),
+                    // IconButton(
+                    //   color: Colors.white,
+                    //   icon: const Icon(Icons.favorite_border),
+                    //   onPressed: () {},
+                    // )
+                  ],
+                ),
+                Container(
+                  padding: const EdgeInsets.all(32.0),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          topLeft: Radius.circular(30)),
+                      color: Color(0xfff5f5f5)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FxText.bodyMedium(
+                            'Per Night',
+                            fontWeight: 900,
+                            color: Colors.black,
+                            // color: theme.colorScheme.onPrimary,
+                          ),
+                          RichText(
+                            text: const TextSpan(
+                              // style:
+                              //     TextStyle(color: Colors.black, fontSize: 36),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: '\$140 ',
+                                    style: TextStyle(color: Colors.black)),
+                                TextSpan(
+                                    text: '\$120',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w900)),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      FxSpacing.height(15),
+                      const Divider(
+                        color: Colors.black,
+                      ),
+                      FxSpacing.height(15),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FxText.bodyMedium(
+                            '4.5/5 - Good',
+                            fontWeight: 900,
+                            color: Colors.black,
+                            // color: theme.colorScheme.onPrimary,
+                          ),
+                          Container(
+                            child: Row(
+                              children: const [
+                                Text('1298 Reviews'),
+                                Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 10,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      FxSpacing.height(15),
+                      const Divider(
+                        color: Colors.black,
+                      ),
+
+                      //fe
+                      FxSpacing.height(15),
+
+                      Container(
+                        // margin:
+                        //     const EdgeInsets.only(top: 24, left: 8, right: 8),
+                        color: Colors.transparent,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            FxText.bodyLarge(
+                              'Hotel Features',
+                              fontWeight: 800,
+                            ),
+                            FxSpacing.height(10),
+                            Row(
+                              children: const <Widget>[
+                                Expanded(
+                                    child: FacityWidget(
+                                  iconData: MdiIcons.currencyUsd,
+                                  text: "Low Cost",
+                                )),
+                                Expanded(
+                                    child: FacityWidget(
+                                  iconData: MdiIcons.car,
+                                  text: "Parking",
+                                )),
+                                Expanded(
+                                    child: FacityWidget(
+                                  iconData: MdiIcons.partyPopper,
+                                  text: "Party",
+                                )),
+                                Expanded(
+                                    child: FacityWidget(
+                                  iconData: MdiIcons.theater,
+                                  text: "Theater",
+                                )),
+                              ],
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 16),
+                              child: Row(
+                                children: const <Widget>[
+                                  Expanded(
+                                      child: FacityWidget(
+                                    iconData: MdiIcons.glassWine,
+                                    text: "Bar",
+                                  )),
+                                  Expanded(
+                                      child: FacityWidget(
+                                    iconData: MdiIcons.pool,
+                                    text: "Pool",
+                                  )),
+                                  Expanded(
+                                      child: FacityWidget(
+                                    iconData: MdiIcons.spa,
+                                    text: "Spa",
+                                  )),
+                                  Expanded(
+                                      child: FacityWidget(
+                                    iconData: MdiIcons.gamepad,
+                                    text: "Games",
+                                  )),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //feaures
+                      FxSpacing.height(15),
+                      // Column(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   crossAxisAlignment: CrossAxisAlignment.start,
+                      //   children: [
+                      //     FxText.bodyLarge(
+                      //       'Hotel Features',
+                      //       fontWeight: 800,
+                      //     ),
+                      //     FxSpacing.height(10),
+                      //     Container(
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         crossAxisAlignment: CrossAxisAlignment.center,
+                      //         children: [
+                      //           Container(
+                      //             child: Column(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               crossAxisAlignment:
+                      //                   CrossAxisAlignment.start,
+                      //               children: [
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       Icons.breakfast_dining,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Breakfast',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //                 FxSpacing.height(20),
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       FontAwesomeIcons.parking,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Parking',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //           FxSpacing.height(30),
+                      //           Container(
+                      //             child: Column(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               crossAxisAlignment:
+                      //                   CrossAxisAlignment.start,
+                      //               children: [
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       Icons.dining,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Dinning',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //                 FxSpacing.height(20),
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       Icons.wifi,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Free wifi',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //           FxSpacing.height(30),
+                      //           Container(
+                      //             child: Column(
+                      //               mainAxisAlignment:
+                      //                   MainAxisAlignment.spaceBetween,
+                      //               crossAxisAlignment:
+                      //                   CrossAxisAlignment.start,
+                      //               children: [
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       Icons.dining,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Dinning',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //                 FxSpacing.height(20),
+                      //                 Row(
+                      //                   children: [
+                      //                     const Icon(
+                      //                       Icons.wifi,
+                      //                       size: 10,
+                      //                     ),
+                      //                     FxSpacing.width(8),
+                      //                     FxText.bodySmall(
+                      //                       'Wifi',
+                      //                       fontWeight: 800,
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     )
+                      //   ],
+                      // ),
+                      FxSpacing.height(15),
+                      const Divider(
+                        color: Colors.black,
+                      ),
+                      FxSpacing.height(15),
+                      // const SizedBox(height: 30.0),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   child: ElevatedButton(
+                      //     style: ElevatedButton.styleFrom(
+                      //       shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(30.0)),
+                      //       // backgroundColor: Colors.purple,
+                      //       // foregroundColor: Colors.white,
+                      //       padding: const EdgeInsets.symmetric(
+                      //         vertical: 16.0,
+                      //         horizontal: 32.0,
+                      //       ),
+                      //     ),
+                      //     child: const Text(
+                      //       "Book Now",
+                      //       style: TextStyle(fontWeight: FontWeight.normal),
+                      //     ),
+                      //     onPressed: () {},
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 30.0),
+                      Text(
+                        "Description".toUpperCase(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14.0),
+                      ),
+                      const SizedBox(height: 10.0),
+                      FxText.bodyLarge(
+                        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
+                        textAlign: TextAlign.justify,
+                        // style: TextStyle(
+                        //     fontWeight: FontWeight.w300, fontSize: 14.0),
+                      ),
+                      const SizedBox(height: 10.0),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 40,
+            left: 10,
+            right: 10,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: FxContainer.bordered(
+                    paddingAll: 4,
+                    child: Icon(
+                      Icons.chevron_left_outlined,
+                      color: theme.colorScheme.onBackground.withAlpha(200),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    controller.isFav
+                        ? controller.animationController.reverse()
+                        : controller.animationController.forward();
+                  },
+                  child: FxContainer.bordered(
+                    paddingAll: 4,
+                    child: Icon(
+                      // FontAwesomeIcons.heart,
+                      // color: theme.colorScheme.onBackground.withAlpha(200),
+                      Icons.favorite,
+                      color: controller.colorAnimation.value,
+                      size: controller.sizeAnimation.value,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            // child: AppBar(
+            //   backgroundColor: Colors.transparent,
+            //   elevation: 0,
+
+            //   centerTitle: true,
+            //   title: const Text(
+            //     "DETAIL",
+            //     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.normal),
+            //   ),
+            // ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildbody2() {
@@ -164,10 +671,17 @@ class _SingleProductScreenState extends State<SingleProductScreen>
           Container(
             padding: EdgeInsets.only(top: statusBarHeight * 0.8),
             height: height * 0.4,
+            width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(controller.product.image),
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: const Center(
+              child: Text(
+                'data',
+                style: TextStyle(color: Colors.pink),
               ),
             ),
           ),
