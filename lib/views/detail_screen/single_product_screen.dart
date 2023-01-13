@@ -368,7 +368,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             FxText.bodyLarge(
-                              'Hotel Features',
+                              'Features',
                               fontWeight: 800,
                             ),
                             FxSpacing.height(10),
@@ -376,23 +376,24 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                               children: const <Widget>[
                                 Expanded(
                                     child: FacityWidget(
-                                  iconData: MdiIcons.currencyUsd,
-                                  text: "Low Cost",
+                                  iconData: MdiIcons.calendarAccount,
+                                  text: "Availibility:Daily",
                                 )),
                                 Expanded(
                                     child: FacityWidget(
-                                  iconData: MdiIcons.car,
-                                  text: "Parking",
+                                  iconData: MdiIcons.timerSand,
+                                  // text: "Duration: 6 hours",
+                                  text: "Duration: 6 hours (approx)",
                                 )),
                                 Expanded(
                                     child: FacityWidget(
-                                  iconData: MdiIcons.partyPopper,
-                                  text: "Party",
+                                  iconData: MdiIcons.timer,
+                                  text: "Time slot: 8:00 - 11:30",
                                 )),
                                 Expanded(
                                     child: FacityWidget(
-                                  iconData: MdiIcons.theater,
-                                  text: "Theater",
+                                  iconData: Icons.bolt,
+                                  text: "Instant Confirmation",
                                 )),
                               ],
                             ),
@@ -402,8 +403,8 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 children: const <Widget>[
                                   Expanded(
                                       child: FacityWidget(
-                                    iconData: MdiIcons.glassWine,
-                                    text: "Bar",
+                                    iconData: MdiIcons.accountCancelOutline,
+                                    text: "Free cancellation upto 24 hours",
                                   )),
                                   Expanded(
                                       child: FacityWidget(
@@ -566,6 +567,62 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                         color: Colors.black,
                       ),
                       FxSpacing.height(15),
+                      Text(
+                        "HighLights".toUpperCase(),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14.0),
+                      ),
+
+                      //highlights
+                      FxSpacing.height(15),
+
+                      Container(
+                        // height: 300,
+                        width: MediaQuery.of(context).size.width,
+                        color: Colors.transparent,
+                        // child: AnimatedList(
+                        //     scrollDirection: Axis.horizontal,
+                        //     // key: controller.listKey,
+                        //     initialItemCount: controller.product.interests.length,
+                        //     itemBuilder: (context, index, animation) {
+                        //       return SlideTransition(
+                        //           position: animation.drive(controller.offset),
+                        //           child: controller.newCategories[index]
+                        //           // child: Container(
+                        //           //   color: Colors.green,
+                        //           // ),
+                        //           );
+                        //     }),
+                        child: ListView.separated(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          itemCount: controller.product.interests.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          separatorBuilder: (context, index) {
+                            return FxSpacing.height(2);
+                          },
+                          itemBuilder: (context, index) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Icon(
+                                  Icons.star_border_outlined,
+                                  color: Colors.black,
+                                ),
+                                FxSpacing.width(5),
+                                Expanded(
+                                  child: FxText.bodyLarge(
+                                      controller.product.interests[index]),
+                                ),
+                              ],
+                            );
+                            // return StepTile(
+                            //   data: controller.product,
+                            // );
+                          },
+                        ),
+                      ),
                       // const SizedBox(height: 30.0),
                       // SizedBox(
                       //   width: double.infinity,
@@ -588,6 +645,10 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                       //   ),
                       // ),
                       // const SizedBox(height: 30.0),
+                      const Divider(
+                        color: Colors.black,
+                      ),
+                      FxSpacing.height(15),
                       Text(
                         "Description".toUpperCase(),
                         style: const TextStyle(

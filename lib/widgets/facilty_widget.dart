@@ -11,8 +11,11 @@ class FacityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return FxContainer.bordered(
+      height: 90,
+      width: 150,
       margin: const EdgeInsets.only(left: 8, right: 8),
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      // padding: const EdgeInsets.only(top: 8, bottom: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: Center(
         child: Column(
           children: <Widget>[
@@ -22,12 +25,24 @@ class FacityWidget extends StatelessWidget {
               size: 28,
             ),
             Container(
+              // height: 20,
+              // width: MediaQuery.of(context).size.width,
+              // color: Colors.yellow,
               margin: const EdgeInsets.only(top: 8),
-              child: FxText.bodySmall(text,
-                  letterSpacing: 0,
-                  fontWeight: 600,
-                  color: theme.colorScheme.onBackground),
+              child: Center(
+                child: FxText.bodySmall(text,
+                    letterSpacing: 0,
+                    fontWeight: 600,
+                    color: theme.colorScheme.onBackground),
+              ),
             )
+            // Container(
+            //   margin: const EdgeInsets.only(top: 8),
+            //   child: FxText.bodySmall(text,
+            //       letterSpacing: 0,
+            //       fontWeight: 600,
+            //       color: theme.colorScheme.onBackground),
+            // )
           ],
         ),
       ),

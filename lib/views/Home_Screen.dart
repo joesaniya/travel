@@ -638,7 +638,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ),
             // FxSpacing.height(20),
-            // Container(
+            // SizedBox(
             //   key: controller.intro.keys[2],
             //   // height: 50,
             //   height: 70,

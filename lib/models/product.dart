@@ -10,6 +10,7 @@ class Product {
   int review, quantity;
   Color color;
   bool favorite;
+  List<String> interests;
 
   Product(
       this.name,
@@ -22,7 +23,8 @@ class Product {
       this.color,
       this.favorite,
       this.location,
-      this.types);
+      this.types,
+      this.interests);
 
   static Future<List<Product>> getDummyList() async {
     dynamic data = json.decode(await getData());
@@ -45,9 +47,13 @@ class Product {
     bool favorite = jsonObject['favorite'].toString().toBool();
     String location = jsonObject['location'].toString();
     String types = jsonObject['types'].toString();
+    List<String> interests = [];
+    for (dynamic interest in jsonObject['interests']) {
+      interests.add(interest.toString());
+    }
 
     return Product(name, image, description, rating, price, review, quantity,
-        color, favorite, location, types);
+        color, favorite, location, types, interests);
   }
 
   static List<Product> getListFromJson(List<dynamic> jsonArray) {
