@@ -3,6 +3,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
 import 'package:hotel_travel/widgets/facilty_widget.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../controllers/single_product_controller.dart';
@@ -171,7 +172,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
           elevation: 0,
           child: FxText.bodyMedium(
             'Book Now',
-            color: Colors.black,
+            color: Colors.white,
             // color: customTheme.estateOnPrimary,
             fontWeight: 700,
           ),
@@ -234,130 +235,415 @@ class _SingleProductScreenState extends State<SingleProductScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const SizedBox(height: 250),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    controller.product.name,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 28.0,
-                        fontWeight: FontWeight.w900),
-                  ),
-                ),
-                Row(
-                  children: <Widget>[
-                    // const SizedBox(width: 16.0),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 8.0,
-                        horizontal: 16.0,
-                      ),
-                      // decoration: BoxDecoration(
-                      //     color: Colors.grey,
-                      //     borderRadius: BorderRadius.circular(20.0)),
-                      child: Row(
-                        children: [
-                          FxText.bodyMedium(
-                            controller.product.rating.toString(),
-                            fontWeight: 900,
-                            color: Colors.white,
-                            // color: theme.colorScheme.onPrimary,
-                          ),
-                          const Icon(
-                            Icons.star,
-                            color: Colors.yellow,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    // FxText.bodySmall(
-                    //   '23+',
-                    //   fontWeight: 900,
-                    //   color: Colors.white,
-                    //   // color: theme.colorScheme.onPrimary,
-                    // ),
-                    // IconButton(
-                    //   color: Colors.white,
-                    //   icon: const Icon(Icons.favorite_border),
-                    //   onPressed: () {},
-                    // )
-                  ],
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                //   child: Text(
+                //     controller.product.name,
+                //     style: const TextStyle(
+                //         color: Colors.white,
+                //         fontSize: 28.0,
+                //         fontWeight: FontWeight.w900),
+                //   ),
+                // ),
+                // Row(
+                //   children: <Widget>[
+                //     // const SizedBox(width: 16.0),
+                //     Container(
+                //       padding: const EdgeInsets.symmetric(
+                //         vertical: 8.0,
+                //         horizontal: 16.0,
+                //       ),
+                //       // decoration: BoxDecoration(
+                //       //     color: Colors.grey,
+                //       //     borderRadius: BorderRadius.circular(20.0)),
+                //       child: Row(
+                //         children: [
+                //           FxText.bodyMedium(
+                //             controller.product.rating.toString(),
+                //             fontWeight: 900,
+                //             color: Colors.white,
+                //             // color: theme.colorScheme.onPrimary,
+                //           ),
+                //           const Icon(
+                //             Icons.star,
+                //             color: Colors.yellow,
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     const Spacer(),
+                //     // FxText.bodySmall(
+                //     //   '23+',
+                //     //   fontWeight: 900,
+                //     //   color: Colors.white,
+                //     //   // color: theme.colorScheme.onPrimary,
+                //     // ),
+                //     // IconButton(
+                //     //   color: Colors.white,
+                //     //   icon: const Icon(Icons.favorite_border),
+                //     //   onPressed: () {},
+                //     // )
+                //   ],
+                // ),
                 Container(
                   padding: const EdgeInsets.all(32.0),
                   decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           topRight: Radius.circular(30),
                           topLeft: Radius.circular(30)),
+                      // color: Colors.blue
                       color: Color(0xfff5f5f5)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     // mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FxText.bodyMedium(
-                            'Per Night',
-                            fontWeight: 900,
-                            color: Colors.black,
-                            // color: theme.colorScheme.onPrimary,
-                          ),
-                          RichText(
-                            text: const TextSpan(
-                              // style:
-                              //     TextStyle(color: Colors.black, fontSize: 36),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: '\$140 ',
-                                    style: TextStyle(color: Colors.black)),
-                                TextSpan(
-                                    text: '\$120',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w900)),
+                      Container(
+                        // margin: const EdgeInsets.all(5.0),
+                        // width: 800,
+                        height: 100,
+                        decoration: BoxDecoration(
+                            // color: Color(0xffe6e1e5),
+                            color: Colors.white,
+                            // color: Color(0xffe5fdfd),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(
+                                color: Colors.grey.shade300, width: 1)
+                            // color: theme!.colorScheme.onPrimaryContainer,
+                            ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      FxContainer(
+                                        borderRadiusAll: 10,
+                                        // padding: FxSpacing.xy(8, 4),
+                                        padding: FxSpacing.xy(6, 2),
+                                        // color: Color(0xff1529e8),
+                                        color: Colors.blueGrey,
+                                        child: FxText.bodySmall(
+                                          // 'Theme Park',
+                                          controller.product.types.toString(),
+                                          fontWeight: 300,
+                                          color: Colors.white,
+                                          // color: theme.colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      FxContainer(
+                                        borderRadiusAll: 10,
+                                        // padding: FxSpacing.xy(8, 4),
+                                        padding: FxSpacing.xy(6, 2),
+                                        // color: Color(0xff1529e8),
+                                        color: Colors.blueGrey,
+                                        child: FxText.bodySmall(
+                                          'Ticket',
+                                          fontWeight: 300,
+                                          color: Colors.white,
+                                          // color: theme.colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      FxContainer(
+                                        borderRadiusAll: 10,
+                                        // padding: FxSpacing.xy(8, 4),
+                                        padding: FxSpacing.xy(6, 2),
+                                        // color: Color(0xff1529e8),
+                                        color: Colors.blueGrey,
+                                        child: FxText.bodySmall(
+                                          'Offer',
+                                          fontWeight: 300,
+                                          color: Colors.white,
+                                          // color: theme.colorScheme.onPrimary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            // FeatherIcons.star,
+                                            Icons.star,
+                                            color: Colors.yellow,
+                                            size: 12,
+                                          ),
+                                          FxSpacing.width(4),
+                                          FxText.bodySmall(
+                                            // '4.5',
+                                            controller.product.rating
+                                                .toString(),
+                                            fontWeight: 600,
+                                            color: Colors.black,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // FxSpacing.height(20),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: FxText.bodyLarge(
+                                // 'Ferrari world',
+                                controller.product.name.toString(),
+                                fontWeight: 800,
+                              ),
+                            ),
+                            // FxSpacing.height(10),
+                            Padding(
+                              // padding: EdgeInsets.symmetric(horizontal: 0),
+                              padding: const EdgeInsets.only(right: 8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      FxContainer(
+                                        borderRadiusAll: 8,
+                                        padding: FxSpacing.xy(8, 4),
+                                        // color: theme.colorScheme.primary,
+                                        // color: Colors.yellow.shade400,
+                                        color: Colors.white,
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Iconsax.location,
+                                              color: Colors.black,
+                                              // color: theme.colorScheme.onPrimary,
+                                              size: 12,
+                                            ),
+                                            FxSpacing.width(4),
+                                            FxText.labelLarge(
+                                              // '\$' + product.price.toString(),
+                                              controller.product.location
+                                                  .toString(),
+                                              // product.price.toString() + " " + "USD",
+                                              // "\$" + product.price.toString() + "/hour",
+                                              // fontWeight: 700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  FxText(
+                                    controller.product.price.toString(),
+                                    color: const Color(0xff1529e8),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // FxContainer.bordered(
+                      //   // margin: const EdgeInsets.only(left: 8, right: 8),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Text(
+                      //         controller.product.name,
+                      //         style: const TextStyle(
+                      //             color: Colors.black,
+                      //             fontSize: 28.0,
+                      //             fontWeight: FontWeight.w900),
+                      //       ),
+                      //       Row(
+                      //         children: <Widget>[
+                      //           // const SizedBox(width: 16.0),
+                      //           Container(
+                      //             padding: const EdgeInsets.symmetric(
+                      //               vertical: 8.0,
+                      //               // horizontal: 16.0,
+                      //             ),
+                      //             // decoration: BoxDecoration(
+                      //             //     color: Colors.grey,
+                      //             //     borderRadius: BorderRadius.circular(20.0)),
+                      //             child: Row(
+                      //               children: [
+                      //                 FxText.bodyMedium(
+                      //                   controller.product.rating.toString(),
+                      //                   fontWeight: 900,
+                      //                   color: Colors.black,
+                      //                   // color: theme.colorScheme.onPrimary,
+                      //                 ),
+                      //                 const Icon(
+                      //                   Icons.star,
+                      //                   color: Colors.yellow,
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //           const Spacer(),
+                      //           // FxText.bodySmall(
+                      //           //   '23+',
+                      //           //   fontWeight: 900,
+                      //           //   color: Colors.white,
+                      //           //   // color: theme.colorScheme.onPrimary,
+                      //           // ),
+                      //           // IconButton(
+                      //           //   color: Colors.white,
+                      //           //   icon: const Icon(Icons.favorite_border),
+                      //           //   onPressed: () {},
+                      //           // )
+                      //         ],
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      FxSpacing.height(15),
+                      Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                            // color: Color(0xffe6e1e5),
+                            color: Colors.white,
+                            // color: Color(0xffe5fdfd),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(
+                                color: Colors.grey.shade300, width: 1)
+                            // color: theme!.colorScheme.onPrimaryContainer,
+                            ),
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                FxText.labelLarge(
+                                  // '\$' + product.price.toString(),
+                                  controller.product.location.toString(),
+                                  // product.price.toString() + " " + "USD",
+                                  // "\$" + product.price.toString() + "/hour",
+                                  // fontWeight: 700,
+                                ),
+                                FxText.bodyLarge(
+                                  '\$140 ',
+                                  color: Colors.indigo,
+                                  fontWeight: 900,
+                                  // color: const Color(0xff1529e8),
+                                ),
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                      FxSpacing.height(15),
-                      const Divider(
-                        color: Colors.black,
-                      ),
-                      FxSpacing.height(15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FxText.bodyMedium(
-                            '4.5/5 - Good',
-                            fontWeight: 900,
-                            color: Colors.black,
-                            // color: theme.colorScheme.onPrimary,
-                          ),
-                          Container(
-                            child: Row(
-                              children: const [
-                                Text('1298 Reviews'),
-                                Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 10,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FxText.bodyMedium(
+                                  '4.5/5 - Good',
+                                  fontWeight: 900,
+                                  color: Colors.black,
+                                  // color: theme.colorScheme.onPrimary,
+                                ),
+                                Container(
+                                  child: Row(
+                                    children: const [
+                                      Text('1298 Reviews'),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        size: 10,
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
+                      // FxContainer.bordered(
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       FxText.bodyMedium(
+                      //         'Per Person',
+                      //         fontWeight: 900,
+                      //         color: Colors.black,
+                      //         // color: theme.colorScheme.onPrimary,
+                      //       ),
+                      //       RichText(
+                      //         text: const TextSpan(
+                      //           // style:
+                      //           //     TextStyle(color: Colors.black, fontSize: 36),
+                      //           children: <TextSpan>[
+                      //             TextSpan(
+                      //                 text: '\$140 ',
+                      //                 style: TextStyle(color: Colors.black)),
+                      //             TextSpan(
+                      //                 text: '\$120',
+                      //                 style: TextStyle(
+                      //                     color: Colors.black,
+                      //                     fontWeight: FontWeight.w900)),
+                      //           ],
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
+                      // FxSpacing.height(15),
+                      // // const Divider(
+                      // //   color: Colors.black,
+                      // // ),
+                      // // FxSpacing.height(15),
+                      // FxContainer.bordered(
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       FxText.bodyMedium(
+                      //         '4.5/5 - Good',
+                      //         fontWeight: 900,
+                      //         color: Colors.black,
+                      //         // color: theme.colorScheme.onPrimary,
+                      //       ),
+                      //       Container(
+                      //         child: Row(
+                      //           children: const [
+                      //             Text('1298 Reviews'),
+                      //             Icon(
+                      //               Icons.arrow_forward_ios,
+                      //               size: 10,
+                      //             )
+                      //           ],
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       FxSpacing.height(15),
-                      const Divider(
-                        color: Colors.black,
-                      ),
+                      // const Divider(
+                      //   color: Colors.black,
+                      // ),
 
-                      //fe
-                      FxSpacing.height(15),
+                      // //fe
+                      // FxSpacing.height(15),
 
                       Container(
                         // margin:
@@ -1163,7 +1449,8 @@ class _SingleProductScreenState extends State<SingleProductScreen>
               child: FxText.bodyLarge(
                 'Book Now',
                 fontWeight: 600,
-                color: theme.colorScheme.onPrimary,
+                color: Colors.white,
+                // color: theme.colorScheme.onPrimary,
               ),
             ),
           ),

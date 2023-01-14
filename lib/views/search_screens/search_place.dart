@@ -209,6 +209,13 @@ class _SearchPlaceState extends State<SearchPlace>
                                   log(value);
                                   log('country');
                                 },
+                                onSuggestionTap: (value) {
+                                  countryList.first.countries =
+                                      value as List<Country?>?;
+                                  setState(() {});
+                                  log('onSuggestionTap');
+                                  log(value.toString());
+                                },
                                 // suggestions:
                                 //     //  _countryCodes
                                 //     searchResult

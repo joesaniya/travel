@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hotel_travel/card_widgets/attraction_tile.dart';
 import 'package:hotel_travel/models/TopAttraction.dart';
@@ -19,9 +21,11 @@ class _TopAttractionCardState extends State<TopAttractionCard> {
   // late ThemeData theme;
   @override
   void initState() {
+    log('top');
     foundCompany = searchResult;
     super.initState();
     // theme = AppTheme.shoppingTheme;
+    log(foundCompany!.length.toString());
   }
 
   @override
