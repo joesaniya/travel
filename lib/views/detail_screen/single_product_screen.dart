@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
+import 'package:hotel_travel/views/detail_screen/review_Screen.dart';
 import 'package:hotel_travel/widgets/facilty_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -528,7 +531,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 color: Colors.grey.shade300, width: 1)
                             // color: theme!.colorScheme.onPrimaryContainer,
                             ),
-                        padding: const EdgeInsets.only(left: 8.0),
+                        padding: const EdgeInsets.only(left: 8.0, right: 8),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -538,7 +541,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                               children: [
                                 FxText.labelLarge(
                                   // '\$' + product.price.toString(),
-                                  controller.product.location.toString(),
+                                  'Per Person',
                                   // product.price.toString() + " " + "USD",
                                   // "\$" + product.price.toString() + "/hour",
                                   // fontWeight: 700,
@@ -561,13 +564,31 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                   color: Colors.black,
                                   // color: theme.colorScheme.onPrimary,
                                 ),
-                                Container(
+                                FxContainer(
+                                  onTap: () {
+                                    log('review Screen clicked');
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ReviewScreen()));
+                                  },
+                                  padding: FxSpacing.fromLTRB(8, 6, 8, 6),
+                                  color: const Color(0xff1529e8).withAlpha(40),
+                                  // color:Color(0xff6874E8),
+                                  // customTheme.groceryPrimary.withAlpha(40),
                                   child: Row(
-                                    children: const [
-                                      Text('1298 Reviews'),
-                                      Icon(
-                                        Icons.arrow_forward_ios,
-                                        size: 10,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      FxText.bodyMedium("(243 review)",
+                                          color: const Color(0xff1529e8),
+                                          // color: customTheme.groceryPrimary,
+                                          fontWeight: 500,
+                                          letterSpacing: -0.2),
+                                      const Icon(
+                                        MdiIcons.chevronRight,
+                                        size: 14,
+                                        color: Color(0xff1529e8),
                                       )
                                     ],
                                   ),

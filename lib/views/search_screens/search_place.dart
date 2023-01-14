@@ -76,6 +76,7 @@ class _SearchPlaceState extends State<SearchPlace>
   }
 
   String? _selectedCountry;
+
   List<CountryModal> countryList = <CountryModal>[];
   bool isCountryListLoading = true;
   Future getCountryList() async {
@@ -210,11 +211,12 @@ class _SearchPlaceState extends State<SearchPlace>
                                   log('country');
                                 },
                                 onSuggestionTap: (value) {
-                                  countryList.first.countries =
-                                      value as List<Country?>?;
+                                  // countryList.first.countries =
+                                  //     value as List<Country?>?;
+                                  _selectedCountry = value.item.toString();
                                   setState(() {});
                                   log('onSuggestionTap');
-                                  log(value.toString());
+                                  log(value.item.toString());
                                 },
                                 // suggestions:
                                 //     //  _countryCodes
