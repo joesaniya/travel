@@ -11,6 +11,9 @@ class SearchController extends FxController {
   late TextEditingController locationTE, dateTE;
   GlobalKey<FormState> formKey = GlobalKey();
 
+  //country
+
+//ani
   late AnimationController searchController, locationController, dateController;
   late Animation<Offset> searchAnimation, locationAnimation, dateAnimation;
   int locationCounter = 0;

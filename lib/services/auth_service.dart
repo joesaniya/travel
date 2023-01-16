@@ -55,7 +55,13 @@ class AuthService {
           body: jsonEncode(body));
       if (response.statusCode == 200) {
         return response.body;
-      } else {
+      }
+      //  else if (response.statusCode == 400) {
+      //   log('else if');
+      //   return response.body;
+      // }
+
+      else {
         var jsondata = jsonDecode(response.body);
         log(jsondata['error']);
       }

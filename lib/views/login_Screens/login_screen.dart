@@ -17,6 +17,13 @@ class _LogInScreenState extends State<LogInScreen>
   late ThemeData theme;
   late LogInController controller;
   late OutlineInputBorder outlineInputBorder;
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
 
   @override
   void initState() {
@@ -24,7 +31,7 @@ class _LogInScreenState extends State<LogInScreen>
     theme = AppTheme.shoppingTheme;
 
     controller = FxControllerStore.put(LogInController(this));
-    outlineInputBorder = OutlineInputBorder(
+    outlineInputBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(4)),
       borderSide: BorderSide(
         color: Colors.transparent,
@@ -96,8 +103,19 @@ class _LogInScreenState extends State<LogInScreen>
                         SlideTransition(
                           position: controller.passwordAnimation,
                           child: TextFormField(
+                            obscureText: _obscureText,
                             style: FxTextStyle.bodyMedium(),
                             decoration: InputDecoration(
+                                suffixIconColor: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureText
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  color: Colors.grey,
+                                  onPressed: _toggle,
+                                ),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 filled: true,
@@ -135,7 +153,7 @@ class _LogInScreenState extends State<LogInScreen>
                       child: Text(
                         "Forgot Password ?",
                         style: FxTextStyle.bodySmall(
-                          color: Color(0xff1529e8),
+                          color: const Color(0xff1529e8),
                           // color: theme.colorScheme.primary
                         ),
                       ),
@@ -150,10 +168,10 @@ class _LogInScreenState extends State<LogInScreen>
                     },
                     splashColor: theme.colorScheme.onPrimary.withAlpha(28),
                     // backgroundColor: theme.colorScheme.primary,
-                    backgroundColor: Color(0xff1529e8),
+                    backgroundColor: const Color(0xff1529e8),
                     child: Container(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -234,7 +252,7 @@ class _LogInScreenState extends State<LogInScreen>
                         child: FxText.labelLarge(
                           "Create an Account",
                           decoration: TextDecoration.underline,
-                          color: Color(0xff1529e8),
+                          color: const Color(0xff1529e8),
                           // color: theme.colorScheme.primary
                         )),
                   ),

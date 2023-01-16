@@ -31,6 +31,14 @@ class _RegisterScreenState extends State<RegisterScreen>
   String? _selectedCountryCode;
   final List<String> _countryCodes = ['+91', '+23'];
 
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -38,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen>
 
     controller = FxControllerStore.put(RegisterController(this));
 
-    outlineInputBorder = OutlineInputBorder(
+    outlineInputBorder = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(4)),
       borderSide: BorderSide(
         color: Colors.transparent,
@@ -141,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: Color(0xff1529e8),
+                            color: const Color(0xff1529e8),
                             borderRadius: BorderRadius.circular(0)),
                         height: 45.0,
                         width: 68,
@@ -280,7 +288,18 @@ class _RegisterScreenState extends State<RegisterScreen>
                     position: controller.passwordAnimation,
                     child: TextFormField(
                       style: FxTextStyle.bodyMedium(),
+                      obscureText: _obscureText,
                       decoration: InputDecoration(
+                          suffixIconColor: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            color: Colors.grey,
+                            onPressed: _toggle,
+                          ),
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           filled: true,
                           isDense: true,
@@ -313,7 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                 controller.register();
               },
               splashColor: theme.colorScheme.onPrimary.withAlpha(30),
-              backgroundColor: Color(0xff1529e8),
+              backgroundColor: const Color(0xff1529e8),
               // backgroundColor: theme.colorScheme.primary,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -396,7 +415,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                   "I have an Account",
                   decoration: TextDecoration.underline,
                   // color: theme.colorScheme.primary
-                  color: Color(0xff1529e8),
+                  color: const Color(0xff1529e8),
                 ),
               ),
             ),
