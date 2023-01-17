@@ -92,4 +92,16 @@ class AuthService {
       rethrow;
     }
   }
+
+  Future<List?> countryget() async {
+    const standardUrl = 'https://a.walletbot.online/api/v1/home/initial-data';
+    final response = await http.get(Uri.parse(standardUrl));
+    if (response.statusCode == 200) {
+      final standardData = countryModalFromJson(response.body);
+      final List<Country?>? standards = standardData!.countries;
+      return standards;
+    } else {
+      return <Country>[];
+    }
+  }
 }
