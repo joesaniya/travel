@@ -210,9 +210,18 @@ class _SearchPlaceState extends State<SearchPlace>
                                   log(value);
                                   log('country');
                                 },
+                                // onSuggestionTap: (SearchFieldListItem x) {
+                                //   _selectedCountry = x.item;
+                                //   setState(() {});
+                                //   log('se');
+                                // },
                                 onSuggestionTap: (value) {
+                                  log('tap');
+                                  // log(countryList.first.destinations
+                                  //     .toString());
+                                  // log(countryList.first.destinations);
                                   // countryList.first.countries =
-                                  //     value as List<Country?>?;
+                                  //     value.item as List<Country?>?;
                                   _selectedCountry = value.item.toString();
                                   setState(() {});
                                   log('onSuggestionTap');
@@ -220,14 +229,17 @@ class _SearchPlaceState extends State<SearchPlace>
                                 },
                                 // suggestions:
                                 //     //  _countryCodes
-                                //     searchResult
-                                //         .map((e) => SearchFieldListItem(e.toString(),
-                                //             child: foundCompany!.isNotEmpty
-                                //                 ? Text(e.codes.toString())
-                                //                 : Text(
-                                //                     'No data',
-                                //                     style: TextStyle(color: Colors.black),
-                                //                   )))
+                                //     AuthController()
+                                //         .countryList
+                                //         .first
+                                //         .countries!
+                                //         .map((e) =>
+                                //             SearchFieldListItem(e.toString(),
+                                //                 child: Text(
+                                //                   e!.countryName.toString(),
+                                //                   style: const TextStyle(
+                                //                       color: Colors.black),
+                                //                 )))
                                 //         .toList(),
                                 suggestions:
                                     //  AuthController()

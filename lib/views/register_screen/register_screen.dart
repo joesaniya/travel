@@ -149,7 +149,8 @@ class _RegisterScreenState extends State<RegisterScreen>
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                            color: const Color(0xff1529e8),
+                            color: theme.cardTheme.color,
+                            // color: const Color(0xff1529e8),
                             borderRadius: BorderRadius.circular(0)),
                         height: 45.0,
                         width: 68,
@@ -160,14 +161,18 @@ class _RegisterScreenState extends State<RegisterScreen>
                             alignedDropdown: true,
                             child: DropdownButton(
                               iconSize: 0.0,
-                              dropdownColor: Colors.blueAccent,
+
+                              dropdownColor: theme.cardTheme.color,
+                              // dropdownColor: Colors.blueAccent,
                               // icon: Icon(icon),
-                              value: _selectedCountryCode,
+                              value: controller.selectedCountryCode,
+                              // value: _selectedCountryCode,
                               hint: Center(
                                 child: FxText.labelLarge(
                                   "Code",
                                   fontWeight: 600,
-                                  color: theme.colorScheme.onPrimary,
+                                  color: Colors.black,
+                                  // color: theme.colorScheme.onPrimary,
                                   letterSpacing: 0.4,
                                 ),
                                 // child: Text(
@@ -178,7 +183,9 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 //       fontWeight: FontWeight.w500),
                                 // ),
                               ),
-                              items: _countryCodes.map((String value) {
+                              items: controller.countryCodes.map
+                                  // _countryCodes.map
+                                  ((String value) {
                                 return DropdownMenuItem<String>(
                                     value: value,
                                     child: Center(
@@ -193,13 +200,16 @@ class _RegisterScreenState extends State<RegisterScreen>
                               }).toList(),
                               onChanged: (value) {
                                 setState(() {
-                                  _selectedCountryCode = value.toString();
+                                  controller.selectedCountryCode =
+                                      value.toString();
+                                  // _selectedCountryCode = value.toString();
                                 });
                               },
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500),
+                              style: FxTextStyle.bodyMedium(),
+                              // style: const TextStyle(
+                              //     color: Colors.black,
+                              //     fontSize: 20,
+                              //     fontWeight: FontWeight.w500),
                             ),
                           ),
                         ),

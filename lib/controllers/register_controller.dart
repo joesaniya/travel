@@ -12,6 +12,8 @@ class RegisterController extends FxController {
   RegisterController(this.ticker);
   late TextEditingController nameTE, emailTE, passwordTE, phoneTE;
   GlobalKey<FormState> formKey = GlobalKey();
+  String? selectedCountryCode;
+  final List<String> countryCodes = ['+91', '+23', '+010'];
   late AnimationController arrowController,
       nameController,
       emailController,
@@ -184,6 +186,20 @@ class RegisterController extends FxController {
     return null;
   }
 
+  // String? _selectedCountryCode;
+  // final List<String> _countryCodes = ['+91', '+23'];
+
+  RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
+  //A function that validate user entered password
+  bool validatePassword1(String pass) {
+    String password = pass.trim();
+    if (pass_valid.hasMatch(password)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   void dispose() {
     arrowController.dispose();
@@ -230,19 +246,36 @@ class RegisterController extends FxController {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Please enter email")));
     }
-
-    //  else if (_selectedCountryCode == null || _selectedCountryCode!.isEmpty) {
+    // else if (_selectedCountryCode == null || _selectedCountryCode!.isEmpty) {
     //   // log('isempty');
     //   ScaffoldMessenger.of(context).showSnackBar(
     //       const SnackBar(content: Text("please select country code")));
     // }
-
-    else if (phoneTE.text.isEmpty || phoneTE.text.length != 10) {
+    else if (selectedCountryCode == null || selectedCountryCode!.isEmpty) {
+      // log('isempty');
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("please select country code")));
+    } else if (phoneTE.text.isEmpty || phoneTE.text.length != 10) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Please enter 10digit number code")));
-    } else if (passwordTE.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please enter 10digit number code")));
+    } else if (passwordTE.text.isEmpty || passwordTE.text.length >= 5) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+              "Password contains one alphabet and correctors and numbers")));
+      // if (passwordTE.text.contains(RegExp(r"[a-z]"))) {
+      //   log('A');
+      // }
+      // if (passwordTE.text.contains(RegExp(r"[A-Z]"))) {
+      //   log('b');
+      // }
+      // if (passwordTE.text.contains(RegExp(r"[0-9]"))) {
+      //   log('c');
+      // }
+      // if (passwordTE.text.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      //   log('d');
+      // } else {
+      //   return;
+      // }
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("success")));
