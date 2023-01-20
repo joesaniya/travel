@@ -258,7 +258,7 @@ class RegisterController extends FxController {
     } else if (phoneTE.text.isEmpty || phoneTE.text.length != 10) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Please enter 10digit number code")));
-    } else if (passwordTE.text.isEmpty || passwordTE.text.length >= 5) {
+    } else if (passwordTE.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
               "Password contains one alphabet and correctors and numbers")));
@@ -287,6 +287,7 @@ class RegisterController extends FxController {
               emailTE.text,
               // int.parse(phoneTE.text)
               '63ac33c3ff04e5652a2583f1',
+              // selectedCountryCode.toString(),
               phoneTE.text,
               passwordTE.text)
           .then((value) =>

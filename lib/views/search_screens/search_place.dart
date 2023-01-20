@@ -225,7 +225,7 @@ class _SearchPlaceState extends State<SearchPlace>
                                   _selectedCountry = value.item.toString();
                                   setState(() {});
                                   log('onSuggestionTap');
-                                  log(value.item.toString());
+                                  log(value.searchKey.toString());
                                 },
                                 // suggestions:
                                 //     //  _countryCodes

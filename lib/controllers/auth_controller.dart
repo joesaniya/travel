@@ -22,7 +22,7 @@ class AuthController {
     }
   }
 
-  Future login(
+  Future<bool> login(
     String email,
     String password,
   ) async {
@@ -30,6 +30,9 @@ class AuthController {
       var data = await AuthService().login(email, password);
       if (data != null) {
         log(data);
+        return true;
+      } else {
+        return false;
       }
     } catch (e) {
       rethrow;

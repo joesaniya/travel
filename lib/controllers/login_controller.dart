@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
@@ -138,15 +136,21 @@ class LogInController extends FxController {
     if (formKey.currentState!.validate()) {
       arrowController.forward();
       await Future.delayed(const Duration(milliseconds: 1000));
-      await AuthController()
-          .login(emailTE.text, passwordTE.text)
-          .then((value) => log(emailTE.text));
+      await AuthController().login(emailTE.text, passwordTE.text).then((value) {
+        if (value) {
+          Navigator.of(context, rootNavigator: true).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const SplashScreen2(),
+            ),
+          );
+        }
+      });
 
-      Navigator.of(context, rootNavigator: true).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const SplashScreen2(),
-        ),
-      );
+      // Navigator.of(context, rootNavigator: true).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => const SplashScreen2(),
+      //   ),
+      // );
     }
   }
 

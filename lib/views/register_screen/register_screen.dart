@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import '../../models/Country_modal.dart';
+import '../../services/auth_service.dart';
 import '/theme/app_theme.dart';
 
 import '../../controllers/register_controller.dart';
@@ -39,9 +43,12 @@ class _RegisterScreenState extends State<RegisterScreen>
     });
   }
 
+  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
+    fetchData();
     theme = AppTheme.shoppingTheme;
 
     controller = FxControllerStore.put(RegisterController(this));
@@ -52,6 +59,45 @@ class _RegisterScreenState extends State<RegisterScreen>
         color: Colors.transparent,
       ),
     );
+  }
+
+  fetchData() {
+    Future.delayed(Duration.zero, () async {
+      await getCountryList().then((value) {
+        if (value) {
+          isLoading = false;
+          setState(() {});
+        }
+      });
+      // await AuthController().getCountryList().then((value) {
+      //   if (value) {
+      //     isLoading = false;
+      //     setState(() {});
+      //   }
+      // });
+    });
+  }
+
+  String? _selectedCountry;
+
+  List<CountryModal> countryList = <CountryModal>[];
+  bool isCountryListLoading = true;
+  Future getCountryList() async {
+    isCountryListLoading = true;
+    try {
+      var data = await AuthService().getCountry();
+      countryList.clear();
+      if (data != null) {
+        setState(() {});
+        countryList.add(data);
+        isCountryListLoading = false;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -183,23 +229,45 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 //       fontWeight: FontWeight.w500),
                                 // ),
                               ),
-                              items: controller.countryCodes.map
+                              items:
+                                  // controller.countryCodes.map
                                   // _countryCodes.map
-                                  ((String value) {
-                                return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Center(
-                                      child: Text(
-                                        value,
-                                        style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ));
-                              }).toList(),
+                                  countryList.isNotEmpty &&
+                                          countryList
+                                              .first.countries!.isNotEmpty
+                                      ? countryList.first.countries!
+                                          .map((value) {
+                                          return DropdownMenuItem<String>(
+                                              value:
+                                                  value!.phonecode.toString(),
+                                              child: Center(
+                                                child: Text(
+                                                  value.phonecode.toString(),
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ));
+                                        }).toList()
+                                      : [].map((value) {
+                                          return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Center(
+                                                child: Text(
+                                                  value,
+                                                  style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ));
+                                        }).toList(),
                               onChanged: (value) {
                                 setState(() {
+                                  log(value.toString());
                                   controller.selectedCountryCode =
                                       value.toString();
                                   // _selectedCountryCode = value.toString();

@@ -22,12 +22,14 @@ class AuthService {
         "country": countryid,
         "phoneNumber": phoneNumber
       };
+      log(body.toString());
       var response = await http.post(
           Uri.parse(
             'https://a.walletbot.online/api/v1/users/signup',
           ),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body));
+
       if (response.statusCode == 200) {
         return response.body;
       } else {
