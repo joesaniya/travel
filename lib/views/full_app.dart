@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/Home_Screen.dart';
+import 'package:hotel_travel/views/Saved_Screen.dart';
 
 import '../controllers/full_app_conrtoller.dart';
 import '../theme/app_theme.dart';
@@ -97,7 +98,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                   children: <Widget>[
                     HomeScreen(),
                     // HomeScreen(size: size),
-                    const Text('home'),
+                    const SavedScreen(),
                     const Text('home'),
                     const Text('home'),
                   ],

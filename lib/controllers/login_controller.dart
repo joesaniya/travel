@@ -145,6 +145,8 @@ class LogInController extends FxController {
           );
         }
       });
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(const SnackBar(content: Text("Invalid Credentials")));
 
       // Navigator.of(context, rootNavigator: true).pushReplacement(
       //   MaterialPageRoute(

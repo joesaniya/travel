@@ -12,6 +12,7 @@ class SearchController extends FxController {
   GlobalKey<FormState> formKey = GlobalKey();
 
   //country
+  final focus = FocusNode();
 
 //ani
   late AnimationController searchController, locationController, dateController;
@@ -75,6 +76,7 @@ class SearchController extends FxController {
     searchController.dispose();
     locationController.dispose();
     dateController.dispose();
+    focus.dispose();
     super.dispose();
   }
 

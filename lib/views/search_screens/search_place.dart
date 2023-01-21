@@ -156,133 +156,138 @@ class _SearchPlaceState extends State<SearchPlace>
                             //   ),
                             // ),
 
-                            SlideTransition(
-                              position: controller.locationAnimation,
-                              child: SearchField(
-                                searchStyle: FxTextStyle.bodyMedium(),
-                                suggestionStyle: FxTextStyle.bodyMedium(),
-                                controller: controller.locationTE,
-                                hint: 'Search',
-                                searchInputDecoration: InputDecoration(
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                    filled: true,
-                                    isDense: true,
-                                    fillColor: theme.cardTheme.color,
-                                    suffixIcon: Icon(
-                                      Iconsax.location,
-                                      color: theme.colorScheme.onBackground,
-                                    ),
-                                    hintText: "Where do you want to see?",
-                                    border: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Color(0xff1529e8),
-                                            // color: Colors.lightBlueAccent,
-                                            width: 1)),
-                                    enabledBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Color(0xff1529e8),
-                                            width: 1)),
-                                    focusedBorder: const OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Color(0xff1529e8),
-                                            width: 1)),
-                                    contentPadding: FxSpacing.all(16),
-                                    hintStyle: FxTextStyle.bodyMedium(),
-                                    isCollapsed: true),
-                                maxSuggestionsInViewPort: 6,
-                                itemHeight: 50,
+                            GestureDetector(
+                              onTap: () => FocusScope.of(context).unfocus(),
+                              child: SlideTransition(
+                                position: controller.locationAnimation,
+                                child: SearchField(
+                                  focusNode: controller.focus,
+                                  searchStyle: FxTextStyle.bodyMedium(),
+                                  suggestionStyle: FxTextStyle.bodyMedium(),
+                                  controller: controller.locationTE,
+                                  hint: 'Search',
+                                  searchInputDecoration: InputDecoration(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      filled: true,
+                                      isDense: true,
+                                      fillColor: theme.cardTheme.color,
+                                      suffixIcon: Icon(
+                                        Iconsax.location,
+                                        color: theme.colorScheme.onBackground,
+                                      ),
+                                      hintText: "Where do you want to see?",
+                                      border: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Color(0xff1529e8),
+                                              // color: Colors.lightBlueAccent,
+                                              width: 1)),
+                                      enabledBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Color(0xff1529e8),
+                                              width: 1)),
+                                      focusedBorder: const OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: Color(0xff1529e8),
+                                              width: 1)),
+                                      contentPadding: FxSpacing.all(16),
+                                      hintStyle: FxTextStyle.bodyMedium(),
+                                      isCollapsed: true),
+                                  maxSuggestionsInViewPort: 6,
+                                  itemHeight: 50,
 
-                                suggestionsDecoration: BoxDecoration(
-                                  // color: Colors.white
-                                  color: const Color(0xfff5f5f5),
-                                  // color: const Color(0xff1529e8),
-                                  borderRadius: BorderRadius.circular(10),
+                                  suggestionsDecoration: BoxDecoration(
+                                    // color: Colors.white
+                                    color: const Color(0xfff5f5f5),
+                                    // color: const Color(0xff1529e8),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  onSubmit: (value) {
+                                    setState(() {
+                                      // _selectedItem = value;
+                                      _selectedCountry = value;
+                                      // foundCompany = value as List<Search>?;
+                                    });
+
+                                    print(value);
+                                    log(value);
+                                    log('country');
+                                  },
+                                  // onSuggestionTap: (SearchFieldListItem x) {
+                                  //   _selectedCountry = x.item;
+                                  //   setState(() {});
+                                  //   log('se');
+                                  // },
+                                  onSuggestionTap: (value) {
+                                    log('tap');
+                                    // log(countryList.first.destinations
+                                    //     .toString());
+                                    // log(countryList.first.destinations);
+                                    // countryList.first.countries =
+                                    //     value.item as List<Country?>?;
+                                    _selectedCountry = value.item.toString();
+                                    setState(() {});
+                                    log('onSuggestionTap');
+                                    log(value.searchKey.toString());
+                                    controller.focus.unfocus();
+                                  },
+                                  // suggestions:
+                                  //     //  _countryCodes
+                                  //     AuthController()
+                                  //         .countryList
+                                  //         .first
+                                  //         .countries!
+                                  //         .map((e) =>
+                                  //             SearchFieldListItem(e.toString(),
+                                  //                 child: Text(
+                                  //                   e!.countryName.toString(),
+                                  //                   style: const TextStyle(
+                                  //                       color: Colors.black),
+                                  //                 )))
+                                  //         .toList(),
+                                  suggestions:
+                                      //  AuthController()
+                                      //     .countryList
+                                      //     .first
+                                      //     .countries!
+                                      countryList.isEmpty ||
+                                              countryList
+                                                  .first.destinations!.isEmpty
+                                          ? []
+
+                                              // _countryCodes
+                                              .map((e) => SearchFieldListItem(
+                                                  // e,
+                                                  e!.countryName.toString(),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Text(
+                                                      // e,
+                                                      e.countryName.toString(),
+                                                      style: FxTextStyle
+                                                          .bodyMedium(),
+                                                    ),
+                                                  )))
+                                              .toList()
+                                          : countryList.first.destinations!
+                                              .map((e) => SearchFieldListItem(
+                                                  // e,
+                                                  e!.name.toString(),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 8.0),
+                                                    child: Text(
+                                                      // e,
+                                                      e.name.toString(),
+                                                      style: FxTextStyle
+                                                          .bodyMedium(),
+                                                    ),
+                                                  )))
+                                              .toList(),
                                 ),
-                                onSubmit: (value) {
-                                  setState(() {
-                                    // _selectedItem = value;
-                                    _selectedCountry = value;
-                                    // foundCompany = value as List<Search>?;
-                                  });
-
-                                  print(value);
-                                  log(value);
-                                  log('country');
-                                },
-                                // onSuggestionTap: (SearchFieldListItem x) {
-                                //   _selectedCountry = x.item;
-                                //   setState(() {});
-                                //   log('se');
-                                // },
-                                onSuggestionTap: (value) {
-                                  log('tap');
-                                  // log(countryList.first.destinations
-                                  //     .toString());
-                                  // log(countryList.first.destinations);
-                                  // countryList.first.countries =
-                                  //     value.item as List<Country?>?;
-                                  _selectedCountry = value.item.toString();
-                                  setState(() {});
-                                  log('onSuggestionTap');
-                                  log(value.searchKey.toString());
-                                },
-                                // suggestions:
-                                //     //  _countryCodes
-                                //     AuthController()
-                                //         .countryList
-                                //         .first
-                                //         .countries!
-                                //         .map((e) =>
-                                //             SearchFieldListItem(e.toString(),
-                                //                 child: Text(
-                                //                   e!.countryName.toString(),
-                                //                   style: const TextStyle(
-                                //                       color: Colors.black),
-                                //                 )))
-                                //         .toList(),
-                                suggestions:
-                                    //  AuthController()
-                                    //     .countryList
-                                    //     .first
-                                    //     .countries!
-                                    countryList.isEmpty ||
-                                            countryList
-                                                .first.destinations!.isEmpty
-                                        ? []
-
-                                            // _countryCodes
-                                            .map((e) => SearchFieldListItem(
-                                                // e,
-                                                e!.countryName.toString(),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 8.0),
-                                                  child: Text(
-                                                    // e,
-                                                    e.countryName.toString(),
-                                                    style: FxTextStyle
-                                                        .bodyMedium(),
-                                                  ),
-                                                )))
-                                            .toList()
-                                        : countryList.first.destinations!
-                                            .map((e) => SearchFieldListItem(
-                                                // e,
-                                                e!.name.toString(),
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 8.0),
-                                                  child: Text(
-                                                    // e,
-                                                    e.name.toString(),
-                                                    style: FxTextStyle
-                                                        .bodyMedium(),
-                                                  ),
-                                                )))
-                                            .toList(),
                               ),
                             ),
                             SlideTransition(

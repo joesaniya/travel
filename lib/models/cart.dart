@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/services.dart';
@@ -16,6 +17,8 @@ class Cart {
 
   static Future<List<Cart>> getDummyList() async {
     dynamic data = json.decode(await getData());
+    log(data);
+    log('dummy');
     return getListFromJson(data);
   }
 
