@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/card_widgets/attraction_tile.dart';
 import 'package:hotel_travel/models/TopAttraction.dart';
 
+import '../controllers/home_controller.dart';
 import '../helperdata/helper.dart';
 
 class TopAttractionCard extends StatefulWidget {
@@ -13,12 +15,14 @@ class TopAttractionCard extends StatefulWidget {
   State<TopAttractionCard> createState() => _TopAttractionCardState();
 }
 
-class _TopAttractionCardState extends State<TopAttractionCard> {
+class _TopAttractionCardState extends State<TopAttractionCard>
+    with TickerProviderStateMixin {
   final List<TopAttraction> recentattraction =
       ActivityHelper.newlyTopAttraction;
   List<TopAttraction> searchResult = ActivityHelper.newlyTopAttraction;
   List<TopAttraction>? foundCompany;
   // late ThemeData theme;
+  late HomeController controller;
   @override
   void initState() {
     log('top');
@@ -26,43 +30,84 @@ class _TopAttractionCardState extends State<TopAttractionCard> {
     super.initState();
     // theme = AppTheme.shoppingTheme;
     log(foundCompany!.length.toString());
+    controller = FxControllerStore.put(HomeController(this));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // addCategories();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: 280,
-      child: ListView.builder(
-        itemExtent: 250,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          // return AttractionTile();
-          return AttractionTile(data: recentattraction[index]);
-        },
-        // itemBuilder: (context, index) => Container(
-        //       margin: EdgeInsets.all(5.0),
-        //       // width: 800,
-        //       height: 150,
-        //       decoration: BoxDecoration(
-        //         color: Color(0xffe6e1e5),
-        //         // color: Color(0xffe5fdfd),
-        //         borderRadius: BorderRadius.all(Radius.circular(10)),
-        //         // color: theme!.colorScheme.onPrimaryContainer,
-        //       ),
-        //       child: Column(
-        //         children: [
-        //           Container(
-        //             height: 200,
+    // return SizedBox(
+    //   height: 280,
+    //   child: ListView.builder(
+    //     itemExtent: 250,
+    //     scrollDirection: Axis.horizontal,
+    //     itemBuilder: (context, index) {
+    //       // return AttractionTile();
+    //       return AttractionTile(data: recentattraction[index]);
+    //     },
+    //     // itemBuilder: (context, index) => Container(
+    //     //       margin: EdgeInsets.all(5.0),
+    //     //       // width: 800,
+    //     //       height: 150,
+    //     //       decoration: BoxDecoration(
+    //     //         color: Color(0xffe6e1e5),
+    //     //         // color: Color(0xffe5fdfd),
+    //     //         borderRadius: BorderRadius.all(Radius.circular(10)),
+    //     //         // color: theme!.colorScheme.onPrimaryContainer,
+    //     //       ),
+    //     //       child: Column(
+    //     //         children: [
+    //     //           Container(
+    //     //             height: 200,
 
-        //             decoration:BoxDecoration(image: DecorationImage(image: AssetImage(recentattraction[index].))) ,
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        itemCount: foundCompany!.length,
-        // itemCount: recentattraction.length
-      ),
-    );
+    //     //             decoration:BoxDecoration(image: DecorationImage(image: AssetImage(recentattraction[index].))) ,
+    //     //           )
+    //     //         ],
+    //     //       ),
+    //     //     ),
+    //     itemCount: foundCompany!.length,
+    //     // itemCount: recentattraction.length
+    //   ),
+    // );
+    return FxBuilder<HomeController>(
+        controller: controller,
+        builder: (controller) {
+          return SizedBox(
+            height: 280,
+            child: ListView.builder(
+              itemExtent: 250,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                // return AttractionTile();
+                return AttractionTile(data: recentattraction[index]);
+              },
+              // itemBuilder: (context, index) => Container(
+              //       margin: EdgeInsets.all(5.0),
+              //       // width: 800,
+              //       height: 150,
+              //       decoration: BoxDecoration(
+              //         color: Color(0xffe6e1e5),
+              //         // color: Color(0xffe5fdfd),
+              //         borderRadius: BorderRadius.all(Radius.circular(10)),
+              //         // color: theme!.colorScheme.onPrimaryContainer,
+              //       ),
+              //       child: Column(
+              //         children: [
+              //           Container(
+              //             height: 200,
+
+              //             decoration:BoxDecoration(image: DecorationImage(image: AssetImage(recentattraction[index].))) ,
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              itemCount: foundCompany!.length,
+              // itemCount: recentattraction.length
+            ),
+          );
+        });
   }
 }
