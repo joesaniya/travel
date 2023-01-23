@@ -167,7 +167,9 @@ class _SingleProductScreenState extends State<SingleProductScreen>
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
         child: FxButton.block(
-          onPressed: () {},
+          onPressed: () {
+            controller.bookNow();
+          },
           backgroundColor: Colors.indigo,
           // backgroundColor: customTheme.estatePrimary,
           borderRadiusAll: 12,

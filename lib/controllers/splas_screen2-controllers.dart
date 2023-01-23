@@ -17,12 +17,12 @@ class SplashScreen2Controller extends FxController {
     HotelTravelCache.products = await Product.getDummyList();
     HotelTravelCache.categories = await Category.getDummyList();
     // ShoppingCache.carts = await Cart.getDummyList();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
 
     Navigator.of(context, rootNavigator: true).pushReplacement(
       PageRouteBuilder(
-          transitionDuration: Duration(seconds: 2),
-          pageBuilder: (_, __, ___) => FullApp()),
+          transitionDuration: const Duration(seconds: 2),
+          pageBuilder: (_, __, ___) => const FullApp()),
     );
   }
 

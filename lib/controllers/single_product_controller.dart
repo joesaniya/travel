@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
 import '../models/product.dart';
+import '../views/checkout_screen.dart';
 import '../views/detail_screen/single_product_screen.dart';
 import '../views/hotel_travel_constants.dart';
 
@@ -117,6 +118,16 @@ class SingleProductController extends FxController {
   void toggleFavorite() {
     product.favorite = !product.favorite;
     update();
+  }
+
+  Future<void> bookNow() async {
+    animationController.forward();
+    await Future.delayed(const Duration(seconds: 1));
+    Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder: (context) => const CheckOutScreen(),
+      ),
+    );
   }
 
   void goBack() {

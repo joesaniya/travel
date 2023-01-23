@@ -58,23 +58,23 @@ class SavedController extends FxController {
   }
 
   bool increaseAble(Cart cart) {
-    return cart.quantity < cart.product.quantity;
+    return cart.person < cart.product.person;
   }
 
   bool decreaseAble(Cart cart) {
-    return cart.quantity > 1;
+    return cart.person > 1;
   }
 
   void increment(Cart cart) {
     if (!increaseAble(cart)) return;
-    cart.quantity++;
+    cart.person++;
     calculateBilling();
     update();
   }
 
   void decrement(Cart cart) {
     if (!decreaseAble(cart)) return;
-    cart.quantity--;
+    cart.person--;
     calculateBilling();
     update();
   }
@@ -93,7 +93,7 @@ class SavedController extends FxController {
   void calculateBilling() {
     order = 0;
     for (Cart cart in carts!) {
-      order = order + (cart.product.price * cart.quantity);
+      order = order + (cart.product.price * cart.person);
     }
 
     total = order + tax - offer;

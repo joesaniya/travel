@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:ui';
 
 import 'package:flutter/services.dart';
@@ -10,15 +9,13 @@ import 'product.dart';
 class Cart {
   Product product;
   String selectedSize;
-  int quantity;
+  int person;
   Color selectedColor;
 
-  Cart(this.product, this.selectedSize, this.quantity, this.selectedColor);
+  Cart(this.product, this.selectedSize, this.person, this.selectedColor);
 
   static Future<List<Cart>> getDummyList() async {
     dynamic data = json.decode(await getData());
-    log(data);
-    log('dummy');
     return getListFromJson(data);
   }
 
@@ -29,10 +26,10 @@ class Cart {
   static Future<Cart> fromJson(Map<String, dynamic> jsonObject) async {
     Product product = Product.fromJson(jsonObject['product']);
     String selectedSize = jsonObject['selectedSize'].toString();
-    int quantity = int.parse(jsonObject['quantity'].toString());
+    int person = int.parse(jsonObject['person'].toString());
     Color selectedColor = jsonObject['selectedColor'].toString().toColor;
 
-    return Cart(product, selectedSize, quantity, selectedColor);
+    return Cart(product, selectedSize, person, selectedColor);
   }
 
   static Future<List<Cart>> getListFromJson(List<dynamic> jsonArray) async {

@@ -113,7 +113,7 @@ class _SavedScreenState extends State<SavedScreen>
                   ),
                   FxSpacing.height(8),
                   FxText.bodyMedium(
-                    cart.quantity.toString(),
+                    cart.person.toString(),
                     fontWeight: 700,
                   ),
                   FxSpacing.height(8),

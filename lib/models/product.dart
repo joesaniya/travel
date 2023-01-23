@@ -7,7 +7,7 @@ import 'package:hotel_travel/extensions/extensions.dart';
 class Product {
   String name, image, description, location, types;
   double price, rating;
-  int review, quantity;
+  int review, person;
   Color color;
   bool favorite;
   List<String> interests;
@@ -19,7 +19,7 @@ class Product {
       this.rating,
       this.price,
       this.review,
-      this.quantity,
+      this.person,
       this.color,
       this.favorite,
       this.location,
@@ -42,7 +42,7 @@ class Product {
     double rating = double.parse(jsonObject['rating'].toString());
     double price = double.parse(jsonObject['price'].toString());
     int review = int.parse(jsonObject['review'].toString());
-    int quantity = int.parse(jsonObject['quantity'].toString());
+    int person = int.parse(jsonObject['person'].toString());
     Color color = jsonObject['review'].toString().toColor;
     bool favorite = jsonObject['favorite'].toString().toBool();
     String location = jsonObject['location'].toString();
@@ -52,7 +52,7 @@ class Product {
       interests.add(interest.toString());
     }
 
-    return Product(name, image, description, rating, price, review, quantity,
+    return Product(name, image, description, rating, price, review, person,
         color, favorite, location, types, interests);
   }
 
