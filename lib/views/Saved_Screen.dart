@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
 
 import 'package:hotel_travel/extensions/extensions.dart';
@@ -88,56 +89,56 @@ class _SavedScreenState extends State<SavedScreen>
                   ],
                 ),
               ),
-              // FxSpacing.width(20),
-              // Column(
-              //   children: [
-              //     FxContainer(
-              //       onTap: () {
-              //         controller.increment(cart);
-              //       },
-              //       bordered: increaseAble,
-              //       paddingAll: 4,
-              //       borderRadiusAll: 2,
-              //       border: Border.all(color: theme.colorScheme.primary),
-              //       color: increaseAble
-              //           ? theme.colorScheme.primary
-              //           : theme.colorScheme.onBackground.withAlpha(200),
-              //       child: Icon(
-              //         FeatherIcons.plus,
-              //         size: 12,
-              //         color: increaseAble
-              //             ? theme.colorScheme.onPrimary
-              //             : theme.colorScheme.onPrimary,
-              //       ),
-              //     ),
-              //     FxSpacing.height(8),
-              //     FxText.bodyMedium(
-              //       cart.person.toString(),
-              //       fontWeight: 700,
-              //     ),
-              //     FxSpacing.height(8),
-              //     FxContainer(
-              //       onTap: () {
-              //         controller.decrement(cart);
-              //       },
-              //       paddingAll: 4,
-              //       borderRadiusAll: 2,
-              //       bordered: decreaseAble,
-              //       border: Border.all(
-              //           color: theme.colorScheme.primary.withAlpha(120)),
-              //       color: decreaseAble
-              //           ? theme.colorScheme.primary.withAlpha(28)
-              //           : theme.colorScheme.onBackground.withAlpha(200),
-              //       child: Icon(
-              //         FeatherIcons.minus,
-              //         size: 12,
-              //         color: decreaseAble
-              //             ? theme.colorScheme.primary
-              //             : theme.colorScheme.onPrimary,
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              FxSpacing.width(20),
+              Column(
+                children: [
+                  FxContainer(
+                    onTap: () {
+                      controller.increment(cart);
+                    },
+                    bordered: increaseAble,
+                    paddingAll: 4,
+                    borderRadiusAll: 2,
+                    border: Border.all(color: theme.colorScheme.primary),
+                    color: increaseAble
+                        ? theme.colorScheme.primary
+                        : theme.colorScheme.onBackground.withAlpha(200),
+                    child: Icon(
+                      FeatherIcons.plus,
+                      size: 12,
+                      color: increaseAble
+                          ? theme.colorScheme.onPrimary
+                          : theme.colorScheme.onPrimary,
+                    ),
+                  ),
+                  FxSpacing.height(8),
+                  FxText.bodyMedium(
+                    cart.person.toString(),
+                    fontWeight: 700,
+                  ),
+                  FxSpacing.height(8),
+                  FxContainer(
+                    onTap: () {
+                      controller.decrement(cart);
+                    },
+                    paddingAll: 4,
+                    borderRadiusAll: 2,
+                    bordered: decreaseAble,
+                    border: Border.all(
+                        color: theme.colorScheme.primary.withAlpha(120)),
+                    color: decreaseAble
+                        ? theme.colorScheme.primary.withAlpha(28)
+                        : theme.colorScheme.onBackground.withAlpha(200),
+                    child: Icon(
+                      FeatherIcons.minus,
+                      size: 12,
+                      color: decreaseAble
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.onPrimary,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

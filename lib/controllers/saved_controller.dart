@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
 import '../models/cart.dart';
+import '../views/checkout_screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class SavedController extends FxController {
@@ -15,6 +16,31 @@ class SavedController extends FxController {
   late AnimationController animationController, fadeController;
   late Animation<Offset> animation;
   late Animation<double> fadeAnimation;
+  String? selectedtransfer;
+  final List<String> TransferCodes = ['without'];
+  String? selectedPax;
+  final List<String> PaxCodes = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20'
+  ];
 
   @override
   void initState() {
@@ -99,14 +125,23 @@ class SavedController extends FxController {
     total = order + tax - offer;
   }
 
+  // Future<void> goToCheckout() async {
+  //   animationController.forward();
+  //   await Future.delayed(const Duration(seconds: 1));
+  //   // Navigator.of(context, rootNavigator: true).push(
+  //   //   MaterialPageRoute(
+  //   //     builder: (context) => CheckOutScreen(),
+  //   //   ),
+  //   // );
+  // }
   Future<void> goToCheckout() async {
     animationController.forward();
     await Future.delayed(const Duration(seconds: 1));
-    // Navigator.of(context, rootNavigator: true).push(
-    //   MaterialPageRoute(
-    //     builder: (context) => CheckOutScreen(),
-    //   ),
-    // );
+    Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder: (context) => const CheckOutScreen(),
+      ),
+    );
   }
 
   @override

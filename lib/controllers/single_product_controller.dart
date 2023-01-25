@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:intl/intl.dart';
 
 import '../models/product.dart';
 import '../views/checkout_screen.dart';
@@ -17,13 +18,18 @@ class SingleProductController extends FxController {
   bool showLoading = true, uiLoading = true;
   int colorSelected = 1;
   Product product;
-  late AnimationController animationController, cartController;
+  late AnimationController animationController, cartController, dateController;
   late Animation<Color?> colorAnimation;
-  late Animation<double?> sizeAnimation, cartAnimation, paddingAnimation;
-
+  late Animation<double> sizeAnimation,
+      cartAnimation,
+      paddingAnimation,
+      fadeAnimation;
+  late Animation<Offset> dateAnimation;
+  int dateCounter = 0;
   final PageController pageController = PageController(initialPage: 0);
   int currentPage = 0, numPages = 3;
   late Timer timerAnimation;
+  late TextEditingController dateTE;
 
   bool isFav = false;
   bool addCart = false;
@@ -32,12 +38,42 @@ class SingleProductController extends FxController {
   String selectedSize = 'M';
 
   List<Product>? products;
+  late double order, tax = 30, offer = 50, total;
+
+  String? selectedtransfer;
+  final List<String> TransferCodes = ['without'];
+  String? selectedPax;
+  final List<String> PaxCodes = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20'
+  ];
 
   @override
   void initState() {
     super.initState();
+    dateTE = TextEditingController();
     save = false;
     fetchData();
+    dateController = AnimationController(
+        vsync: ticker, duration: const Duration(milliseconds: 50));
     timerAnimation = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
       if (currentPage < numPages - 1) {
         currentPage++;
@@ -51,6 +87,12 @@ class SingleProductController extends FxController {
         curve: Curves.ease,
       );
     });
+    dateAnimation =
+        Tween<Offset>(begin: const Offset(-0.01, 0), end: const Offset(0.01, 0))
+            .animate(CurvedAnimation(
+      parent: dateController,
+      curve: Curves.easeIn,
+    ));
     animationController = AnimationController(
         vsync: ticker, duration: const Duration(milliseconds: 500));
 
@@ -69,6 +111,12 @@ class SingleProductController extends FxController {
       TweenSequenceItem<double>(
           tween: Tween<double>(begin: 28, end: 24), weight: 50)
     ]).animate(animationController);
+    fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: animationController,
+        curve: Curves.easeIn,
+      ),
+    );
 
     cartAnimation = TweenSequence(<TweenSequenceItem<double>>[
       TweenSequenceItem<double>(
@@ -105,14 +153,80 @@ class SingleProductController extends FxController {
         update();
       }
     });
+
+    dateController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        dateController.reverse();
+      }
+      if (status == AnimationStatus.dismissed && dateCounter < 2) {
+        dateController.forward();
+        dateCounter++;
+      }
+    });
   }
 
   @override
   void dispose() {
     animationController.dispose();
     cartController.dispose();
+    dateController.dispose();
     super.dispose();
     pageController.dispose();
+  }
+
+  bool increaseAble(Product product) {
+    return product.person < 9;
+    // return product.person < product.person;
+    // return cart.quantity < cart.product.quantity;
+  }
+
+  bool decreaseAble(Product product) {
+    return product.person > 1;
+  }
+
+  void increment(Product product) {
+    if (!increaseAble(product)) return;
+    product.person++;
+    calculateBilling();
+    update();
+  }
+
+  void decrement(Product product) {
+    if (!decreaseAble(product)) return;
+    product.person--;
+    calculateBilling();
+    update();
+  }
+
+  void calculateBilling() {
+    order = 0;
+    for (Product product in products!) {
+      order = order + (product.price * product.person);
+    }
+
+    total = order + tax - offer;
+  }
+
+  Future<void> dateselect() async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(
+            1900), //DateTime.now() - not to allow to choose before today.
+        lastDate: DateTime(2101));
+
+    if (pickedDate != null) {
+      print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      print(formattedDate);
+      dateTE.text = formattedDate;
+
+      // setState(() {
+      //   dateinput.text = formattedDate; //set output date to TextField value.
+      // });
+    } else {
+      print("Date is not selected");
+    }
   }
 
   void toggleFavorite() {
