@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutx/core/state_management/controller.dart';
+import 'package:hotel_travel/models/cart.dart';
 
 import '../models/category.dart';
 import '../models/product.dart';
@@ -16,6 +17,7 @@ class SplashScreen2Controller extends FxController {
   goToFullApp() async {
     HotelTravelCache.products = await Product.getDummyList();
     HotelTravelCache.categories = await Category.getDummyList();
+    HotelTravelCache.carts = await Cart.getDummyList();
     // ShoppingCache.carts = await Cart.getDummyList();
     await Future.delayed(const Duration(seconds: 1));
 

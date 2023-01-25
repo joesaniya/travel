@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
@@ -23,8 +21,6 @@ class _CheckOutScreenState extends State<CheckOutScreen>
 
   late CheckOutController controller;
   late OutlineInputBorder outlineInputBorder;
-
-  bool _showcode = true;
 
   @override
   void initState() {
@@ -78,6 +74,165 @@ class _CheckOutScreenState extends State<CheckOutScreen>
 
     return Row(
       children: tabs,
+    );
+  }
+
+  Widget _billingWidget() {
+    return FadeTransition(
+      opacity: controller.fadeAnimation,
+      child: FxContainer(
+        borderRadiusAll: 4,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FxText.bodyMedium(
+              'Billing Information',
+              muted: true,
+              fontWeight: 700,
+            ),
+            FxSpacing.height(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Option',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.order.precise,
+                  'IMG Worlds of Adventure',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Transfer',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.order.precise,
+                  'without',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Date',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.order.precise,
+                  '2023-01-31',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Pax',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.order.precise,
+                  '1 adult',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Amount',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  '345.00 AED',
+                  // 'IMG Worlds of Adventure',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Tax',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.tax.precise,
+                  '\$ 33',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(4),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Offer',
+                  fontWeight: 600,
+                ),
+                FxText.bodyMedium(
+                  // '- \$' + controller.offer.precise,
+                  '- \$ 50',
+                  fontWeight: 700,
+                ),
+              ],
+            ),
+            FxSpacing.height(12),
+            Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(),
+                ),
+                Expanded(
+                  child: FxDashedDivider(
+                    dashSpace: 4,
+                    dashWidth: 8,
+                    color: theme.colorScheme.onBackground.withAlpha(180),
+                    height: 1.2,
+                  ),
+                )
+              ],
+            ),
+            FxSpacing.height(12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxText.bodyMedium(
+                  'Grand Total',
+                  fontWeight: 700,
+                  color: const Color(0xff1529e8),
+                ),
+                FxText.bodyMedium(
+                  // '\$' + controller.total.precise,
+                  '345.00 AED',
+                  // controller.products.
+                  fontWeight: 800,
+                  color: const Color(0xff1529e8),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -926,9 +1081,13 @@ class _CheckOutScreenState extends State<CheckOutScreen>
               FxContainer.bordered(
                 // padding: FxSpacing.xy(16, 12),
                 onTap: () {
-                  _showcode = !_showcode;
-                  log(_showcode.toString());
-                  log('message');
+                  controller.addCart
+                      ? controller.cartController.reverse()
+                      : controller.cartController.forward();
+                  // controller.showcode = !controller.showcode;
+                  // log(controller.showcode.toString());
+                  // // controller.showcode();
+                  // log('message');
                 },
                 borderRadiusAll: 4,
                 // elevation: 0,
@@ -959,7 +1118,7 @@ class _CheckOutScreenState extends State<CheckOutScreen>
           ),
           FxSpacing.height(20),
           //code
-          _showcode
+          controller.addCart
               ? FxContainer(
                   paddingAll: 12,
                   borderRadiusAll: 4,
@@ -991,35 +1150,38 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                 )
               : const SizedBox(),
           FxSpacing.height(20),
-          FxContainer(
-            paddingAll: 12,
-            borderRadiusAll: 4,
-            child: Row(
-              children: [
-                Icon(
-                  FeatherIcons.creditCard,
-                  size: 18,
-                  color: theme.colorScheme.primary,
-                ),
-                FxSpacing.width(16),
-                Expanded(
-                    child: FxText.labelLarge(
-                  'Cyber Week Deal',
-                  fontWeight: 600,
-                )),
-                FxSpacing.width(16),
-                FxContainer(
-                  borderRadiusAll: 2,
-                  padding: FxSpacing.xy(8, 4),
-                  color: theme.colorScheme.primary.withAlpha(40),
-                  child: FxText.bodySmall(
-                    'CYBR00',
-                    color: theme.colorScheme.primary,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // FxContainer(
+          //   paddingAll: 12,
+          //   borderRadiusAll: 4,
+          //   child: Row(
+          //     children: [
+          //       Icon(
+          //         FeatherIcons.creditCard,
+          //         size: 18,
+          //         color: theme.colorScheme.primary,
+          //       ),
+          //       FxSpacing.width(16),
+          //       Expanded(
+          //           child: FxText.labelLarge(
+          //         'Cyber Week Deal',
+          //         fontWeight: 600,
+          //       )),
+          //       FxSpacing.width(16),
+          //       FxContainer(
+          //         borderRadiusAll: 2,
+          //         padding: FxSpacing.xy(8, 4),
+          //         color: theme.colorScheme.primary.withAlpha(40),
+          //         child: FxText.bodySmall(
+          //           'CYBR00',
+          //           color: theme.colorScheme.primary,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+
+          //bill
+          _billingWidget(),
           FxSpacing.height(20),
           FxButton.block(
             onPressed: () {

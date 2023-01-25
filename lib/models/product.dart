@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
 
 class Product {
-  String name, image, description, location, types;
+  String name, image, description, location, types, id;
   double price, rating;
   int review, person;
   Color color;
   bool favorite;
-  List<String> interests;
+  // List<String> interests;
 
   Product(
       this.name,
@@ -24,7 +24,8 @@ class Product {
       this.favorite,
       this.location,
       this.types,
-      this.interests);
+      // this.interests
+      this.id);
 
   static Future<List<Product>> getDummyList() async {
     dynamic data = json.decode(await getData());
@@ -47,13 +48,16 @@ class Product {
     bool favorite = jsonObject['favorite'].toString().toBool();
     String location = jsonObject['location'].toString();
     String types = jsonObject['types'].toString();
-    List<String> interests = [];
-    for (dynamic interest in jsonObject['interests']) {
-      interests.add(interest.toString());
-    }
+    String id = jsonObject['id'].toString();
+    // List<String> interests = [];
+    // for (dynamic interest in jsonObject['interests']) {
+    //   interests.add(interest.toString());
+    // }
 
     return Product(name, image, description, rating, price, review, person,
-        color, favorite, location, types, interests);
+        color, favorite, location, types, id
+        // interests
+        );
   }
 
   static List<Product> getListFromJson(List<dynamic> jsonArray) {

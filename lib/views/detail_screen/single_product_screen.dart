@@ -170,13 +170,13 @@ class _SingleProductScreenState extends State<SingleProductScreen>
           onPressed: () {
             controller.bookNow();
           },
-          backgroundColor: Colors.indigo,
+          backgroundColor: const Color(0xff1529e8),
           // backgroundColor: customTheme.estatePrimary,
           borderRadiusAll: 12,
 
           elevation: 0,
           child: FxText.bodyMedium(
-            'Book Now',
+            'Add to Cart',
             color: Colors.white,
             // color: customTheme.estateOnPrimary,
             fontWeight: 700,
@@ -876,87 +876,87 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                         color: Colors.black,
                       ),
                       FxSpacing.height(15),
-                      Text(
-                        "HighLights".toUpperCase(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14.0),
-                      ),
+                      // Text(
+                      //   "HighLights".toUpperCase(),
+                      //   style: const TextStyle(
+                      //       fontWeight: FontWeight.w600, fontSize: 14.0),
+                      // ),
 
                       //highlights
-                      FxSpacing.height(15),
+                      // FxSpacing.height(15),
 
-                      Container(
-                        // height: 300,
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.transparent,
-                        // child: AnimatedList(
-                        //     scrollDirection: Axis.horizontal,
-                        //     // key: controller.listKey,
-                        //     initialItemCount: controller.product.interests.length,
-                        //     itemBuilder: (context, index, animation) {
-                        //       return SlideTransition(
-                        //           position: animation.drive(controller.offset),
-                        //           child: controller.newCategories[index]
-                        //           // child: Container(
-                        //           //   color: Colors.green,
-                        //           // ),
-                        //           );
-                        //     }),
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          itemCount: controller.product.interests.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          separatorBuilder: (context, index) {
-                            return FxSpacing.height(2);
-                          },
-                          itemBuilder: (context, index) {
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Icon(
-                                  Icons.star_border_outlined,
-                                  color: Colors.black,
-                                ),
-                                FxSpacing.width(5),
-                                Expanded(
-                                  child: FxText.bodyLarge(
-                                      controller.product.interests[index]),
-                                ),
-                              ],
-                            );
-                            // return StepTile(
-                            //   data: controller.product,
-                            // );
-                          },
-                        ),
-                      ),
-                      // const SizedBox(height: 30.0),
-                      // SizedBox(
-                      //   width: double.infinity,
-                      //   child: ElevatedButton(
-                      //     style: ElevatedButton.styleFrom(
-                      //       shape: RoundedRectangleBorder(
-                      //           borderRadius: BorderRadius.circular(30.0)),
-                      //       // backgroundColor: Colors.purple,
-                      //       // foregroundColor: Colors.white,
-                      //       padding: const EdgeInsets.symmetric(
-                      //         vertical: 16.0,
-                      //         horizontal: 32.0,
-                      //       ),
-                      //     ),
-                      //     child: const Text(
-                      //       "Book Now",
-                      //       style: TextStyle(fontWeight: FontWeight.normal),
-                      //     ),
-                      //     onPressed: () {},
+                      // Container(
+                      //   // height: 300,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   color: Colors.transparent,
+                      //   // child: AnimatedList(
+                      //   //     scrollDirection: Axis.horizontal,
+                      //   //     // key: controller.listKey,
+                      //   //     initialItemCount: controller.product.interests.length,
+                      //   //     itemBuilder: (context, index, animation) {
+                      //   //       return SlideTransition(
+                      //   //           position: animation.drive(controller.offset),
+                      //   //           child: controller.newCategories[index]
+                      //   //           // child: Container(
+                      //   //           //   color: Colors.green,
+                      //   //           // ),
+                      //   //           );
+                      //   //     }),
+                      //   child: ListView.separated(
+                      //     shrinkWrap: true,
+                      //     padding: EdgeInsets.zero,
+                      //     itemCount: controller.product.interests.length,
+                      //     physics: const NeverScrollableScrollPhysics(),
+                      //     separatorBuilder: (context, index) {
+                      //       return FxSpacing.height(2);
+                      //     },
+                      //     itemBuilder: (context, index) {
+                      //       return Row(
+                      //         mainAxisAlignment: MainAxisAlignment.start,
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           const Icon(
+                      //             Icons.star_border_outlined,
+                      //             color: Colors.black,
+                      //           ),
+                      //           FxSpacing.width(5),
+                      //           Expanded(
+                      //             child: FxText.bodyLarge(
+                      //                 controller.product.interests[index]),
+                      //           ),
+                      //         ],
+                      //       );
+                      //       // return StepTile(
+                      //       //   data: controller.product,
+                      //       // );
+                      //     },
                       //   ),
                       // ),
-                      // const SizedBox(height: 30.0),
-                      const Divider(
-                        color: Colors.black,
-                      ),
+                      // // const SizedBox(height: 30.0),
+                      // // SizedBox(
+                      // //   width: double.infinity,
+                      // //   child: ElevatedButton(
+                      // //     style: ElevatedButton.styleFrom(
+                      // //       shape: RoundedRectangleBorder(
+                      // //           borderRadius: BorderRadius.circular(30.0)),
+                      // //       // backgroundColor: Colors.purple,
+                      // //       // foregroundColor: Colors.white,
+                      // //       padding: const EdgeInsets.symmetric(
+                      // //         vertical: 16.0,
+                      // //         horizontal: 32.0,
+                      // //       ),
+                      // //     ),
+                      // //     child: const Text(
+                      // //       "Book Now",
+                      // //       style: TextStyle(fontWeight: FontWeight.normal),
+                      // //     ),
+                      // //     onPressed: () {},
+                      // //   ),
+                      // // ),
+                      // // const SizedBox(height: 30.0),
+                      // const Divider(
+                      //   color: Colors.black,
+                      // ),
                       FxSpacing.height(15),
                       Text(
                         "Description".toUpperCase(),

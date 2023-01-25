@@ -11,11 +11,7 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 1
   },
   {
     "name": "Dubai Parks and Resorts",
@@ -29,11 +25,7 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 2
   },
   {
     "name": "Bollywood Theme Park with Meal + Motion Gate",
@@ -47,11 +39,7 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 3
   },
   {
     "name": "IMG Worlds of Adventure Dubai",
@@ -65,11 +53,7 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 4
   },
   {
     "name": "Flying Cup",
@@ -83,11 +67,7 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 5
   },
   {
     "name": "Ski Dubai",
@@ -101,11 +81,7 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 6
   },
   {
     "name": "Sky View Observatory",
@@ -119,11 +95,7 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 7
   },
   {
     "name": "Global Village",
@@ -137,11 +109,7 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 8
   },
   {
     "name": "Miracle Garden",
@@ -155,11 +123,7 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 9
   },
   {
     "name": "Dubai Dolphinarium",
@@ -173,10 +137,6 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "interests": [
-      "Get thrilled with unlimited access to 40+ rides, slides, and attractions with over four different thrill levels",
-      "Experience the adrenaline rush at Bandit Bomber, a 550m long rollercoaster with water guns, lasers, and water effects",
-      "Spread over 37 acres, the YAS water park offers the ultimate water adventure with 5 one-of-a-kind rides"
-    ]
+    "id": 10
   }
 ]

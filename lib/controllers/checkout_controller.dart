@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/hotel_travel_constants.dart';
 
+import '../models/product.dart';
 import '../models/shipping_address.dart';
 
 class Tab {
@@ -21,11 +23,14 @@ class CheckOutController extends FxController {
   int paymentMethodSelected = 1;
   ShippingAddress? addressSelected;
   List<ShippingAddress>? addressList;
+  bool showcode = false;
+  List<Product>? products;
+  bool addCart = false;
 
   List<Tab> tabs = [];
 //form
-  late Animation<double> fadeAnimation;
-  late AnimationController animationController;
+  late Animation<double> fadeAnimation, cartAnimation;
+  // late AnimationController animationController;
 
   late TextEditingController FnameTE, LnameTE, emailTE, reqTE;
   GlobalKey<FormState> formKey = GlobalKey();
@@ -34,6 +39,8 @@ class CheckOutController extends FxController {
   String? selectedcountry;
   final List<String> countryCodes = ['India', 'UAE', 'France'];
   late AnimationController arrowController,
+      animationController,
+      cartController,
       firstnameController,
       lastnameController,
       emailController,
@@ -43,6 +50,7 @@ class CheckOutController extends FxController {
       lastnameAnimation,
       emailAnimation,
       reqAnimation;
+
   int firstnameCounter = 0;
   int lastnameCounter = 0;
   int emailCounter = 0;
@@ -51,6 +59,7 @@ class CheckOutController extends FxController {
   @override
   initState() {
     super.initState();
+    fetchData();
     currentPage = 0;
     addressList = ShippingAddress.shipping();
     addressSelected = addressList!.first;
@@ -68,6 +77,8 @@ class CheckOutController extends FxController {
       duration: const Duration(seconds: 3),
       vsync: ticker,
     );
+    cartController = AnimationController(
+        vsync: ticker, duration: const Duration(milliseconds: 500));
 
     fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -75,6 +86,12 @@ class CheckOutController extends FxController {
         curve: Curves.easeIn,
       ),
     );
+    cartAnimation = TweenSequence(<TweenSequenceItem<double>>[
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 24, end: 28), weight: 50),
+      TweenSequenceItem<double>(
+          tween: Tween<double>(begin: 28, end: 24), weight: 50)
+    ]).animate(cartController);
 
     arrowController = AnimationController(
         vsync: ticker, duration: const Duration(milliseconds: 500));
@@ -94,6 +111,16 @@ class CheckOutController extends FxController {
       parent: arrowController,
       curve: Curves.easeIn,
     ));
+    cartController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        addCart = true;
+        update();
+      }
+      if (status == AnimationStatus.dismissed) {
+        addCart = false;
+        update();
+      }
+    });
     firstnameAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
             .animate(CurvedAnimation(
@@ -171,9 +198,21 @@ class CheckOutController extends FxController {
     paymentMethodSelected = method;
     update();
   }
+  // void showcodeMethod(bool show) {
+  //   showcode = show;
+  //   update();
+  // }
 
   void selectShippingAddress(ShippingAddress address) {
     addressSelected = address;
+    update();
+  }
+
+  void fetchData() async {
+    products = HotelTravelCache.products;
+    // calculateBilling();
+    // showLoading = false;
+    // uiLoading = false;
     update();
   }
 
@@ -219,6 +258,7 @@ class CheckOutController extends FxController {
   void dispose() {
     if (pageController.hasClients) pageController.dispose();
     arrowController.dispose();
+    cartController.dispose();
     firstnameController.dispose();
     lastnameController.dispose();
     emailController.dispose();

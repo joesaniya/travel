@@ -18,14 +18,14 @@ class StepTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            data.interests.toString(),
-            style: const TextStyle(
-                color: Colors.black,
-                fontFamily: 'inter',
-                fontSize: 16,
-                fontWeight: FontWeight.w600),
-          ),
+          // Text(
+          //   data.interests.toString(),
+          //   style: const TextStyle(
+          //       color: Colors.black,
+          //       fontFamily: 'inter',
+          //       fontSize: 16,
+          //       fontWeight: FontWeight.w600),
+          // ),
           (data.description != null)
               ? Container(
                   margin: const EdgeInsets.only(top: 10),

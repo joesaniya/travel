@@ -98,8 +98,9 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                   children: <Widget>[
                     HomeScreen(),
                     // HomeScreen(size: size),
-                    const SavedScreen(),
+
                     const Text('home'),
+                    const SavedScreen(),
                     const Text('home'),
                   ],
                 ),
@@ -136,9 +137,11 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                                 title: "Saved"),
                             singleItem(
                                 index: 2,
-                                activeIconData: Icons.luggage,
-                                iconData: Icons.luggage,
-                                title: "Booking"),
+                                // activeIconData: Icons.luggage,
+                                // iconData: Icons.luggage,
+                                activeIconData: FeatherIcons.shoppingCart,
+                                iconData: FeatherIcons.shoppingCart,
+                                title: "Cart"),
                             singleItem(
                                 index: 3,
                                 iconData: FeatherIcons.user,
