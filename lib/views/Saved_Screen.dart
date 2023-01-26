@@ -42,100 +42,139 @@ class _SavedScreenState extends State<SavedScreen>
           margin: FxSpacing.bottom(20),
           borderRadiusAll: 4,
           paddingAll: 12,
-          child: Row(
+          child: Column(
             children: [
-              FxContainer(
-                paddingAll: 0,
-                borderRadiusAll: 4,
-                height: 80,
-                width: 80,
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Image(
-                  fit: BoxFit.cover,
-                  image: AssetImage(cart.product.image),
-                ),
-              ),
-              FxSpacing.width(16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    FxText.titleMedium(
-                      cart.product.name,
-                      fontWeight: 700,
-                    ),
-                    FxSpacing.height(8),
-                    FxText.bodyMedium(
-                      '\$${cart.product.price}',
-                      fontWeight: 700,
-                    ),
-                    FxSpacing.height(8),
-                    // Row(
-                    //   children: [
-                    //     FxText.bodySmall(
-                    //       'Size : ${cart.selectedSize}',
-                    //       fontWeight: 600,
-                    //     ),
-                    //     FxSpacing.width(20),
-                    //     FxText.bodySmall('Color : '),
-                    //     FxContainer(
-                    //         paddingAll: 8,
-                    //         borderRadiusAll: 2,
-                    //         color: cart.selectedColor,
-                    //         child: Container()),
-                    //   ],
-                    // ),
-                  ],
-                ),
-              ),
-              FxSpacing.width(20),
-              Column(
+              // InkWell(
+              //   onTap: () {
+              //     // Navigator.pop(context);
+              //   },
+              //   child: FxContainer.bordered(
+              //     paddingAll: 4,
+              //     child: Icon(
+              //       Icons.chevron_left_outlined,
+              //       color: theme.colorScheme.onBackground.withAlpha(200),
+              //     ),
+              //   ),
+              // ),
+              Row(
                 children: [
+                  Expanded(child: Container()),
                   FxContainer(
                     onTap: () {
-                      controller.increment(cart);
-                    },
-                    bordered: increaseAble,
-                    paddingAll: 4,
-                    borderRadiusAll: 2,
-                    border: Border.all(color: theme.colorScheme.primary),
-                    color: increaseAble
-                        ? theme.colorScheme.primary
-                        : theme.colorScheme.onBackground.withAlpha(200),
-                    child: Icon(
-                      FeatherIcons.plus,
-                      size: 12,
-                      color: increaseAble
-                          ? theme.colorScheme.onPrimary
-                          : theme.colorScheme.onPrimary,
-                    ),
-                  ),
-                  FxSpacing.height(8),
-                  FxText.bodyMedium(
-                    cart.person.toString(),
-                    fontWeight: 700,
-                  ),
-                  FxSpacing.height(8),
-                  FxContainer(
-                    onTap: () {
-                      controller.decrement(cart);
+                      // controller.decrement(cart);
                     },
                     paddingAll: 4,
                     borderRadiusAll: 2,
-                    bordered: decreaseAble,
-                    border: Border.all(
-                        color: theme.colorScheme.primary.withAlpha(120)),
-                    color: decreaseAble
-                        ? theme.colorScheme.primary.withAlpha(28)
-                        : theme.colorScheme.onBackground.withAlpha(200),
-                    child: Icon(
+                    alignment: Alignment.centerRight,
+                    // bordered: decreaseAble,
+
+                    border: Border.all(color: Colors.grey.withAlpha(120)),
+                    color: Colors.grey,
+                    child: const Icon(
                       FeatherIcons.minus,
                       size: 12,
-                      color: decreaseAble
-                          ? theme.colorScheme.primary
-                          : theme.colorScheme.onPrimary,
+                      color: Colors.indigo,
                     ),
+                  ),
+                ],
+              ),
+              FxSpacing.height(10),
+              Row(
+                children: [
+                  FxContainer(
+                    paddingAll: 0,
+                    borderRadiusAll: 4,
+                    height: 80,
+                    width: 80,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    child: Image(
+                      fit: BoxFit.cover,
+                      image: AssetImage(cart.product.image),
+                    ),
+                  ),
+                  FxSpacing.width(16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        FxText.titleMedium(
+                          cart.product.name,
+                          fontWeight: 700,
+                        ),
+                        FxSpacing.height(8),
+                        FxText.bodyMedium(
+                          '\$${cart.product.price}',
+                          fontWeight: 700,
+                        ),
+                        FxSpacing.height(8),
+                        // Row(
+                        //   children: [
+                        //     FxText.bodySmall(
+                        //       'Size : ${cart.selectedSize}',
+                        //       fontWeight: 600,
+                        //     ),
+                        //     FxSpacing.width(20),
+                        //     FxText.bodySmall('Color : '),
+                        //     FxContainer(
+                        //         paddingAll: 8,
+                        //         borderRadiusAll: 2,
+                        //         color: cart.selectedColor,
+                        //         child: Container()),
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                  ),
+                  FxSpacing.width(20),
+                  Column(
+                    children: [
+                      FxContainer(
+                        onTap: () {
+                          controller.increment(cart);
+                        },
+                        bordered: increaseAble,
+                        paddingAll: 4,
+                        borderRadiusAll: 2,
+                        border: Border.all(color: theme.colorScheme.primary),
+                        color: increaseAble
+                            ? theme.colorScheme.primary
+                            : theme.colorScheme.onBackground.withAlpha(200),
+                        child: Icon(
+                          FeatherIcons.plus,
+                          size: 12,
+                          color: increaseAble
+                              ? theme.colorScheme.onPrimary
+                              : theme.colorScheme.onPrimary,
+                        ),
+                      ),
+                      FxSpacing.height(8),
+                      FxText.bodyMedium(
+                        cart.person.toString(),
+                        fontWeight: 700,
+                      ),
+                      FxSpacing.height(8),
+                      FxContainer(
+                        onTap: () {
+                          controller.decrement(cart);
+                        },
+                        paddingAll: 4,
+                        borderRadiusAll: 2,
+                        bordered: decreaseAble,
+                        border: Border.all(
+                            color: theme.colorScheme.primary.withAlpha(120)),
+                        color: decreaseAble
+                            ? theme.colorScheme.primary.withAlpha(28)
+                            : theme.colorScheme.onBackground.withAlpha(200),
+                        child: Icon(
+                          FeatherIcons.minus,
+                          size: 12,
+                          color: decreaseAble
+                              ? theme.colorScheme.primary
+                              : theme.colorScheme.onPrimary,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
