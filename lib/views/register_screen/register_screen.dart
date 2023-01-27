@@ -238,8 +238,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                       ? countryList.first.countries!
                                           .map((value) {
                                           return DropdownMenuItem<String>(
-                                              value:
-                                                  value!.phonecode.toString(),
+                                              value: value!.id.toString(),
                                               child: Center(
                                                 child: Text(
                                                   value.phonecode.toString(),

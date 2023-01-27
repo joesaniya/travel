@@ -32,7 +32,7 @@ class CheckOutController extends FxController {
   late Animation<double> fadeAnimation, cartAnimation;
   // late AnimationController animationController;
 
-  late TextEditingController FnameTE, LnameTE, emailTE, reqTE;
+  late TextEditingController FnameTE, LnameTE, emailTE, reqTE, promoTE;
   GlobalKey<FormState> formKey = GlobalKey();
   String? selectedname;
   final List<String> nameCodes = ['Mr.', 'Mrs.', 'Ms.'];
@@ -44,17 +44,20 @@ class CheckOutController extends FxController {
       firstnameController,
       lastnameController,
       emailController,
+      promoController,
       reqController;
   late Animation<Offset> arrowAnimation,
       firstnameAnimation,
       lastnameAnimation,
       emailAnimation,
+      promoAnimation,
       reqAnimation;
 
   int firstnameCounter = 0;
   int lastnameCounter = 0;
   int emailCounter = 0;
   int reqCounter = 0;
+  int promoCounter = 0;
 
   @override
   initState() {
@@ -72,6 +75,7 @@ class CheckOutController extends FxController {
     LnameTE = TextEditingController();
     emailTE = TextEditingController();
     reqTE = TextEditingController();
+    promoTE = TextEditingController();
 
     animationController = AnimationController(
       duration: const Duration(seconds: 3),
@@ -92,6 +96,8 @@ class CheckOutController extends FxController {
       TweenSequenceItem<double>(
           tween: Tween<double>(begin: 28, end: 24), weight: 50)
     ]).animate(cartController);
+    promoController = AnimationController(
+        vsync: ticker, duration: const Duration(milliseconds: 500));
 
     arrowController = AnimationController(
         vsync: ticker, duration: const Duration(milliseconds: 500));
@@ -121,33 +127,49 @@ class CheckOutController extends FxController {
         update();
       }
     });
+    promoAnimation =
+        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
+            .animate(CurvedAnimation(
+      parent: promoController,
+      curve: Curves.easeIn,
+    ));
     firstnameAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
             .animate(CurvedAnimation(
-      parent: arrowController,
+      parent: firstnameController,
       curve: Curves.easeIn,
     ));
     lastnameAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
             .animate(CurvedAnimation(
-      parent: arrowController,
+      parent: lastnameController,
       curve: Curves.easeIn,
     ));
     emailAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
             .animate(CurvedAnimation(
-      parent: arrowController,
+      parent: emailController,
       curve: Curves.easeIn,
     ));
     reqAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(8, 0))
             .animate(CurvedAnimation(
-      parent: arrowController,
+      parent: reqController,
       curve: Curves.easeIn,
     ));
     animationController.forward();
 
     //listener
+    promoController.addStatusListener((status) {
+      log(status.toString());
+      if (status == AnimationStatus.completed) {
+        promoController.reverse();
+      }
+      if (status == AnimationStatus.dismissed && promoCounter < 2) {
+        promoController.forward();
+        promoCounter++;
+      }
+    });
     firstnameController.addStatusListener((status) {
       log(status.toString());
       if (status == AnimationStatus.completed) {
@@ -263,6 +285,7 @@ class CheckOutController extends FxController {
     lastnameController.dispose();
     emailController.dispose();
     reqController.dispose();
+    promoController.dispose();
     animationController.dispose();
     super.dispose();
   }

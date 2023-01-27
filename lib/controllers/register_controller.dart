@@ -286,8 +286,8 @@ class RegisterController extends FxController {
               nameTE.text,
               emailTE.text,
               // int.parse(phoneTE.text)
-              '63ac33c3ff04e5652a2583f1',
-              // selectedCountryCode.toString(),
+              // '63ac33c3ff04e5652a2583f1',
+              selectedCountryCode.toString(),
               phoneTE.text,
               passwordTE.text)
           .then((value) =>

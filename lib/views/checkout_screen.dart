@@ -359,7 +359,8 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                   child: PageView(
                     allowImplicitScrolling: true,
                     pageSnapping: true,
-                    physics: const ClampingScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
+                    // physics: const ClampingScrollPhysics(),
                     controller: controller.pageController,
                     onPageChanged: (int page) {
                       controller.onPageChanged(page);
@@ -1124,25 +1125,72 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                   borderRadiusAll: 4,
                   child: Row(
                     children: [
-                      Icon(
-                        FeatherIcons.creditCard,
-                        size: 18,
-                        color: theme.colorScheme.primary,
+                      // Icon(
+                      //   FeatherIcons.creditCard,
+                      //   size: 18,
+                      //   color: theme.colorScheme.primary,
+                      // ),
+                      // FxSpacing.width(16),
+                      Expanded(
+                        child: SlideTransition(
+                          position: controller.promoAnimation,
+                          child: TextFormField(
+                            style: FxTextStyle.bodyMedium(),
+                            decoration: InputDecoration(
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                filled: true,
+                                isDense: true,
+                                fillColor: Colors.white,
+                                // fillColor: theme.cardTheme.color,
+                                // prefixIcon: Icon(
+                                //   FeatherIcons.user,
+                                //   color: theme.colorScheme.onBackground,
+                                // ),
+                                hintText: "Enter Promo Code",
+                                enabledBorder: outlineInputBorder,
+                                focusedBorder: outlineInputBorder,
+                                border: outlineInputBorder,
+                                contentPadding: FxSpacing.all(16),
+                                hintStyle: FxTextStyle.bodyMedium(),
+                                isCollapsed: true),
+                            maxLines: 1,
+                            controller: controller.promoTE,
+                            // validator: controller.validateName,
+                            cursorColor: theme.colorScheme.onBackground,
+                          ),
+                        ),
+                        //     child: FxText.labelLarge(
+                        //   'Black Friday Promo',
+                        //   fontWeight: 600,
+                        // )
                       ),
                       FxSpacing.width(16),
+                      // FxContainer(
+                      //   borderRadiusAll: 2,
+                      //   padding: FxSpacing.xy(8, 4),
+                      //   color: theme.colorScheme.primary.withAlpha(40),
+                      //   child: FxText.bodySmall(
+                      //     'BLCK20',
+                      //     color: theme.colorScheme.primary,
+                      //   ),
+                      // ),
+                      // Expanded(
+                      //   child: Container(),
+                      // ),
+
                       Expanded(
-                          child: FxText.labelLarge(
-                        'Black Friday Promo',
-                        fontWeight: 600,
-                      )),
-                      FxSpacing.width(16),
-                      FxContainer(
-                        borderRadiusAll: 2,
-                        padding: FxSpacing.xy(8, 4),
-                        color: theme.colorScheme.primary.withAlpha(40),
-                        child: FxText.bodySmall(
-                          'BLCK20',
-                          color: theme.colorScheme.primary,
+                        child: FxButton.block(
+                          onPressed: () {},
+                          borderRadiusAll: 4,
+                          elevation: 0,
+                          splashColor: const Color(0xff1529e8).withAlpha(40),
+                          backgroundColor: const Color(0xff1529e8),
+                          child: FxText.bodyMedium(
+                            'Redeem',
+                            fontWeight: 600,
+                            color: theme.colorScheme.onPrimary,
+                          ),
                         ),
                       ),
                     ],

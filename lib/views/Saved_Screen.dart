@@ -59,23 +59,38 @@ class _SavedScreenState extends State<SavedScreen>
               Row(
                 children: [
                   Expanded(child: Container()),
-                  FxContainer(
+                  InkWell(
                     onTap: () {
-                      // controller.decrement(cart);
+                      Navigator.pop(context);
                     },
-                    paddingAll: 4,
-                    borderRadiusAll: 2,
-                    alignment: Alignment.centerRight,
-                    // bordered: decreaseAble,
-
-                    border: Border.all(color: Colors.grey.withAlpha(120)),
-                    color: Colors.grey,
-                    child: const Icon(
-                      FeatherIcons.minus,
-                      size: 12,
-                      color: Colors.indigo,
+                    child: FxContainer.bordered(
+                      paddingAll: 4,
+                      color: Colors.grey,
+                      borderColor: Colors.black,
+                      child: Icon(
+                        FeatherIcons.minus,
+                        color: Colors.red.withAlpha(200),
+                        size: 12,
+                      ),
                     ),
                   ),
+                  // FxContainer(
+                  //   onTap: () {
+                  //     // controller.decrement(cart);
+                  //   },
+                  //   paddingAll: 4,
+                  //   borderRadiusAll: 2,
+                  //   alignment: Alignment.centerRight,
+                  //   // bordered: decreaseAble,
+
+                  //   border: Border.all(color: Colors.grey.withAlpha(120)),
+                  //   color: Colors.grey,
+                  //   child: const Icon(
+                  //     FeatherIcons.minus,
+                  //     size: 12,
+                  //     color: Colors.indigo,
+                  //   ),
+                  // ),
                 ],
               ),
               FxSpacing.height(10),
@@ -127,55 +142,55 @@ class _SavedScreenState extends State<SavedScreen>
                     ),
                   ),
                   FxSpacing.width(20),
-                  Column(
-                    children: [
-                      FxContainer(
-                        onTap: () {
-                          controller.increment(cart);
-                        },
-                        bordered: increaseAble,
-                        paddingAll: 4,
-                        borderRadiusAll: 2,
-                        border: Border.all(color: theme.colorScheme.primary),
-                        color: increaseAble
-                            ? theme.colorScheme.primary
-                            : theme.colorScheme.onBackground.withAlpha(200),
-                        child: Icon(
-                          FeatherIcons.plus,
-                          size: 12,
-                          color: increaseAble
-                              ? theme.colorScheme.onPrimary
-                              : theme.colorScheme.onPrimary,
-                        ),
-                      ),
-                      FxSpacing.height(8),
-                      FxText.bodyMedium(
-                        cart.person.toString(),
-                        fontWeight: 700,
-                      ),
-                      FxSpacing.height(8),
-                      FxContainer(
-                        onTap: () {
-                          controller.decrement(cart);
-                        },
-                        paddingAll: 4,
-                        borderRadiusAll: 2,
-                        bordered: decreaseAble,
-                        border: Border.all(
-                            color: theme.colorScheme.primary.withAlpha(120)),
-                        color: decreaseAble
-                            ? theme.colorScheme.primary.withAlpha(28)
-                            : theme.colorScheme.onBackground.withAlpha(200),
-                        child: Icon(
-                          FeatherIcons.minus,
-                          size: 12,
-                          color: decreaseAble
-                              ? theme.colorScheme.primary
-                              : theme.colorScheme.onPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   children: [
+                  //     FxContainer(
+                  //       onTap: () {
+                  //         controller.increment(cart);
+                  //       },
+                  //       bordered: increaseAble,
+                  //       paddingAll: 4,
+                  //       borderRadiusAll: 2,
+                  //       border: Border.all(color: theme.colorScheme.primary),
+                  //       color: increaseAble
+                  //           ? theme.colorScheme.primary
+                  //           : theme.colorScheme.onBackground.withAlpha(200),
+                  //       child: Icon(
+                  //         FeatherIcons.plus,
+                  //         size: 12,
+                  //         color: increaseAble
+                  //             ? theme.colorScheme.onPrimary
+                  //             : theme.colorScheme.onPrimary,
+                  //       ),
+                  //     ),
+                  //     FxSpacing.height(8),
+                  //     FxText.bodyMedium(
+                  //       cart.person.toString(),
+                  //       fontWeight: 700,
+                  //     ),
+                  //     FxSpacing.height(8),
+                  //     FxContainer(
+                  //       onTap: () {
+                  //         controller.decrement(cart);
+                  //       },
+                  //       paddingAll: 4,
+                  //       borderRadiusAll: 2,
+                  //       bordered: decreaseAble,
+                  //       border: Border.all(
+                  //           color: theme.colorScheme.primary.withAlpha(120)),
+                  //       color: decreaseAble
+                  //           ? theme.colorScheme.primary.withAlpha(28)
+                  //           : theme.colorScheme.onBackground.withAlpha(200),
+                  //       child: Icon(
+                  //         FeatherIcons.minus,
+                  //         size: 12,
+                  //         color: decreaseAble
+                  //             ? theme.colorScheme.primary
+                  //             : theme.colorScheme.onPrimary,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ],

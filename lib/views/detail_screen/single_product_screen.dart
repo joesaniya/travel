@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/controllers/saved_controller.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
 import 'package:hotel_travel/views/detail_screen/review_Screen.dart';
 import 'package:hotel_travel/widgets/facilty_widget.dart';
@@ -30,6 +31,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
   late ThemeData theme;
 
   late SingleProductController controller;
+  late SavedController cartController;
   late OutlineInputBorder outlineInputBorder;
 
   @override
@@ -930,6 +932,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
         child: FxButton.block(
           onPressed: () {
             controller.bookNow();
+            // cartController.carts.add(Cart());
           },
           backgroundColor: const Color(0xff1529e8),
           // backgroundColor: customTheme.estatePrimary,
