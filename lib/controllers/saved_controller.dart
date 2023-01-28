@@ -46,6 +46,7 @@ class SavedController extends FxController {
   void initState() {
     super.initState();
     fetchData();
+    fetchloader();
     animationController = AnimationController(
       duration: const Duration(seconds: 1),
       vsync: ticker,
@@ -112,7 +113,16 @@ class SavedController extends FxController {
     log(carts!.length.toString());
     calculateBilling();
     showLoading = false;
+    // uiLoading = false;
+    update();
+  }
+
+  void fetchloader() async {
+    await Future.delayed(const Duration(seconds: 4));
+
     uiLoading = false;
+    log('fetchloader');
+    log(uiLoading.toString());
     update();
   }
 

@@ -464,7 +464,7 @@ class LoadingEffect {
   }
 
   static Widget getCartLoadingScreen(BuildContext context,
-      {int itemCount = 2}) {
+      {int itemCount = 9}) {
     LoadingThemeData theme = LoadingThemeData.theme;
 
     Widget singleLoading = Shimmer.fromColors(
@@ -534,7 +534,7 @@ class LoadingEffect {
     for (int i = 0; i < itemCount; i++) {
       list.add(Container(padding: FxSpacing.all(16), child: singleLoading));
     }
-    return Column(
+    return ListView(
       children: list,
     );
   }

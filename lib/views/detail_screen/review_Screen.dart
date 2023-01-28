@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+import '../../controllers/review_controller.dart';
+import '../../loading_effect.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/generator.dart';
 
@@ -14,75 +16,99 @@ class _ReviewScreenState extends State<ReviewScreen>
     with SingleTickerProviderStateMixin {
   late CustomTheme customTheme;
   late ThemeData theme;
+  late ReviewController controller;
 
   @override
   initState() {
     super.initState();
     customTheme = AppTheme.customTheme;
     theme = AppTheme.theme;
+    controller = FxControllerStore.put(ReviewController(this));
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      // addCategories();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: theme.copyWith(
-          colorScheme: theme.colorScheme
-              .copyWith(secondary: customTheme.groceryPrimary)),
-      child: Scaffold(
-          // backgroundColor: Colors.yellow,
-          backgroundColor: const Color(0xfff5f5f5),
-          appBar: AppBar(
+    return FxBuilder<ReviewController>(
+        controller: controller,
+        builder: (controller) {
+          return _buildBody();
+        });
+  }
+
+  Widget _buildBody() {
+    if (controller.uiLoading) {
+      return Scaffold(
+          body: Padding(
+        padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
+        child: LoadingEffect.getReviewLoadingScreen(
+          context,
+          // theme, theme.colorScheme
+        ),
+      ));
+    } else {
+      return Theme(
+        data: theme.copyWith(
+            colorScheme: theme.colorScheme
+                .copyWith(secondary: customTheme.groceryPrimary)),
+        child: Scaffold(
+            // backgroundColor: Colors.yellow,
             backgroundColor: const Color(0xfff5f5f5),
-            elevation: 0,
-            leading: InkWell(
-              onTap: () {
-                Navigator.of(context).pop();
-              },
-              child: Icon(
-                MdiIcons.chevronLeft,
-                size: 20,
-                color: theme.colorScheme.onBackground,
-              ),
-            ),
-            title: FxText("Reviews", fontWeight: 600),
-          ),
-          body: ListView(
-            padding: FxSpacing.fromLTRB(24, 8, 24, 0),
-            children: <Widget>[
-              _buildRatingWidget(),
-              FxSpacing.height(24),
-              _singleReview(
-                  image: "./assets/images/profile/avatar_4.jpg",
-                  name: "Tegan Payne",
-                  rating: 5,
-                  review: Generator.getDummyText(32),
-                  time: "1 day ago"),
-              _singleReview(
-                  image: "./assets/images/profile/avatar_3.jpg",
-                  name: "Jamal Rossi",
-                  rating: 4,
-                  review: Generator.getDummyText(25),
-                  time: "7 days ago"),
-              _singleReview(
-                  image: "./assets/images/profile/avatar_2.jpg",
-                  name: "Harvie Duncan",
-                  rating: 4,
-                  review: Generator.getDummyText(30),
-                  time: "1 month ago"),
-              // Space.height(8),
-              Center(
-                child: TextButton(
-                  onPressed: () {},
-                  child: FxText.bodyMedium("Write a Review",
-                      letterSpacing: 0,
-                      color: const Color(0xff1529e8),
-                      // color: customTheme.groceryPrimary,
-                      fontWeight: 600),
+            appBar: AppBar(
+              backgroundColor: const Color(0xfff5f5f5),
+              elevation: 0,
+              leading: InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  MdiIcons.chevronLeft,
+                  size: 20,
+                  color: theme.colorScheme.onBackground,
                 ),
-              )
-            ],
-          )),
-    );
+              ),
+              title: FxText("Reviews", fontWeight: 600),
+            ),
+            body: ListView(
+              padding: FxSpacing.fromLTRB(24, 8, 24, 0),
+              children: <Widget>[
+                _buildRatingWidget(),
+                FxSpacing.height(24),
+                _singleReview(
+                    image: "./assets/images/profile/avatar_4.jpg",
+                    name: "Tegan Payne",
+                    rating: 5,
+                    review: Generator.getDummyText(32),
+                    time: "1 day ago"),
+                _singleReview(
+                    image: "./assets/images/profile/avatar_3.jpg",
+                    name: "Jamal Rossi",
+                    rating: 4,
+                    review: Generator.getDummyText(25),
+                    time: "7 days ago"),
+                _singleReview(
+                    image: "./assets/images/profile/avatar_2.jpg",
+                    name: "Harvie Duncan",
+                    rating: 4,
+                    review: Generator.getDummyText(30),
+                    time: "1 month ago"),
+                // Space.height(8),
+                Center(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: FxText.bodyMedium("Write a Review",
+                        letterSpacing: 0,
+                        color: const Color(0xff1529e8),
+                        // color: customTheme.groceryPrimary,
+                        fontWeight: 600),
+                  ),
+                )
+              ],
+            )),
+      );
+    }
   }
 
   Widget _singleReview(

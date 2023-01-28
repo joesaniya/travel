@@ -7,6 +7,7 @@ import 'package:hotel_travel/views/bottomSheet/Filter_Sheet.dart';
 import 'package:hotel_travel/views/bottomSheet/categories_Sheet.dart';
 
 import '../controllers/search_Home_controller.dart';
+import '../loading_effect.dart';
 import '../models/product.dart';
 import '../theme/app_theme.dart';
 
@@ -52,95 +53,103 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   Widget _buildBody() {
-    return Scaffold(
-      key: controller.scaffoldKey,
-      endDrawer: endDrawer(),
-      body: ListView(
-        padding:
-            FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(context) + 20, 20, 20),
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  style: FxTextStyle.bodyMedium(),
-                  cursorColor: theme.colorScheme.primary,
-                  decoration: InputDecoration(
-                    hintText: "Search your place ...",
-                    hintStyle: FxTextStyle.bodySmall(
-                        color: theme.colorScheme.onBackground),
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                        borderSide: BorderSide.none),
-                    enabledBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                        borderSide: BorderSide.none),
-                    focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(4),
-                        ),
-                        borderSide: BorderSide.none),
-                    filled: true,
-                    // fillColor: const Color(0xffcfd2ff),
-                    fillColor: theme.cardTheme.color,
-                    prefixIcon: Icon(
-                      FeatherIcons.search,
-                      size: 16,
-                      color: theme.colorScheme.onBackground.withAlpha(150),
+    if (controller.uiLoading) {
+      return Scaffold(
+          body: Padding(
+        padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
+        child: LoadingEffect.getHomeLoadingScreen(
+          context,
+          // theme, theme.colorScheme
+        ),
+      ));
+    } else {
+      return Scaffold(
+        key: controller.scaffoldKey,
+        endDrawer: endDrawer(),
+        body: ListView(
+          padding: FxSpacing.fromLTRB(
+              20, FxSpacing.safeAreaTop(context) + 20, 20, 20),
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    style: FxTextStyle.bodyMedium(),
+                    cursorColor: theme.colorScheme.primary,
+                    decoration: InputDecoration(
+                      hintText: "Search your place ...",
+                      hintStyle: FxTextStyle.bodySmall(
+                          color: theme.colorScheme.onBackground),
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                          borderSide: BorderSide.none),
+                      enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                          borderSide: BorderSide.none),
+                      focusedBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4),
+                          ),
+                          borderSide: BorderSide.none),
+                      filled: true,
+                      // fillColor: const Color(0xffcfd2ff),
+                      fillColor: theme.cardTheme.color,
+                      prefixIcon: Icon(
+                        FeatherIcons.search,
+                        size: 16,
+                        color: theme.colorScheme.onBackground.withAlpha(150),
+                      ),
+                      isDense: true,
                     ),
-                    isDense: true,
+                    textCapitalization: TextCapitalization.sentences,
                   ),
-                  textCapitalization: TextCapitalization.sentences,
                 ),
-              ),
-              // FxSpacing.width(20),
-              // FxContainer(
-              //   paddingAll: 12,
-              //   borderRadiusAll: 4,
-              //   onTap: () {
-              //     controller.openEndDrawer();
-              //   },
-              //   color: const Color(0xffcfd2ff),
-              //   // color: theme.colorScheme.primaryContainer,
-              //   child: Icon(
-              //     FeatherIcons.sliders,
-              //     color: theme1.colorScheme.onSecondaryContainer,
-              //     // color: theme.colorScheme.primary,
-              //     size: 20,
-              //   ),
-              // ),
-            ],
-          ),
-          // Text(
-          //   widget.place.toString(),
-          //   style: const TextStyle(color: Colors.red),
-          // ),
-          FxSpacing.height(20),
-          //btn
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext buildContext) {
-                        return const CategoriesBottomSheet();
-                      });
-                },
-                child: Container(
-                  height: 30,
-                  width: 80,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff1529e8),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: FxText.bodyLarge(
+                // FxSpacing.width(20),
+                // FxContainer(
+                //   paddingAll: 12,
+                //   borderRadiusAll: 4,
+                //   onTap: () {
+                //     controller.openEndDrawer();
+                //   },
+                //   color: const Color(0xffcfd2ff),
+                //   // color: theme.colorScheme.primaryContainer,
+                //   child: Icon(
+                //     FeatherIcons.sliders,
+                //     color: theme1.colorScheme.onSecondaryContainer,
+                //     // color: theme.colorScheme.primary,
+                //     size: 20,
+                //   ),
+                // ),
+              ],
+            ),
+            // Text(
+            //   widget.place.toString(),
+            //   style: const TextStyle(color: Colors.red),
+            // ),
+            FxSpacing.height(20),
+            //btn
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext buildContext) {
+                          return const CategoriesBottomSheet();
+                        });
+                  },
+                  child: FxContainer(
+                    borderRadiusAll: 10,
+                    // padding: FxSpacing.xy(8, 4),
+                    padding: FxSpacing.xy(6, 9),
+                    color: const Color(0xff1529e8),
+                    child: FxText.bodySmall(
                       'Categories',
                       fontWeight: 300,
                       color: Colors.white,
@@ -148,43 +157,43 @@ class _SearchScreenState extends State<SearchScreen>
                     ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext buildContext) {
-                        return const FilterSheet();
-                      });
-                },
-                child: Container(
-                  height: 30,
-                  width: 80,
-                  decoration: BoxDecoration(
-                      color: const Color(0xff1529e8),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                    child: FxText.bodyLarge(
-                      'Filter',
-                      fontWeight: 300,
-                      color: Colors.white,
-                      // color: theme.colorScheme.onPrimary,
+                GestureDetector(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext buildContext) {
+                          return const FilterSheet();
+                        });
+                  },
+                  child: Container(
+                    height: 30,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        color: const Color(0xff1529e8),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Center(
+                      child: FxText.bodySmall(
+                        'Filter',
+                        fontWeight: 300,
+                        color: Colors.white,
+                        // color: theme.colorScheme.onPrimary,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
 
-          FxSpacing.height(20),
-          //content
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: _buildProductList(),
-          ),
-        ],
-      ),
-    );
+            FxSpacing.height(20),
+            //content
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: _buildProductList(),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   Widget _buildProductList() {
@@ -209,7 +218,8 @@ class _SearchScreenState extends State<SearchScreen>
           child: Container(
             // borderRadiusAll: 4,
             // // paddingAll: 16,
-            height: 120,
+            // height: 120,
+            height: 132,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -260,7 +270,10 @@ class _SearchScreenState extends State<SearchScreen>
                               // color: Color(0xff1529e8),
                               color: Colors.blueGrey,
                               child: FxText.bodySmall(
-                                'Theme Park',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                // 'Theme Park',
+                                'Park',
                                 fontWeight: 300,
                                 color: Colors.white,
                                 // color: theme.colorScheme.onPrimary,
@@ -301,17 +314,17 @@ class _SearchScreenState extends State<SearchScreen>
                           ],
                         ),
                         FxSpacing.height(8),
-                        Flexible(
-                          child: Hero(
-                            tag: "product_${product.name}",
-                            // child: FxText.bodyLarge(
-                            //   product.name,
-                            //   // fontWeight: 500,
-                            // ),
-                            child: FxText.bodyLarge(
-                              product.name,
-                              fontWeight: 800,
-                            ),
+                        Hero(
+                          tag: "product_${product.name}",
+                          // child: FxText.bodyLarge(
+                          //   product.name,
+                          //   // fontWeight: 500,
+                          // ),
+                          child: FxText.bodyLarge(
+                            product.name,
+                            fontWeight: 800,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
                         ),
                         FxSpacing.height(4),

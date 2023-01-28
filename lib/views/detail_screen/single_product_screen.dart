@@ -6,7 +6,6 @@ import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/controllers/saved_controller.dart';
 import 'package:hotel_travel/extensions/extensions.dart';
 import 'package:hotel_travel/views/detail_screen/review_Screen.dart';
-import 'package:hotel_travel/widgets/facilty_widget.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -1438,82 +1437,83 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                       //     ],
                       //   ),
                       // ),
-                      FxSpacing.height(15),
-                      // const Divider(
-                      //   color: Colors.black,
-                      // ),
-
-                      // //fe
+                      //featureswidget
                       // FxSpacing.height(15),
+                      // // const Divider(
+                      // //   color: Colors.black,
+                      // // ),
 
-                      Container(
-                        // margin:
-                        //     const EdgeInsets.only(top: 24, left: 8, right: 8),
-                        color: Colors.transparent,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            FxText.bodyLarge(
-                              'Features',
-                              fontWeight: 800,
-                            ),
-                            FxSpacing.height(10),
-                            Row(
-                              children: const <Widget>[
-                                Expanded(
-                                    child: FacityWidget(
-                                  iconData: MdiIcons.calendarAccount,
-                                  text: "Availibility:Daily",
-                                )),
-                                Expanded(
-                                    child: FacityWidget(
-                                  iconData: MdiIcons.timerSand,
-                                  // text: "Duration: 6 hours",
-                                  text: "Duration: 6 hours (approx)",
-                                )),
-                                Expanded(
-                                    child: FacityWidget(
-                                  iconData: MdiIcons.timer,
-                                  text: "Time slot: 8:00 - 11:30",
-                                )),
-                                Expanded(
-                                    child: FacityWidget(
-                                  iconData: Icons.bolt,
-                                  text: "Instant Confirmation",
-                                )),
-                              ],
-                            ),
-                            Container(
-                              margin: const EdgeInsets.only(top: 16),
-                              child: Row(
-                                children: const <Widget>[
-                                  Expanded(
-                                      child: FacityWidget(
-                                    iconData: MdiIcons.accountCancelOutline,
-                                    text: "Free cancellation upto 24 hours",
-                                  )),
-                                  Expanded(
-                                      child: FacityWidget(
-                                    iconData: MdiIcons.pool,
-                                    text: "Pool",
-                                  )),
-                                  Expanded(
-                                      child: FacityWidget(
-                                    iconData: MdiIcons.spa,
-                                    text: "Spa",
-                                  )),
-                                  Expanded(
-                                      child: FacityWidget(
-                                    iconData: MdiIcons.gamepad,
-                                    text: "Games",
-                                  )),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      // // //fe
+                      // // FxSpacing.height(15),
+
+                      // Container(
+                      //   // margin:
+                      //   //     const EdgeInsets.only(top: 24, left: 8, right: 8),
+                      //   color: Colors.transparent,
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: <Widget>[
+                      //       FxText.bodyLarge(
+                      //         'Features',
+                      //         fontWeight: 800,
+                      //       ),
+                      //       FxSpacing.height(10),
+                      //       Row(
+                      //         children: const <Widget>[
+                      //           Expanded(
+                      //               child: FacityWidget(
+                      //             iconData: MdiIcons.calendarAccount,
+                      //             text: "Availibility:Daily",
+                      //           )),
+                      //           Expanded(
+                      //               child: FacityWidget(
+                      //             iconData: MdiIcons.timerSand,
+                      //             // text: "Duration: 6 hours",
+                      //             text: "Duration: 6 hours (approx)",
+                      //           )),
+                      //           Expanded(
+                      //               child: FacityWidget(
+                      //             iconData: MdiIcons.timer,
+                      //             text: "Time slot: 8:00 - 11:30",
+                      //           )),
+                      //           Expanded(
+                      //               child: FacityWidget(
+                      //             iconData: Icons.bolt,
+                      //             text: "Instant Confirmation",
+                      //           )),
+                      //         ],
+                      //       ),
+                      //       Container(
+                      //         margin: const EdgeInsets.only(top: 16),
+                      //         child: Row(
+                      //           children: const <Widget>[
+                      //             Expanded(
+                      //                 child: FacityWidget(
+                      //               iconData: MdiIcons.accountCancelOutline,
+                      //               text: "Free cancellation upto 24 hours",
+                      //             )),
+                      //             Expanded(
+                      //                 child: FacityWidget(
+                      //               iconData: MdiIcons.pool,
+                      //               text: "Pool",
+                      //             )),
+                      //             Expanded(
+                      //                 child: FacityWidget(
+                      //               iconData: MdiIcons.spa,
+                      //               text: "Spa",
+                      //             )),
+                      //             Expanded(
+                      //                 child: FacityWidget(
+                      //               iconData: MdiIcons.gamepad,
+                      //               text: "Games",
+                      //             )),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
 
                       //touroption
                       FxSpacing.height(15),

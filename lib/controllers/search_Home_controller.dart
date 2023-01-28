@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
@@ -18,6 +20,7 @@ class HomeSearchController extends FxController {
   late Animation<double> fadeAnimation;
   List<Product>? products;
   late TextEditingController dateTE;
+  bool uiLoading = true;
 
   late Tween<Offset> offset;
   late AnimationController dateController;
@@ -61,10 +64,20 @@ class HomeSearchController extends FxController {
     // selectedCategory = categories!.first;
   }
 
+  void fetchloader() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    uiLoading = false;
+    log('fetchloader');
+    log(uiLoading.toString());
+    update();
+  }
+
   @override
   void initState() {
     super.initState();
     fetchData();
+    fetchloader();
     animationController = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: ticker,
