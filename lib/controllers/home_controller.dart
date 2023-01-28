@@ -15,6 +15,7 @@ class HomeController extends FxController {
   HomeController(this.ticker);
   List<Category>? categories;
   List<Product>? products;
+  bool uiLoading = true;
   late Category selectedCategory;
   late AnimationController animationController;
   late AnimationController bellController;
@@ -31,6 +32,7 @@ class HomeController extends FxController {
   void initState() {
     super.initState();
     fetchData();
+    fetchloader();
     animationController = AnimationController(
       duration: const Duration(seconds: 3),
       vsync: ticker,
@@ -81,7 +83,7 @@ class HomeController extends FxController {
       const Duration(milliseconds: 2000),
       () {
         if (HotelTravelCache.isFirstTime) {
-          intro.start(context);
+          // intro.start(context);
           HotelTravelCache.isFirstTime = false;
         }
       },
@@ -116,6 +118,18 @@ class HomeController extends FxController {
     categories = HotelTravelCache.categories;
     products = HotelTravelCache.products;
     selectedCategory = categories!.first;
+    // uiLoading = false;
+    // log(uiLoading.toString());
+    update();
+  }
+
+  void fetchloader() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    uiLoading = false;
+    log('fetchloader');
+    log(uiLoading.toString());
+    update();
   }
 
   void changeSelectedCategory(Category category) {

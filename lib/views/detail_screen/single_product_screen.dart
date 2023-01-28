@@ -925,6 +925,20 @@ class _SingleProductScreenState extends State<SingleProductScreen>
   }
 
   Widget _buildDetail() {
+    // if (controller.uiLoading) {
+    //   return Scaffold(
+    //       body: Padding(
+    //     padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
+    //     child: LoadingEffect.getDatingHomeScreen
+    //         // getProductLoadingScreen->profile
+    //         //getDatingHomeScreen->detail
+
+    //         (
+    //       context,
+    //       // theme, theme.colorScheme
+    //     ),
+    //   ));
+    // } else {
     return Scaffold(
       backgroundColor: const Color(0xfff5f5f5),
       bottomNavigationBar: Padding(
@@ -1798,6 +1812,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
         ],
       ),
     );
+    // }
   }
 
   Widget _buildbody2() {

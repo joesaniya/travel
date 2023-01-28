@@ -259,6 +259,15 @@ class SingleProductController extends FxController {
     log(products!.length.toString());
   }
 
+  void fetchloader() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    uiLoading = false;
+    log('fetchloader');
+    log(uiLoading.toString());
+    update();
+  }
+
   Future<void> goToCheckout() async {
     /*Navigator.of(context, rootNavigator: true).push(
       MaterialPageRoute(

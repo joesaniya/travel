@@ -223,6 +223,7 @@ class _AttractionTileState extends State<AttractionTile>
 
   @override
   Widget build(BuildContext context) {
+    // return _buildProductList();
     return InkWell(
       onTap: () {
         // controller.goToSingleProduct(product);
