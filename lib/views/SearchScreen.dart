@@ -249,7 +249,8 @@ class _SearchScreenState extends State<SearchScreen>
                       tag: "product_image_${product.name}",
                       child: Image(
                         image: AssetImage(product.image),
-                        height: 100,
+                        // height: 100,
+                        height: 132,
                         width: 150,
                         fit: BoxFit.cover,
                       ),

@@ -67,6 +67,7 @@ dependencies:
   line_icons: ^2.0.1
   font_awesome_flutter: ^10.3.0
   iconsax: ^0.0.8
+  dropdown_button2: ^1.9.2
 
 dev_dependencies:
   flutter_test:

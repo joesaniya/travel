@@ -129,7 +129,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       tag: "product_image_${product.name}",
                       child: Image(
                         image: AssetImage(product.image),
-                        height: 100,
+                        // height: 100,
+                        height: 132,
                         width: 150,
                         fit: BoxFit.cover,
                       ),
@@ -153,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                                 // 'Theme Park',
-                                 'Park',
+                                'Park',
                                 fontWeight: 300,
                                 color: Colors.white,
                                 // color: theme.colorScheme.onPrimary,
@@ -478,11 +479,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           margin: const EdgeInsets.all(5.0),
 
           // height: 250,
+          // height: 267,
           // height: 278,
           // height: 286,
-          height: 300,
+          // height: 300,
 
-          width: 300,
+          // width: 300,
+          width: 260,
+          height: 274,
           decoration: BoxDecoration(
               // color: Color(0xffe6e1e5),
               color: Colors.white,

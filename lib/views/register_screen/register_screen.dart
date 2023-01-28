@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
@@ -199,88 +200,226 @@ class _RegisterScreenState extends State<RegisterScreen>
                             // color: const Color(0xff1529e8),
                             borderRadius: BorderRadius.circular(0)),
                         height: 45.0,
-                        width: 68,
+                        width: 80,
                         // margin: const EdgeInsets.all(3.0),
                         //width: 300.0,
                         child: DropdownButtonHideUnderline(
-                          child: ButtonTheme(
-                            alignedDropdown: true,
-                            child: DropdownButton(
-                              iconSize: 0.0,
-
-                              dropdownColor: theme.cardTheme.color,
-                              // dropdownColor: Colors.blueAccent,
-                              // icon: Icon(icon),
-                              value: controller.selectedCountryCode,
-                              // value: _selectedCountryCode,
-                              hint: Center(
-                                child: FxText.labelLarge(
-                                  "Code",
-                                  fontWeight: 600,
-                                  color: Colors.black,
-                                  // color: theme.colorScheme.onPrimary,
-                                  letterSpacing: 0.4,
+                          child: DropdownButton2(
+                            isExpanded: true,
+                            hint: Row(
+                              children: [
+                                Expanded(
+                                  child: FxText.labelLarge(
+                                    "Code",
+                                    fontWeight: 600,
+                                    color: Colors.black,
+                                    // color: theme.colorScheme.onPrimary,
+                                    letterSpacing: 0.4,
+                                  ),
                                 ),
-                                // child: Text(
-                                //   'code',
-                                //   style: TextStyle(
-                                //       color: Colors.white,
-                                //       fontSize: 20,
-                                //       fontWeight: FontWeight.w500),
-                                // ),
-                              ),
-                              items:
-                                  // controller.countryCodes.map
-                                  // _countryCodes.map
-                                  countryList.isNotEmpty &&
-                                          countryList
-                                              .first.countries!.isNotEmpty
-                                      ? countryList.first.countries!
-                                          .map((value) {
-                                          return DropdownMenuItem<String>(
-                                              value: value!.id.toString(),
-                                              child: Center(
-                                                child: Text(
-                                                  value.phonecode.toString(),
-                                                  style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ));
-                                        }).toList()
-                                      : [].map((value) {
-                                          return DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Center(
-                                                child: Text(
-                                                  value,
-                                                  style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ));
-                                        }).toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  log(value.toString());
-                                  controller.selectedCountryCode =
-                                      value.toString();
-                                  // _selectedCountryCode = value.toString();
-                                });
-                              },
-                              style: FxTextStyle.bodyMedium(),
-                              // style: const TextStyle(
-                              //     color: Colors.black,
-                              //     fontSize: 20,
-                              //     fontWeight: FontWeight.w500),
+                              ],
                             ),
+                            items:
+                                // controller.countryCodes.map
+                                // _countryCodes.map
+                                countryList.isNotEmpty &&
+                                        countryList.first.countries!.isNotEmpty
+                                    ? countryList.first.countries!.map((value) {
+                                        return DropdownMenuItem<String>(
+                                            value: value!.id.toString(),
+                                            child: Center(
+                                              child: Text(
+                                                value.phonecode.toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ));
+                                      }).toList()
+                                    : [].map((value) {
+                                        return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Center(
+                                              child: Text(
+                                                value,
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ));
+                                      }).toList(),
+                            // items: itemList
+                            //     .map((item) => DropdownMenuItem<Item>(
+                            //           value: item,
+                            //           child: Row(
+                            //             children: [
+                            //               Image(
+                            //                   image:
+                            //                       AssetImage(item.image)),
+                            //               const SizedBox(
+                            //                 width: 5,
+                            //               ),
+                            //               Text(
+                            //                 item.name,
+                            //                 style: const TextStyle(
+                            //                   fontSize: 14,
+                            //                   fontWeight: FontWeight.w300,
+                            //                   color: Colors.grey,
+                            //                 ),
+                            //                 overflow: TextOverflow.ellipsis,
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         ))
+                            //     .toList(),
+                            value: controller.selectedCountryCode,
+                            // onChanged: (value) {
+                            //   setState(() {
+                            //     selectedItem1 = value as Item;
+                            //   });
+                            // },
+                            onChanged: (value) {
+                              setState(() {
+                                log(value.toString());
+                                controller.selectedCountryCode =
+                                    value.toString();
+                                // _selectedCountryCode = value.toString();
+                              });
+                            },
+
+                            icon: const Icon(Icons.arrow_drop_down),
+                            iconSize: 20,
+                            iconEnabledColor: Colors.black,
+                            iconDisabledColor: Colors.black,
+                            buttonHeight: 30,
+                            buttonWidth: 200,
+                            buttonPadding: const EdgeInsets.only(
+                                left: 14, right: 14, top: 4, bottom: 4),
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: Colors.white,
+                            ),
+                            buttonDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border: Border.all(
+                              //     color: AppColor
+                              //         .Secondary1,
+                              //     width: 1),
+                              // color: const Color(0xff2C2138),
+                              color: theme.cardTheme.color,
+                            ),
+                            // .
+                            // copyWith(
+                            //   boxShadow:
+                            //       kElevationToShadow[
+                            //           2],
+                            // ),
+                            itemHeight: 40,
+                            // itemWidth: 200,
+                            itemPadding:
+                                const EdgeInsets.only(left: 14, right: 14),
+                            dropdownMaxHeight: 200,
+                            dropdownPadding: null,
+
+                            scrollbarRadius: const Radius.circular(40),
+                            scrollbarThickness: 2,
+                            scrollbarAlwaysShow: true,
+                            offset: const Offset(0, 0),
                           ),
                         ),
                       ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //       color: theme.cardTheme.color,
+                      //       // color: const Color(0xff1529e8),
+                      //       borderRadius: BorderRadius.circular(0)),
+                      //   height: 45.0,
+                      //   width: 68,
+                      //   // margin: const EdgeInsets.all(3.0),
+                      //   //width: 300.0,
+                      //   child: DropdownButtonHideUnderline(
+                      //     child: ButtonTheme(
+                      //       alignedDropdown: true,
+                      //       child: DropdownButton(
+                      //         iconSize: 0.0,
+
+                      //         dropdownColor: theme.cardTheme.color,
+                      //         // dropdownColor: Colors.blueAccent,
+                      //         // icon: Icon(icon),
+                      //         value: controller.selectedCountryCode,
+                      //         // value: _selectedCountryCode,
+                      //         hint: Center(
+                      //           child: FxText.labelLarge(
+                      //             "Code",
+                      //             fontWeight: 600,
+                      //             color: Colors.black,
+                      //             // color: theme.colorScheme.onPrimary,
+                      //             letterSpacing: 0.4,
+                      //           ),
+                      //           // child: Text(
+                      //           //   'code',
+                      //           //   style: TextStyle(
+                      //           //       color: Colors.white,
+                      //           //       fontSize: 20,
+                      //           //       fontWeight: FontWeight.w500),
+                      //           // ),
+                      //         ),
+                      //         items:
+                      //             // controller.countryCodes.map
+                      //             // _countryCodes.map
+                      //             countryList.isNotEmpty &&
+                      //                     countryList
+                      //                         .first.countries!.isNotEmpty
+                      //                 ? countryList.first.countries!
+                      //                     .map((value) {
+                      //                     return DropdownMenuItem<String>(
+                      //                         value: value!.id.toString(),
+                      //                         child: Center(
+                      //                           child: Text(
+                      //                             value.phonecode.toString(),
+                      //                             style: const TextStyle(
+                      //                                 color: Colors.black,
+                      //                                 fontSize: 20,
+                      //                                 fontWeight:
+                      //                                     FontWeight.w500),
+                      //                           ),
+                      //                         ));
+                      //                   }).toList()
+                      //                 : [].map((value) {
+                      //                     return DropdownMenuItem<String>(
+                      //                         value: value,
+                      //                         child: Center(
+                      //                           child: Text(
+                      //                             value,
+                      //                             style: const TextStyle(
+                      //                                 color: Colors.black,
+                      //                                 fontSize: 20,
+                      //                                 fontWeight:
+                      //                                     FontWeight.w500),
+                      //                           ),
+                      //                         ));
+                      //                   }).toList(),
+                      //         onChanged: (value) {
+                      //           setState(() {
+                      //             log(value.toString());
+                      //             controller.selectedCountryCode =
+                      //                 value.toString();
+                      //             // _selectedCountryCode = value.toString();
+                      //           });
+                      //         },
+                      //         style: FxTextStyle.bodyMedium(),
+                      //         // style: const TextStyle(
+                      //         //     color: Colors.black,
+                      //         //     fontSize: 20,
+                      //         //     fontWeight: FontWeight.w500),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       Expanded(
                         child: SlideTransition(
                           position: controller.phoneAnimation,
