@@ -160,11 +160,24 @@ class SearchController extends FxController {
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text("Success")));
-      Navigator.of(context, rootNavigator: true).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => SearchScreen(place: selectedCountry),
-        ),
-      );
+      // Navigator.of(context, rootNavigator: true).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => SearchScreen(place: selectedCountry),
+      //   ),
+      // );
+      Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 500),
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+          pageBuilder: (_, __, ___) => SearchScreen(place: selectedCountry)));
     }
   }
 

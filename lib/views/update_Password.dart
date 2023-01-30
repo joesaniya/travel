@@ -49,10 +49,91 @@ class _UpdatePasswordScreenState extends State<UpdatePasswordScreen>
   Widget _buildBody() {
     return Scaffold(
       backgroundColor: const Color(0xfff5f5f5),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   // title: FxText.titleLarge(
+      //   //   singleProductController.product == null
+      //   //       ? 'Please Wait for sometime'
+      //   //       : singleProductController.product!.name,
+      //   //   fontWeight: 600,
+      //   // ),
+      //   backgroundColor: Colors.transparent,
+      //   leading: InkWell(
+      //       onTap: () {
+      //         Navigator.pop(context);
+      //       },
+      //       child: const Icon(
+      //         FeatherIcons.chevronLeft,
+      //         size: 20,
+      //         color: Color(0xff1529e8),
+      //       )),
+      // ),
       body: ListView(
+        // padding:
+        //     FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(context) + 48, 20, 20),
         padding:
-            FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(context) + 48, 20, 20),
+            FxSpacing.fromLTRB(20, FxSpacing.safeAreaTop(context) + 18, 20, 20),
         children: [
+          Container(
+            padding: FxSpacing.fromLTRB(16, 16, 16, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FxContainer.bordered(
+                  paddingAll: 10,
+                  borderRadiusAll: 6,
+                  color: const Color(0xff1529e8).withAlpha(28),
+                  border:
+                      Border.all(color: const Color(0xff1529e8).withAlpha(120)),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Icon(
+                    FeatherIcons.chevronLeft,
+                    size: 16,
+                    color: Color(0xff1529e8),
+                  ),
+                ),
+                // Row(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     FxContainer.bordered(
+                //       paddingAll: 10,
+                //       borderRadiusAll: 6,
+                //       color: Colors.indigo.withAlpha(28),
+                //       border: Border.all(color: Colors.indigo.withAlpha(120)),
+                //       child: const Icon(FeatherIcons.map,
+                //           size: 16, color: Colors.indigo),
+                //     ),
+                //     FxSpacing.width(16),
+                //     FxContainer.bordered(
+                //       paddingAll: 10,
+                //       borderRadiusAll: 6,
+                //       color: Colors.indigo.withAlpha(28),
+                //       border: Border.all(color: Colors.indigo.withAlpha(120)),
+                //       child: const Icon(
+                //         FeatherIcons.phoneOutgoing,
+                //         size: 16,
+                //         color: Colors.indigo,
+                //       ),
+                //     ),
+                //     FxSpacing.width(16),
+                //     FxContainer.bordered(
+                //       paddingAll: 10,
+                //       borderRadiusAll: 6,
+                //       color: Colors.indigo.withAlpha(28),
+                //       border: Border.all(color: Colors.indigo.withAlpha(120)),
+                //       child: const Icon(FeatherIcons.moreHorizontal,
+                //           size: 16, color: Colors.indigo),
+                //     ),
+                //   ],
+                // )
+                Expanded(child: Container())
+              ],
+            ),
+          ),
+          FxSpacing.height(20),
           FxText.displaySmall(
             'Update Password',
             fontWeight: 700,

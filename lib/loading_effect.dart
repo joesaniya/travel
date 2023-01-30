@@ -373,7 +373,7 @@ class LoadingEffect {
       highlightColor: theme.shimmerHighlightColor,
       child: Container(
         padding: FxSpacing.all(24),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Container(
               height: MediaQuery.of(context).size.width * 0.5,

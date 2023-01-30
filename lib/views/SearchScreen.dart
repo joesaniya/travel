@@ -161,11 +161,23 @@ class _SearchScreenState extends State<SearchScreen>
                 ),
                 GestureDetector(
                   onTap: () {
+                    // showModalBottomSheet(
+                    //     context: context,
+                    //     builder: (BuildContext buildContext) {
+                    //       return const FilterSheet();
+                    //     });
                     showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext buildContext) {
-                          return const FilterSheet();
-                        });
+                      context: context,
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20))),
+                      isScrollControlled: true,
+                      builder: (context) {
+                        return const FilterSheet();
+                      },
+                    );
                   },
                   child: Container(
                     height: 30,

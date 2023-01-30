@@ -147,11 +147,24 @@ class SavedController extends FxController {
   Future<void> goToCheckout() async {
     animationController.forward();
     await Future.delayed(const Duration(seconds: 1));
-    Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(
-        builder: (context) => const CheckOutScreen(),
-      ),
-    );
+    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionsBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) =>
+            FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+        pageBuilder: (_, __, ___) => const CheckOutScreen()));
+    // Navigator.of(context, rootNavigator: true).push(
+    //   MaterialPageRoute(
+    //     builder: (context) => const CheckOutScreen(),
+    //   ),
+    // );
   }
 
   @override

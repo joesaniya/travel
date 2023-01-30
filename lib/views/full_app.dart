@@ -100,7 +100,7 @@ class _FullAppState extends State<FullApp> with SingleTickerProviderStateMixin {
                     HomeScreen(),
                     // HomeScreen(size: size),
 
-                    const Text('home'),
+                    const Center(child: Text('Saved')),
                     const SavedScreen(),
                     const ProfileScreen()
                   ],

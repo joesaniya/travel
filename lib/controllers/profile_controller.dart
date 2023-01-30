@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
@@ -13,14 +15,24 @@ class ProfileController extends FxController {
     super.initState();
 
     fetchData();
+    fetchloader();
+  }
+
+  void fetchloader() async {
+    await Future.delayed(const Duration(seconds: 4));
+
+    uiLoading = false;
+    log('fetchloader');
+    log(uiLoading.toString());
+    update();
   }
 
   void fetchData() async {
     user = await User.getOne();
     await Future.delayed(const Duration(seconds: 1));
 
-    showLoading = false;
-    uiLoading = false;
+    // showLoading = false;
+    // uiLoading = false;
     update();
   }
 

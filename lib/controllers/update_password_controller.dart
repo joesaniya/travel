@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
-import 'package:hotel_travel/views/profile_screen.dart';
+import 'package:hotel_travel/views/full_app.dart';
 
 class UpdatePasswordController extends FxController {
   TickerProvider ticker;
@@ -146,7 +146,7 @@ class UpdatePasswordController extends FxController {
       await Future.delayed(const Duration(milliseconds: 500));
       Navigator.of(context, rootNavigator: true).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ProfileScreen(),
+          builder: (context) => const FullApp(),
         ),
       );
     }

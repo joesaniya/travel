@@ -7,9 +7,9 @@ import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 
 import '../models/product.dart';
 
-class WithdrawMoneyController extends FxController {
+class addMoneyController extends FxController {
   TickerProvider ticker;
-  WithdrawMoneyController(this.ticker);
+  addMoneyController(this.ticker);
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<String> selectedChoices = [];
@@ -315,19 +315,11 @@ class WithdrawMoneyController extends FxController {
   }
 
   void goToSingleProduct(Product product) {
-    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 500),
-        transitionsBuilder: (
-          BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child,
-        ) =>
-            FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
-        pageBuilder: (_, __, ___) => SingleProductScreen(product)));
+    Navigator.of(context, rootNavigator: true).push(
+      PageRouteBuilder(
+          transitionDuration: const Duration(seconds: 1),
+          pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+    );
   }
 
   void openEndDrawer() {

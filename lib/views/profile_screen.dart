@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/bottomSheet/add_money.dart';
 import 'package:hotel_travel/views/bottomSheet/withdraw_money.dart';
 import 'package:hotel_travel/views/update_Password.dart';
 import 'package:line_icons/line_icons.dart';
@@ -47,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return Scaffold(
         body: Container(
             margin: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
-            child: LoadingEffect.getSearchLoadingScreen(
+            child: LoadingEffect.getProductLoadingScreen(
               context,
             )),
       );
@@ -125,6 +126,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Column(
                         children: [
                           FxContainer(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return const addMoney();
+                                },
+                              );
+                              // showModalBottomSheet(
+                              //     context: context,
+                              //     builder: (BuildContext buildContext) {
+                              //       return const addMoney();
+                              //     });
+                            },
                             padding: FxSpacing.fromLTRB(16, 8, 16, 8),
                             color: theme.colorScheme.primary.withAlpha(28),
                             borderRadiusAll: 4,
@@ -146,11 +166,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           FxSpacing.height(20),
                           FxContainer(
                             onTap: () {
+                              // showModalBottomSheet(
+                              //     context: context,
+                              //     builder: (BuildContext buildContext) {
+                              //       return const withdrawMoney();
+                              //     });
                               showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext buildContext) {
-                                    return const withdrawMoney();
-                                  });
+                                context: context,
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20))),
+                                isScrollControlled: true,
+                                builder: (context) {
+                                  return const withdrawMoney();
+                                },
+                              );
                             },
                             padding: FxSpacing.fromLTRB(21, 8, 21, 8),
                             color: theme.colorScheme.primary.withAlpha(28),
@@ -266,13 +298,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ListTile(
                           onTap: () {
                             log('update password clicked');
-                            Navigator.of(context, rootNavigator: true)
-                                .pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const UpdatePasswordScreen(),
-                              ),
-                            );
+                            // Navigator.of(context, rootNavigator: true).push(
+                            //   PageRouteBuilder(
+                            //       transitionDuration:
+                            //           const Duration(seconds: 1),
+                            //       pageBuilder: (_, __, ___) =>
+                            //           const UpdatePasswordScreen()),
+                            // );
+                            Navigator.of(context, rootNavigator: true).push(
+                                PageRouteBuilder(
+                                    transitionDuration:
+                                        const Duration(milliseconds: 500),
+                                    transitionsBuilder: (
+                                      BuildContext context,
+                                      Animation<double> animation,
+                                      Animation<double> secondaryAnimation,
+                                      Widget child,
+                                    ) =>
+                                        FadeTransition(
+                                          opacity: animation,
+                                          child: child,
+                                        ),
+                                    pageBuilder: (_, __, ___) =>
+                                        const UpdatePasswordScreen()));
+                            // Navigator.of(context, rootNavigator: true)
+                            //     .pushReplacement(
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         const UpdatePasswordScreen(),
+                            //   ),
+                            // );
                           },
                           dense: true,
                           contentPadding: FxSpacing.zero,
