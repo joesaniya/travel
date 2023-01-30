@@ -20,7 +20,9 @@ class _CheckOutScreenState extends State<CheckOutScreen>
   late ThemeData theme;
 
   late CheckOutController controller;
-  late OutlineInputBorder outlineInputBorder;
+  // late OutlineInputBorder outlineInputBorder;
+  late OutlineInputBorder outlineInputBorderenable;
+  late OutlineInputBorder outlineInputBorderfocus;
 
   @override
   void initState() {
@@ -28,11 +30,20 @@ class _CheckOutScreenState extends State<CheckOutScreen>
     theme = AppTheme.shoppingTheme;
 
     controller = FxControllerStore.put(CheckOutController(this));
-    outlineInputBorder = const OutlineInputBorder(
+    // outlineInputBorder = const OutlineInputBorder(
+    //   borderRadius: BorderRadius.all(Radius.circular(4)),
+    //   borderSide: BorderSide(
+    //       // color: Colors.transparent,
+    //       width: 1,
+    //       color: Colors.black),
+    // );
+    outlineInputBorderenable = const OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(4)),
-      borderSide: BorderSide(
-        color: Colors.transparent,
-      ),
+      borderSide: BorderSide(width: 1, color: Colors.black),
+    );
+    outlineInputBorderfocus = const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(4)),
+      borderSide: BorderSide(width: 1, color: Color(0xff1529e8)),
     );
   }
 
@@ -325,7 +336,8 @@ class _CheckOutScreenState extends State<CheckOutScreen>
         controller: controller,
         builder: (controller) {
           return Scaffold(
-            backgroundColor: theme.scaffoldBackgroundColor,
+            backgroundColor: const Color(0xfff5f5f5),
+            // backgroundColor: theme.scaffoldBackgroundColor,
             appBar: AppBar(
               elevation: 0,
               centerTitle: true,
@@ -395,7 +407,7 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: FxText.bodyLarge(
-                            'Select(Mr/Mrs/Ms)s',
+                            'Select(Mr/Mrs/Ms)',
                             // textAlign: TextAlign.left,
                             letterSpacing: 0,
                             fontWeight: 600,
@@ -406,7 +418,9 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                     FxSpacing.height(10),
                     Container(
                       decoration: BoxDecoration(
-                          color: theme.cardTheme.color,
+                          border: Border.all(width: 1, color: Colors.black),
+                          // color: theme.cardTheme.color,
+                          color: Colors.white,
                           // color: const Color(0xff1529e8),
                           borderRadius: BorderRadius.circular(4)),
                       height: 45.0,
@@ -522,15 +536,32 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             isDense: true,
-                            fillColor: theme.cardTheme.color,
+                            // fillColor: theme.cardTheme.color,
+                            fillColor: Colors.white,
                             // prefixIcon: Icon(
                             //   FeatherIcons.user,
                             //   color: theme.colorScheme.onBackground,
                             // ),
                             hintText: "First Name",
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
+                            // enabledBorder: outlineInputBorder,
+                            // focusedBorder: outlineInputBorder,
+                            // border: outlineInputBorder,
+                            enabledBorder: outlineInputBorderenable,
+                            focusedBorder: outlineInputBorderfocus,
+                            border: outlineInputBorderenable,
+
+                            // enabledBorder: const OutlineInputBorder(
+                            //   borderSide:
+                            //       BorderSide(width: 1, color: Colors.red),
+                            // ),
+                            // focusedBorder: const OutlineInputBorder(
+                            //   borderSide:
+                            //       BorderSide(width: 1, color: Colors.indigo),
+                            // ),
+                            // border: const OutlineInputBorder(
+                            //   borderSide:
+                            //       BorderSide(width: 1, color: Colors.black),
+                            // ),
                             contentPadding: FxSpacing.all(16),
                             hintStyle: FxTextStyle.bodyMedium(),
                             isCollapsed: true),
@@ -564,15 +595,18 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             isDense: true,
-                            fillColor: theme.cardTheme.color,
+                            fillColor: Colors.white,
                             // prefixIcon: Icon(
                             //   FeatherIcons.user,
                             //   color: theme.colorScheme.onBackground,
                             // ),
                             hintText: "Last Name",
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
+                            // enabledBorder: outlineInputBorder,
+                            // focusedBorder: outlineInputBorder,
+                            // border: outlineInputBorder,
+                            enabledBorder: outlineInputBorderenable,
+                            focusedBorder: outlineInputBorderfocus,
+                            border: outlineInputBorderenable,
                             contentPadding: FxSpacing.all(16),
                             hintStyle: FxTextStyle.bodyMedium(),
                             isCollapsed: true),
@@ -606,15 +640,18 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             isDense: true,
-                            fillColor: theme.cardTheme.color,
+                            fillColor: Colors.white,
                             // prefixIcon: Icon(
                             //   FeatherIcons.user,
                             //   color: theme.colorScheme.onBackground,
                             // ),
                             hintText: "Email",
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
+                            // enabledBorder: outlineInputBorder,
+                            // focusedBorder: outlineInputBorder,
+                            // border: outlineInputBorder,
+                            enabledBorder: outlineInputBorderenable,
+                            focusedBorder: outlineInputBorderfocus,
+                            border: outlineInputBorderenable,
                             contentPadding: FxSpacing.all(16),
                             hintStyle: FxTextStyle.bodyMedium(),
                             isCollapsed: true),
@@ -642,7 +679,8 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                     FxSpacing.height(10),
                     Container(
                       decoration: BoxDecoration(
-                          color: theme.cardTheme.color,
+                          color: Colors.white,
+                          border: Border.all(width: 1, color: Colors.black),
                           // color: const Color(0xff1529e8),
                           borderRadius: BorderRadius.circular(4)),
                       height: 45.0,
@@ -758,15 +796,18 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             isDense: true,
-                            fillColor: theme.cardTheme.color,
+                            fillColor: Colors.white,
                             // prefixIcon: Icon(
                             //   FeatherIcons.user,
                             //   color: theme.colorScheme.onBackground,
                             // ),
                             hintText: "Phone",
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
+                            enabledBorder: outlineInputBorderenable,
+                            focusedBorder: outlineInputBorderfocus,
+                            border: outlineInputBorderenable,
+                            // enabledBorder: outlineInputBorder,
+                            // focusedBorder: outlineInputBorder,
+                            // border: outlineInputBorder,
                             contentPadding: FxSpacing.all(16),
                             hintStyle: FxTextStyle.bodyMedium(),
                             isCollapsed: true),
@@ -800,15 +841,18 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             isDense: true,
-                            fillColor: theme.cardTheme.color,
+                            fillColor: Colors.white,
                             // prefixIcon: Icon(
                             //   FeatherIcons.user,
                             //   color: theme.colorScheme.onBackground,
                             // ),
                             hintText: "Special Request",
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: outlineInputBorder,
-                            border: outlineInputBorder,
+                            enabledBorder: outlineInputBorderenable,
+                            focusedBorder: outlineInputBorderfocus,
+                            border: outlineInputBorderenable,
+                            // enabledBorder: outlineInputBorder,
+                            // focusedBorder: outlineInputBorder,
+                            // border: outlineInputBorder,
                             contentPadding: FxSpacing.all(16),
                             hintStyle: FxTextStyle.bodyMedium(),
                             isCollapsed: true),
@@ -930,8 +974,8 @@ class _CheckOutScreenState extends State<CheckOutScreen>
   Widget paymentInfo() {
     return Container(
       padding: FxSpacing.x(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FxText.labelLarge(
             'Select payment method',
@@ -1142,15 +1186,18 @@ class _CheckOutScreenState extends State<CheckOutScreen>
                                 filled: true,
                                 isDense: true,
                                 fillColor: Colors.white,
-                                // fillColor: theme.cardTheme.color,
+                                // fillColor: Colors.white
                                 // prefixIcon: Icon(
                                 //   FeatherIcons.user,
                                 //   color: theme.colorScheme.onBackground,
                                 // ),
                                 hintText: "Enter Promo Code",
-                                enabledBorder: outlineInputBorder,
-                                focusedBorder: outlineInputBorder,
-                                border: outlineInputBorder,
+                                enabledBorder: outlineInputBorderenable,
+                                focusedBorder: outlineInputBorderfocus,
+                                border: outlineInputBorderenable,
+                                // enabledBorder: outlineInputBorder,
+                                // focusedBorder: outlineInputBorder,
+                                // border: outlineInputBorder,
                                 contentPadding: FxSpacing.all(16),
                                 hintStyle: FxTextStyle.bodyMedium(),
                                 isCollapsed: true),
@@ -1255,6 +1302,7 @@ class _CheckOutScreenState extends State<CheckOutScreen>
               ],
             ),
           ),
+          FxSpacing.height(80),
         ],
       ),
     );

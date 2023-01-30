@@ -64,6 +64,8 @@ class _SearchScreenState extends State<SearchScreen>
       ));
     } else {
       return Scaffold(
+        backgroundColor: const Color(0xfff5f5f5),
+        //   backgroundColor: Colors.red,
         key: controller.scaffoldKey,
         endDrawer: endDrawer(),
         body: ListView(

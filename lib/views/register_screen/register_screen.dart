@@ -199,8 +199,10 @@ class _RegisterScreenState extends State<RegisterScreen>
                             color: theme.cardTheme.color,
                             // color: const Color(0xff1529e8),
                             borderRadius: BorderRadius.circular(0)),
-                        height: 45.0,
-                        width: 80,
+                        // height: 45.0,
+                        // width: 80,
+                        height: 50,
+                        width: 100,
                         // margin: const EdgeInsets.all(3.0),
                         //width: 300.0,
                         child: DropdownButtonHideUnderline(

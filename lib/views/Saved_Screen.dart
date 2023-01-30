@@ -412,6 +412,7 @@ class _SavedScreenState extends State<SavedScreen>
                           ],
                         )),
                   ),
+                  FxSpacing.height(80),
                 ],
               ),
       );
