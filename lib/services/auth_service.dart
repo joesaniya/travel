@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 import '../models/Country_modal.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   Future register(
@@ -39,6 +40,12 @@ class AuthService {
     } catch (e) {
       rethrow;
     }
+  }
+
+  void saveToken(data) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.setString("token", data['token']);
+    sharedPreferences.setInt("userId", data['userId']);
   }
 
   //login

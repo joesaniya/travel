@@ -184,7 +184,7 @@ class _AttractionTileState extends State<AttractionTile>
                                 FxText.labelLarge(
                                   // '\$' + product.price.toString(),
                                   widget.data.location.toString(),
-                                  // product.price.toString() + " " + "USD",
+                                  // product.price.toString() + " " + "AED",
                                   // "\$" + product.price.toString() + "/hour",
                                   // fontWeight: 700,
                                 ),
@@ -374,7 +374,7 @@ class _AttractionTileState extends State<AttractionTile>
                             FxText.labelLarge(
                               // '\$' + product.price.toString(),
                               widget.data.location.toString(),
-                              // product.price.toString() + " " + "USD",
+                              // product.price.toString() + " " + "AED",
                               // "\$" + product.price.toString() + "/hour",
                               // fontWeight: 700,
                             ),
@@ -556,7 +556,7 @@ class _AttractionTileState extends State<AttractionTile>
     //       //                         FxText.labelLarge(
     //       //                           // '\$' + product.price.toString(),
     //       //                           widget.data.location.toString(),
-    //       //                           // product.price.toString() + " " + "USD",
+    //       //                           // product.price.toString() + " " + "AED",
     //       //                           // "\$" + product.price.toString() + "/hour",
     //       //                           // fontWeight: 700,
     //       //                         ),

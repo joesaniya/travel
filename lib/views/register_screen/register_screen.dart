@@ -232,11 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen>
                                             child: Center(
                                               child: Text(
                                                 value.phonecode.toString(),
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                                style: FxTextStyle.bodyMedium(),
                                               ),
                                             ));
                                       }).toList()
@@ -246,11 +242,12 @@ class _RegisterScreenState extends State<RegisterScreen>
                                             child: Center(
                                               child: Text(
                                                 value,
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 20,
-                                                    fontWeight:
-                                                        FontWeight.w500),
+                                                style: FxTextStyle.bodyMedium(),
+                                                // style: const TextStyle(
+                                                //     color: Colors.black,
+                                                //     fontSize: 20,
+                                                //     fontWeight:
+                                                //         FontWeight.w500),
                                               ),
                                             ));
                                       }).toList(),

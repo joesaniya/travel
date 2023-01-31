@@ -347,7 +347,7 @@ class _SearchScreenState extends State<SearchScreen>
                           tag: "${product.name}_${product.price}",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
-                            "${product.price} USD",
+                            "${product.price} AED",
                             // "\$" + product.price.toString() + "/hour",
                             fontWeight: 700,
                           ),

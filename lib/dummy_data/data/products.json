@@ -11,7 +11,8 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 1
+    "id": 1,
+    "status": "cancelled"
   },
   {
     "name": "Dubai Parks and Resorts",
@@ -25,7 +26,8 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 2
+    "id": 2,
+    "status": "confirmed"
   },
   {
     "name": "Bollywood Theme Park with Meal + Motion Gate",
@@ -39,7 +41,8 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 3
+    "id": 3,
+    "status": "confirmed"
   },
   {
     "name": "IMG Worlds of Adventure Dubai",
@@ -53,7 +56,8 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 4
+    "id": 4,
+    "status": "confirmed"
   },
   {
     "name": "Flying Cup",
@@ -67,7 +71,8 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 5
+    "id": 5,
+    "status": "cancelled"
   },
   {
     "name": "Ski Dubai",
@@ -81,7 +86,8 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Theme Park",
-    "id": 6
+    "id": 6,
+    "status": "cancelled"
   },
   {
     "name": "Sky View Observatory",
@@ -95,7 +101,8 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "id": 7
+    "id": 7,
+    "status": "confirmed"
   },
   {
     "name": "Global Village",
@@ -109,7 +116,8 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "id": 8
+    "id": 8,
+    "status": "confirmed"
   },
   {
     "name": "Miracle Garden",
@@ -123,7 +131,8 @@
     "favorite": true,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "id": 9
+    "id": 9,
+    "status": "confirmed"
   },
   {
     "name": "Dubai Dolphinarium",
@@ -137,6 +146,7 @@
     "favorite": false,
     "location": "Abu Dhabi",
     "types": "Attractions",
-    "id": 10
+    "id": 10,
+    "status": "confirmed"
   }
 ]

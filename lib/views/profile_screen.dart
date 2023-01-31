@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/all_bookings.dart';
 import 'package:hotel_travel/views/bottomSheet/add_money.dart';
 import 'package:hotel_travel/views/bottomSheet/withdraw_money.dart';
 import 'package:hotel_travel/views/update_Password.dart';
@@ -343,6 +344,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         ListTile(
+                          onTap: () {
+                            log('all bookings clicked');
+
+                            Navigator.of(context, rootNavigator: true).push(
+                                PageRouteBuilder(
+                                    transitionDuration:
+                                        const Duration(milliseconds: 500),
+                                    transitionsBuilder: (
+                                      BuildContext context,
+                                      Animation<double> animation,
+                                      Animation<double> secondaryAnimation,
+                                      Widget child,
+                                    ) =>
+                                        FadeTransition(
+                                          opacity: animation,
+                                          child: child,
+                                        ),
+                                    pageBuilder: (_, __, ___) =>
+                                        const AllBookings()));
+                          },
                           dense: true,
                           contentPadding: FxSpacing.zero,
                           visualDensity: VisualDensity.compact,

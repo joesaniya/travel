@@ -15,14 +15,14 @@ class ProfileController extends FxController {
     super.initState();
 
     fetchData();
-    fetchloader();
+    skeletonloader();
   }
 
-  void fetchloader() async {
+  void skeletonloader() async {
     await Future.delayed(const Duration(seconds: 4));
 
     uiLoading = false;
-    log('fetchloader');
+    log('skeletonloader');
     log(uiLoading.toString());
     update();
   }

@@ -213,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           tag: "${product.name}_${product.price}",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
-                            "${product.price} USD",
+                            "${product.price} AED",
                             // "\$" + product.price.toString() + "/hour",
                             fontWeight: 700,
                           ),
@@ -394,7 +394,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           tag: "${product.name}_${product.price}",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
-                            "${product.price} USD",
+                            "${product.price} AED",
                             // "\$" + product.price.toString() + "/hour",
                             fontWeight: 700,
                           ),
@@ -630,7 +630,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               FxText.labelLarge(
                                 // '\$' + product.price.toString(),
                                 product.location.toString(),
-                                // product.price.toString() + " " + "USD",
+                                // product.price.toString() + " " + "AED",
                                 // "\$" + product.price.toString() + "/hour",
                                 // fontWeight: 700,
                               ),

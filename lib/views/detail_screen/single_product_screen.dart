@@ -962,55 +962,55 @@ class _SingleProductScreenState extends State<SingleProductScreen>
       ),
       body: Stack(
         children: <Widget>[
-          SizedBox(
-            height: 400,
-            // height: MediaQuery.of(context).size.height / 3,
-            child: PageView(
-              pageSnapping: true,
-              physics: const ClampingScrollPhysics(),
-              controller: controller.pageController,
-              onPageChanged: (int page) {
-                setState(() {
-                  controller.currentPage = page;
-                });
-              },
-              children: <Widget>[
-                Container(
-                  child: Image(
-                    image: AssetImage(controller.product.image),
-                    // height: MediaQuery.of(context).size.height / 3,
-                    height: 400,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  child: Image(
-                    image: const AssetImage(
-                        './assets/images/apps/hotel/room-1.jpg'),
-                    // height: MediaQuery.of(context).size.height / 3,
-                    height: 400,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Container(
-                  child: Image(
-                    image: const AssetImage(
-                        './assets/images/apps/hotel/room-3.jpg'),
-                    // height: MediaQuery.of(context).size.height / 3,
-                    height: 400,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Container(
-          //     foregroundDecoration: const BoxDecoration(color: Colors.black26),
-          //     height: 400,
-          //     child: Image.asset(controller.product.image, fit: BoxFit.cover)),
+          // SizedBox(
+          //   height: 400,
+          //   // height: MediaQuery.of(context).size.height / 3,
+          //   child: PageView(
+          //     pageSnapping: true,
+          //     physics: const ClampingScrollPhysics(),
+          //     controller: controller.pageController,
+          //     onPageChanged: (int page) {
+          //       setState(() {
+          //         controller.currentPage = page;
+          //       });
+          //     },
+          //     children: <Widget>[
+          //       Container(
+          //         child: Image(
+          //           image: AssetImage(controller.product.image),
+          //           // height: MediaQuery.of(context).size.height / 3,
+          //           height: 400,
+          //           width: MediaQuery.of(context).size.width,
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //       Container(
+          //         child: Image(
+          //           image: const AssetImage(
+          //               './assets/images/apps/hotel/room-1.jpg'),
+          //           // height: MediaQuery.of(context).size.height / 3,
+          //           height: 400,
+          //           width: MediaQuery.of(context).size.width,
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //       Container(
+          //         child: Image(
+          //           image: const AssetImage(
+          //               './assets/images/apps/hotel/room-3.jpg'),
+          //           // height: MediaQuery.of(context).size.height / 3,
+          //           height: 400,
+          //           width: MediaQuery.of(context).size.width,
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          Container(
+              foregroundDecoration: const BoxDecoration(color: Colors.black26),
+              height: 400,
+              child: Image.asset(controller.product.image, fit: BoxFit.cover)),
           SingleChildScrollView(
             padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
             child: Column(
@@ -1223,7 +1223,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                               // '\$' + product.price.toString(),
                                               controller.product.location
                                                   .toString(),
-                                              // product.price.toString() + " " + "USD",
+                                              // product.price.toString() + " " + "AED",
                                               // "\$" + product.price.toString() + "/hour",
                                               // fontWeight: 700,
                                             ),
@@ -1321,12 +1321,13 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 FxText.labelLarge(
                                   // '\$' + product.price.toString(),
                                   'Per Person',
-                                  // product.price.toString() + " " + "USD",
+                                  // product.price.toString() + " " + "AED",
                                   // "\$" + product.price.toString() + "/hour",
                                   // fontWeight: 700,
                                 ),
                                 FxText.bodyLarge(
-                                  '\$140 ',
+                                  // '\$140 ',
+                                  '140 AED ',
                                   color: Colors.indigo,
                                   fontWeight: 900,
                                   // color: const Color(0xff1529e8),
@@ -1654,10 +1655,10 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                       //     )
                       //   ],
                       // ),
-                      FxSpacing.height(15),
-                      const Divider(
-                        color: Colors.black,
-                      ),
+                      // FxSpacing.height(15),
+                      // const Divider(
+                      //   color: Colors.black,
+                      // ),
                       FxSpacing.height(15),
                       // Text(
                       //   "HighLights".toUpperCase(),
@@ -1741,18 +1742,47 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                       //   color: Colors.black,
                       // ),
                       FxSpacing.height(15),
-                      Text(
-                        "Description".toUpperCase(),
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14.0),
-                      ),
-                      const SizedBox(height: 10.0),
-                      FxText.bodyLarge(
-                        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
-                        textAlign: TextAlign.justify,
-                        // style: TextStyle(
-                        //     fontWeight: FontWeight.w300, fontSize: 14.0),
-                      ),
+                      Container(
+                          decoration: BoxDecoration(
+                              // color: Color(0xffe6e1e5),
+                              color: Colors.white,
+                              // color: Color(0xffe5fdfd),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 15),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Description".toUpperCase(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.0),
+                              ),
+                              const SizedBox(height: 10.0),
+                              FxText.bodyLarge(
+                                controller.product.description,
+                                // "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
+                                textAlign: TextAlign.justify,
+                                // style: TextStyle(
+                                //     fontWeight: FontWeight.w300, fontSize: 14.0),
+                              ),
+                            ],
+                          )),
+                      // Text(
+                      //   "Description".toUpperCase(),
+                      //   style: const TextStyle(
+                      //       fontWeight: FontWeight.w600, fontSize: 14.0),
+                      // ),
+                      // const SizedBox(height: 10.0),
+                      // FxText.bodyLarge(
+                      //   "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione architecto autem quasi nisi iusto eius ex dolorum velit! Atque, veniam! Atque incidunt laudantium eveniet sint quod harum facere numquam molestias?",
+                      //   textAlign: TextAlign.justify,
+                      //   // style: TextStyle(
+                      //   //     fontWeight: FontWeight.w300, fontSize: 14.0),
+                      // ),
                       const SizedBox(height: 10.0),
                     ],
                   ),

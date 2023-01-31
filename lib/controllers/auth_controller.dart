@@ -30,6 +30,8 @@ class AuthController {
       var data = await AuthService().login(email, password);
       if (data != null) {
         log(data);
+        // log('token');
+        // log(data['jwtToken'].toString());
         return true;
       } else {
         return false;

@@ -195,7 +195,7 @@ class _TopAttractionCardState extends State<TopAttractionCard>
                                 FxText.labelLarge(
                                   // '\$' + product.price.toString(),
                                   product.location.toString(),
-                                  // product.price.toString() + " " + "USD",
+                                  // product.price.toString() + " " + "AED",
                                   // "\$" + product.price.toString() + "/hour",
                                   // fontWeight: 700,
                                 ),

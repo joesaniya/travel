@@ -296,6 +296,18 @@ class RegisterController extends FxController {
                   builder: (context) => const SplashScreen2(),
                 ),
               ));
+      // await AuthController()
+      //     .register(nameTE.text, emailTE.text, selectedCountryCode.toString(),
+      //         phoneTE.text, passwordTE.text)
+      //     .then((value) {
+      //   if (value) {
+      //     Navigator.of(context, rootNavigator: true).pushReplacement(
+      //       MaterialPageRoute(
+      //         builder: (context) => const SplashScreen2(),
+      //       ),
+      //     );
+      //   }
+      // });
     }
   }
 
