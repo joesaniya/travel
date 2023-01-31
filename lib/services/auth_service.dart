@@ -34,10 +34,19 @@ class AuthService {
           body: jsonEncode(body));
 
       if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString("token", jsondata['jwtToken']);
+        sharedPreferences.setString("username", jsondata['newUser']['name']);
         return response.body;
       } else {
         var jsondata = jsonDecode(response.body);
         log(jsondata['error']);
+        //snackbar
+        //  ScaffoldMessenger.of(context)
+        //     .showSnackBar(const SnackBar(content: Text("Please enter name")));
+        return null;
       }
     } catch (e) {
       rethrow;
@@ -105,6 +114,11 @@ class AuthService {
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body));
       if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString("token", jsondata['jwtToken']);
+        sharedPreferences.setString("username", jsondata['user']['name']);
         return response.body;
 
         // //todo

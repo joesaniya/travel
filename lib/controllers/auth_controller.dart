@@ -4,7 +4,7 @@ import 'package:hotel_travel/models/Country_modal.dart';
 import 'package:hotel_travel/services/auth_service.dart';
 
 class AuthController {
-  Future register(
+  Future<bool> register(
       String name,
       String email,
       // int countryid,
@@ -16,6 +16,9 @@ class AuthController {
           .register(name, email, countryid, phoneNumber, Password);
       if (data != null) {
         log(data);
+        return true;
+      } else {
+        return false;
       }
     } catch (e) {
       rethrow;

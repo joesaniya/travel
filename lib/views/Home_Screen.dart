@@ -10,7 +10,9 @@ import '../controllers/home_controller.dart';
 import '../loading_effect.dart';
 import '../models/category.dart';
 import '../models/product.dart';
+import '../services/app_constants.dart';
 import '../theme/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   // const HomeScreen({required this.size});
@@ -25,13 +27,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   late HomeController controller;
   String _tabbed = '1';
+  String? name;
 
   @override
   void initState() {
     super.initState();
     theme = AppTheme.shoppingTheme;
     theme1 = AppTheme.learningTheme;
-
+    SharedPreferences.getInstance().then((sharedPrefValue) {
+      setState(() {
+        name = sharedPrefValue.getString(AppConstants.KEY_ACCESS_TOKEN_Name);
+        log(name.toString());
+        log('username');
+      });
+    });
     controller = FxControllerStore.put(HomeController(this));
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       // addCategories();
@@ -758,7 +767,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Hero(
                     tag: "splash_username",
                     child: FxText.titleLarge(
-                      'Hey Nency,',
+                      // 'Hey Nency,',
+                      name.toString(),
                       fontWeight: 700,
                     ),
                   ),

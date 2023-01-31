@@ -3,7 +3,7 @@
 * Version : 1.0.0
 * */
 
-import 'package:hotel_travel/views/login_Screens/login_screen.dart';
+import 'package:hotel_travel/views/auth_container.dart';
 
 import '/localizations/app_localization_delegate.dart';
 import '/localizations/language.dart';
@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: Language.getLocales(),
-          home: const LogInScreen(),
-          // home: AuthContainer(),
+          // home: const LogInScreen(),
+          home: AuthContainer(),
           // home: const FullApp(),
           // home: MyHomePage(),
           // home: YourPage(),

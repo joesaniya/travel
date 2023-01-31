@@ -118,6 +118,8 @@ class HomeController extends FxController {
     categories = HotelTravelCache.categories;
     products = HotelTravelCache.products;
     selectedCategory = categories!.first;
+    log('selectedCategory');
+    // log(selectedCategory.)
     // uiLoading = false;
     // log(uiLoading.toString());
     update();
