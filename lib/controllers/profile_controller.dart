@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/views/login_Screens/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user.dart';
 
@@ -27,6 +29,28 @@ class ProfileController extends FxController {
     update();
   }
 
+  Future logout(BuildContext context) async {
+    log('logout');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear().then((value) {
+      log('log then');
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const LogInScreen()),
+          (route) => false);
+    });
+  }
+
+  // void logout(BuildContext context) async {
+  //   log('logout');
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.clear().then((value) {
+  //     log('log then');
+  //     Navigator.of(context).pushAndRemoveUntil(
+  //         MaterialPageRoute(builder: (context) => const LogInScreen()),
+  //         (route) => false);
+  //   });
+  // }
+
   void fetchData() async {
     user = await User.getOne();
     await Future.delayed(const Duration(seconds: 1));
@@ -36,9 +60,9 @@ class ProfileController extends FxController {
     update();
   }
 
-  void logout() {
-    Navigator.pop(context);
-  }
+  // void logout() {
+  //   Navigator.pop(context);
+  // }
 
   @override
   String getTag() {

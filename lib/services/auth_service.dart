@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/Country_modal.dart';
@@ -15,7 +16,8 @@ class AuthService {
       // int countryid,
       String countryid,
       String phoneNumber,
-      String Password) async {
+      String Password,
+      BuildContext context) async {
     try {
       var body = {
         "name": name,
@@ -44,8 +46,8 @@ class AuthService {
         var jsondata = jsonDecode(response.body);
         log(jsondata['error']);
         //snackbar
-        //  ScaffoldMessenger.of(context)
-        //     .showSnackBar(const SnackBar(content: Text("Please enter name")));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(jsondata['error'])));
         return null;
       }
     } catch (e) {

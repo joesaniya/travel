@@ -423,6 +423,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Center(
                             child: FxButton.rounded(
                           onPressed: () {
+                            // logout(context);
+                            log('logout clicked');
+                            profileController.logout(context);
                             // Navigator.of(context, rootNavigator: true).push(
                             //   MaterialPageRoute(
                             //       builder: (context) => CookifySplashScreen()),

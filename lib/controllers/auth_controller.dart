@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:hotel_travel/models/Country_modal.dart';
 import 'package:hotel_travel/services/auth_service.dart';
 
@@ -10,10 +11,11 @@ class AuthController {
       // int countryid,
       String countryid,
       String phoneNumber,
-      String Password) async {
+      String Password,
+      BuildContext context) async {
     try {
       var data = await AuthService()
-          .register(name, email, countryid, phoneNumber, Password);
+          .register(name, email, countryid, phoneNumber, Password, context);
       if (data != null) {
         log(data);
         return true;

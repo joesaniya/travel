@@ -768,7 +768,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     tag: "splash_username",
                     child: FxText.titleLarge(
                       // 'Hey Nency,',
-                      name.toString(),
+                      // name.toString(),
+                      'Hey $name',
                       fontWeight: 700,
                     ),
                   ),

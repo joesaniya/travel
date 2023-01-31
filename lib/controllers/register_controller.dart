@@ -277,8 +277,8 @@ class RegisterController extends FxController {
       //   return;
       // }
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("success")));
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(const SnackBar(content: Text("success")));
       arrowController.forward();
       await Future.delayed(const Duration(milliseconds: 500));
       // await AuthController()
@@ -298,7 +298,7 @@ class RegisterController extends FxController {
       //         ));
       await AuthController()
           .register(nameTE.text, emailTE.text, selectedCountryCode.toString(),
-              phoneTE.text, passwordTE.text)
+              phoneTE.text, passwordTE.text, context)
           .then((value) {
         if (value) {
           Navigator.of(context, rootNavigator: true).pushReplacement(
