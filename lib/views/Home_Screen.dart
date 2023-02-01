@@ -10,8 +10,7 @@ import '../controllers/auth_controller.dart';
 import '../controllers/home_controller.dart';
 import '../loading_effect.dart';
 
-import '../models/category.dart';
-import '../models/product.dart';
+import '../models/all_attraction_modal.dart';
 import '../services/app_constants.dart';
 import '../theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String? name;
 
   bool isLoading = true;
+  List<AllattractionModal> allattractionList = <AllattractionModal>[];
 
   getAttraction() {
     log('getAttraction function called');
@@ -44,9 +44,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       // });
       await AuthController().getAllattractionList().then((value) {
         log('AuthController().getAllattractionList()');
-        if (value) {
+        if (value != null) {
           log('AuthController().getAllattractionList().ifvalue');
           isLoading = false;
+          allattractionList.add(value);
+
           setState(() {});
         }
       });
@@ -91,55 +93,56 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
-//top suggestion
-  Widget _buildSingleCategory(Category category) {
-    bool selected = category == controller.selectedCategory;
-    bool last = controller.categories!.last == category;
-    return FxContainer(
-      // width: MediaQuery.of(context).size.width / controller.categories!.length,
-      width: 110,
-      margin: FxSpacing.right(last ? 0 : 12),
-      onTap: () {
-        controller.changeSelectedCategory(category);
-        // selected = !selected;
-        // setState(() {});
-        log(selected.toString());
-      },
-      borderRadiusAll: 4,
-      // color: Colors.red,
-      color: selected ? theme.colorScheme.primaryContainer : null,
-      paddingAll: 12,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image(
-            image: AssetImage(category.icon),
-            height: 20,
-            color: selected
-                ? theme.colorScheme.primary
-                : theme.colorScheme.onBackground.withAlpha(220),
-            width: 20,
-          ),
-          FxText.titleMedium(
-            category.name,
-            letterSpacing: 0.3,
-            fontWeight: 700,
-            color: selected
-                ? theme.colorScheme.primary
-                : theme.colorScheme.onBackground.withAlpha(220),
-            // color: theme.colorScheme.primary,
-          ),
-        ],
-      ),
-    );
-  }
+// //top suggestion
+//   Widget _buildSingleCategory(Category category) {
+//     bool selected = category == controller.selectedCategory;
+//     bool last = controller.categories!.last == category;
+//     return FxContainer(
+//       // width: MediaQuery.of(context).size.width / controller.categories!.length,
+//       width: 110,
+//       margin: FxSpacing.right(last ? 0 : 12),
+//       onTap: () {
+//         controller.changeSelectedCategory(category);
+//         // selected = !selected;
+//         // setState(() {});
+//         log(selected.toString());
+//       },
+//       borderRadiusAll: 4,
+//       // color: Colors.red,
+//       color: selected ? theme.colorScheme.primaryContainer : null,
+//       paddingAll: 12,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceAround,
+//         crossAxisAlignment: CrossAxisAlignment.center,
+//         children: [
+//           Image(
+//             image: AssetImage(category.icon),
+//             height: 20,
+//             color: selected
+//                 ? theme.colorScheme.primary
+//                 : theme.colorScheme.onBackground.withAlpha(220),
+//             width: 20,
+//           ),
+//           FxText.titleMedium(
+//             category.name,
+//             letterSpacing: 0.3,
+//             fontWeight: 700,
+//             color: selected
+//                 ? theme.colorScheme.primary
+//                 : theme.colorScheme.onBackground.withAlpha(220),
+//             // color: theme.colorScheme.primary,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 
 //topatt
   Widget _buildProductList() {
     List<Widget> list = [];
 
-    for (Product product in controller.products!) {
+    // for (Product product in controller.products!)
+    for (var product in allattractionList.first.attractions.data) {
       list.add(FadeTransition(
         opacity: controller.fadeAnimation,
         child: InkWell(
@@ -179,10 +182,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
+                    // child: Image(image: NetworkImage(product.images.first)),
                     child: Hero(
-                      tag: "product_image_${product.name}",
+                      tag: "product_image_${product.id}",
                       child: Image(
-                        image: AssetImage(product.image),
+                        // image: AssetImage(product.image),
+                        image: NetworkImage(product.images.first),
+                        // image: AssetImage(product.images.first),
                         // height: 100,
                         height: 132,
                         width: 150,
@@ -250,13 +256,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                         FxSpacing.height(8),
                         Hero(
-                          tag: "product_${product.name}",
+                          tag: "product_${product.title}",
                           // child: FxText.bodyLarge(
                           //   product.name,
                           //   // fontWeight: 500,
                           // ),
                           child: FxText.bodyLarge(
-                            product.name,
+                            product.title,
                             fontWeight: 800,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
@@ -264,10 +270,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                         FxSpacing.height(4),
                         Hero(
-                          tag: "${product.name}_${product.price}",
+                          tag: "${product}_$product",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
-                            "${product.price} AED",
+                            "${product.duration} AED",
                             // "\$" + product.price.toString() + "/hour",
                             fontWeight: 700,
                           ),
@@ -277,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Hero(
-                              tag: "${product.name}_${product.rating}",
+                              tag: "${product}_$product",
                               child: Row(
                                 children: [
                                   const Icon(
@@ -322,186 +328,186 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget _buildAttractionList() {
-    List<Widget> list = [];
+  // Widget _buildAttractionList() {
+  //   List<Widget> list = [];
 
-    for (Product product in controller.products!) {
-      list.add(FadeTransition(
-        opacity: controller.fadeAnimation,
-        child: InkWell(
-          onTap: () {
-            controller.goToSingleProduct(product);
-          },
-          child: Container(
-            // onTap: () {
-            //   controller.goToSingleProduct(product);
-            // },
-            // borderRadiusAll: 4,
-            // // paddingAll: 16,
-            height: 120,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                border: Border.all(color: Colors.grey.shade300, width: 1)),
-            margin: const EdgeInsets.only(
-              bottom: 20,
-            ),
-            // //margin: EdgeInsets.all(8),
-            // // color: Colors.green,
-            // margin: FxSpacing.bottom(20),
+  //   for (Product product in controller.products!) {
+  //     list.add(FadeTransition(
+  //       opacity: controller.fadeAnimation,
+  //       child: InkWell(
+  //         onTap: () {
+  //           controller.goToSingleProduct(product);
+  //         },
+  //         child: Container(
+  //           // onTap: () {
+  //           //   controller.goToSingleProduct(product);
+  //           // },
+  //           // borderRadiusAll: 4,
+  //           // // paddingAll: 16,
+  //           height: 120,
+  //           decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: const BorderRadius.all(Radius.circular(10)),
+  //               border: Border.all(color: Colors.grey.shade300, width: 1)),
+  //           margin: const EdgeInsets.only(
+  //             bottom: 20,
+  //           ),
+  //           // //margin: EdgeInsets.all(8),
+  //           // // color: Colors.green,
+  //           // margin: FxSpacing.bottom(20),
 
-            child: Container(
-              margin: const EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Container(
-                    // margin: EdgeInsets.all(8),
-                    // paddingAll: 0,
-                    // borderRadiusAll: 4,
-                    // margin: EdgeInsets.all(8),
+  //           child: Container(
+  //             margin: const EdgeInsets.all(8),
+  //             child: Row(
+  //               children: [
+  //                 Container(
+  //                   // margin: EdgeInsets.all(8),
+  //                   // paddingAll: 0,
+  //                   // borderRadiusAll: 4,
+  //                   // margin: EdgeInsets.all(8),
 
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: Hero(
-                      tag: "product_image_${product.name}",
-                      child: Image(
-                        image: AssetImage(product.image),
-                        height: 100,
-                        width: 150,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  FxSpacing.width(20),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            FxContainer(
-                              borderRadiusAll: 10,
-                              // padding: FxSpacing.xy(8, 4),
-                              padding: FxSpacing.xy(6, 2),
-                              // color: Color(0xff1529e8),
-                              color: Colors.blueGrey,
-                              child: FxText.bodySmall(
-                                'Theme Park',
-                                fontWeight: 300,
-                                color: Colors.white,
-                                // color: theme.colorScheme.onPrimary,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            FxContainer(
-                              borderRadiusAll: 10,
-                              // padding: FxSpacing.xy(8, 4),
-                              padding: FxSpacing.xy(6, 2),
-                              // color: Color(0xff1529e8),
-                              color: Colors.blueGrey,
-                              child: FxText.bodySmall(
-                                'Ticket',
-                                fontWeight: 300,
-                                color: Colors.white,
-                                // color: theme.colorScheme.onPrimary,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            FxContainer(
-                              borderRadiusAll: 10,
-                              // padding: FxSpacing.xy(8, 4),
-                              padding: FxSpacing.xy(6, 2),
-                              // color: Color(0xff1529e8),
-                              color: Colors.blueGrey,
-                              child: FxText.bodySmall(
-                                'Offer',
-                                fontWeight: 300,
-                                color: Colors.white,
-                                // color: theme.colorScheme.onPrimary,
-                              ),
-                            ),
-                          ],
-                        ),
-                        FxSpacing.height(8),
-                        Flexible(
-                          child: Hero(
-                            tag: "product_${product.name}",
-                            // child: FxText.bodyLarge(
-                            //   product.name,
-                            //   // fontWeight: 500,
-                            // ),
-                            child: FxText.bodyLarge(
-                              product.name,
-                              fontWeight: 800,
-                            ),
-                          ),
-                        ),
-                        FxSpacing.height(4),
-                        Hero(
-                          tag: "${product.name}_${product.price}",
-                          child: FxText.labelLarge(
-                            // '\$' + product.price.toString(),
-                            "${product.price} AED",
-                            // "\$" + product.price.toString() + "/hour",
-                            fontWeight: 700,
-                          ),
-                        ),
-                        FxSpacing.height(6),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Hero(
-                              tag: "${product.name}_${product.rating}",
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    // FeatherIcons.star,
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                    size: 12,
-                                  ),
-                                  FxSpacing.width(4),
-                                  FxText.bodySmall(
-                                    '4.5',
-                                    fontWeight: 600,
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // FxContainer.bordered(
-                            //   paddingAll: 4,
-                            //   borderRadiusAll: 4,
-                            //   child: Icon(
-                            //     FeatherIcons.plus,
-                            //     size: 14,
-                            //     color: theme.colorScheme.onBackground,
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ));
-    }
+  //                   decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                   ),
+  //                   clipBehavior: Clip.antiAliasWithSaveLayer,
+  //                   child: Hero(
+  //                     tag: "product_image_${product.name}",
+  //                     child: Image(
+  //                       image: AssetImage(product.image),
+  //                       height: 100,
+  //                       width: 150,
+  //                       fit: BoxFit.cover,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 FxSpacing.width(20),
+  //                 Expanded(
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     mainAxisAlignment: MainAxisAlignment.start,
+  //                     children: [
+  //                       Row(
+  //                         children: [
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               'Theme Park',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             width: 5,
+  //                           ),
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               'Ticket',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             width: 5,
+  //                           ),
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               'Offer',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       FxSpacing.height(8),
+  //                       Flexible(
+  //                         child: Hero(
+  //                           tag: "product_${product.name}",
+  //                           // child: FxText.bodyLarge(
+  //                           //   product.name,
+  //                           //   // fontWeight: 500,
+  //                           // ),
+  //                           child: FxText.bodyLarge(
+  //                             product.name,
+  //                             fontWeight: 800,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                       FxSpacing.height(4),
+  //                       Hero(
+  //                         tag: "${product.name}_${product.price}",
+  //                         child: FxText.labelLarge(
+  //                           // '\$' + product.price.toString(),
+  //                           "${product.price} AED",
+  //                           // "\$" + product.price.toString() + "/hour",
+  //                           fontWeight: 700,
+  //                         ),
+  //                       ),
+  //                       FxSpacing.height(6),
+  //                       Row(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Hero(
+  //                             tag: "${product.name}_${product.rating}",
+  //                             child: Row(
+  //                               children: [
+  //                                 const Icon(
+  //                                   // FeatherIcons.star,
+  //                                   Icons.star,
+  //                                   color: Colors.yellow,
+  //                                   size: 12,
+  //                                 ),
+  //                                 FxSpacing.width(4),
+  //                                 FxText.bodySmall(
+  //                                   '4.5',
+  //                                   fontWeight: 600,
+  //                                   color: Colors.black,
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                           // FxContainer.bordered(
+  //                           //   paddingAll: 4,
+  //                           //   borderRadiusAll: 4,
+  //                           //   child: Icon(
+  //                           //     FeatherIcons.plus,
+  //                           //     size: 14,
+  //                           //     color: theme.colorScheme.onBackground,
+  //                           //   ),
+  //                           // ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ));
+  //   }
 
-    return Row(
-      children: list,
-    );
-  }
+  //   return Row(
+  //     children: list,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -522,7 +528,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     // for (int i = 0; i < controller.products; i++) {
     //   list.add(car(controller.products![i]));
     // }
-    for (Product product in controller.products!) {
+    // for (Product product in controller.products!)
+    for (var product in allattractionList.first.attractions.data) {
       list.add(
           // car(controller.products![i])
           InkWell(
@@ -557,7 +564,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(product.image.toString()),
+                        image: AssetImage(product.images.toString()),
                         fit: BoxFit.fill)),
               ),
               Padding(
@@ -576,7 +583,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           color: Colors.blueGrey,
                           child: FxText.bodySmall(
                             // 'Theme Park',
-                            product.types.toString(),
+                            product.category.categoryName.toString(),
                             fontWeight: 300,
                             color: Colors.white,
                             // color: theme.colorScheme.onPrimary,
@@ -630,7 +637,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             FxSpacing.width(4),
                             FxText.bodySmall(
                               // '4.5',
-                              product.rating.toString(),
+                              product.averageRating.toString(),
                               fontWeight: 600,
                               color: Colors.black,
                             ),
@@ -649,7 +656,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: FxText.bodyLarge(
                     // 'Ferrari world',
-                    product.name.toString(),
+                    product.title.toString(),
                     fontWeight: 800,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
@@ -683,7 +690,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               FxSpacing.width(4),
                               FxText.labelLarge(
                                 // '\$' + product.price.toString(),
-                                product.location.toString(),
+                                product.destination.name.toString(),
                                 // product.price.toString() + " " + "AED",
                                 // "\$" + product.price.toString() + "/hour",
                                 // fontWeight: 700,
@@ -703,7 +710,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                     FxText(
-                      product.price.toString(),
+                      product.activity.adultPrice.toString(),
                       color: const Color(0xff1529e8),
                     ),
                   ],
@@ -723,63 +730,63 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
-  Widget car(Product product) {
-    return FxContainer(
-      onTap: () {
-        // controller.goToSingleCarScreen(car);
-      },
-      paddingAll: 4,
-      // borderRadiusAll: Constant.containerRadius.xs,
-      margin: FxSpacing.right(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          FxContainer(
-            // borderRadiusAll: Constant.containerRadius.xs,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            paddingAll: 0,
-            child: Image(
-              width: 150,
-              fit: BoxFit.cover,
-              image: AssetImage(product.image),
-            ),
-          ),
-          Container(
-            padding: FxSpacing.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FxText.bodyMedium(
-                  product.name,
-                  fontWeight: 700,
-                ),
-                FxSpacing.height(4),
-                FxText.bodyMedium(
-                  "\$" + 'car.price'.toString() + "/hour",
-                  color: theme.colorScheme.primary,
-                  fontWeight: 600,
-                ),
-                FxSpacing.height(4),
-                Row(
-                  children: [
-                    const Icon(
-                      FeatherIcons.mapPin,
-                      size: 14,
-                    ),
-                    FxSpacing.width(4),
-                    FxText.bodySmall(
-                      product.price.toString(),
-                      xMuted: true,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget car(Product product) {
+  //   return FxContainer(
+  //     onTap: () {
+  //       // controller.goToSingleCarScreen(car);
+  //     },
+  //     paddingAll: 4,
+  //     // borderRadiusAll: Constant.containerRadius.xs,
+  //     margin: FxSpacing.right(20),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         FxContainer(
+  //           // borderRadiusAll: Constant.containerRadius.xs,
+  //           clipBehavior: Clip.antiAliasWithSaveLayer,
+  //           paddingAll: 0,
+  //           child: Image(
+  //             width: 150,
+  //             fit: BoxFit.cover,
+  //             image: AssetImage(product.image),
+  //           ),
+  //         ),
+  //         Container(
+  //           padding: FxSpacing.all(8),
+  //           child: Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               FxText.bodyMedium(
+  //                 product.name,
+  //                 fontWeight: 700,
+  //               ),
+  //               FxSpacing.height(4),
+  //               FxText.bodyMedium(
+  //                 "\$" + 'car.price'.toString() + "/hour",
+  //                 color: theme.colorScheme.primary,
+  //                 fontWeight: 600,
+  //               ),
+  //               FxSpacing.height(4),
+  //               Row(
+  //                 children: [
+  //                   const Icon(
+  //                     FeatherIcons.mapPin,
+  //                     size: 14,
+  //                   ),
+  //                   FxSpacing.width(4),
+  //                   FxText.bodySmall(
+  //                     product.price.toString(),
+  //                     xMuted: true,
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _buildBody() {
     double width = MediaQuery.of(context).size.width;

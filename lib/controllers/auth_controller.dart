@@ -67,7 +67,7 @@ class AuthController {
   //allattractions
   List<AllattractionModal> allattractionList = <AllattractionModal>[];
   bool isAllAttractionListLoading = true;
-  Future getAllattractionList() async {
+  Future<AllattractionModal?> getAllattractionList() async {
     // isCountryListLoading = true;
     try {
       var data = await AuthService().getAllAttraction();
@@ -75,9 +75,9 @@ class AuthController {
       if (data != null) {
         allattractionList.add(data);
         // isCountryListLoading = false;
-        return true;
+        return data; //removed true
       } else {
-        return false;
+        return null; //falseremoved
       }
     } catch (e) {
       rethrow;

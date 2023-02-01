@@ -35,7 +35,7 @@ class _AttractionTileState extends State<AttractionTile>
         opacity: controller.fadeAnimation,
         child: InkWell(
           onTap: () {
-            controller.goToSingleProduct(product);
+            // controller.goToSingleProduct(product);
           },
           child: Container(
             margin: const EdgeInsets.all(5.0),

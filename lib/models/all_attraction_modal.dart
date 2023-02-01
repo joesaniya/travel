@@ -214,7 +214,7 @@ class Destination {
     required this.updatedAt,
     required this.v,
     required this.isDeleted,
-    required this.image,
+    // required this.image,
   });
 
   Id id;
@@ -224,7 +224,7 @@ class Destination {
   DateTime updatedAt;
   int v;
   bool isDeleted;
-  Image image;
+  // Image image;
 
   factory Destination.fromJson(Map<String, dynamic> json) => Destination(
         id: idValues.map[json["_id"]]!,
@@ -234,7 +234,7 @@ class Destination {
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
         isDeleted: json["isDeleted"],
-        image: imageValues.map[json["image"]]!,
+        // image: imageValues.map[json["image"]]!,
       );
 
   Map<String, dynamic> toJson() => {
@@ -245,7 +245,7 @@ class Destination {
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,
         "isDeleted": isDeleted,
-        "image": imageValues.reverse[image],
+        // "image": imageValues.reverse[image],
       };
 }
 
@@ -261,17 +261,17 @@ final idValues = EnumValues({
   "63afbe8fe2247e66126e41cd": Id.THE_63_AFBE8_FE2247_E66126_E41_CD
 });
 
-enum Image {
-  PUBLIC_IMAGES_DESTINATIONS_IMAGE_167440861906061001879_WEBP,
-  PUBLIC_IMAGES_DESTINATIONS_IMAGE_1672982741618547465184_JPG
-}
+// enum Image {
+//   PUBLIC_IMAGES_DESTINATIONS_IMAGE_167440861906061001879_WEBP,
+//   PUBLIC_IMAGES_DESTINATIONS_IMAGE_1672982741618547465184_JPG
+// }
 
-final imageValues = EnumValues({
-  "/public/images/destinations/image-1672982741618-547465184.jpg":
-      Image.PUBLIC_IMAGES_DESTINATIONS_IMAGE_1672982741618547465184_JPG,
-  "/public/images/destinations/image-1674408619060-61001879.webp":
-      Image.PUBLIC_IMAGES_DESTINATIONS_IMAGE_167440861906061001879_WEBP
-});
+// final imageValues = EnumValues({
+//   "/public/images/destinations/image-1672982741618-547465184.jpg":
+//       Image.PUBLIC_IMAGES_DESTINATIONS_IMAGE_1672982741618547465184_JPG,
+//   "/public/images/destinations/image-1674408619060-61001879.webp":
+//       Image.PUBLIC_IMAGES_DESTINATIONS_IMAGE_167440861906061001879_WEBP
+// });
 
 enum Name { ABU_DHABI, DUBAI }
 
