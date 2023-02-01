@@ -11,6 +11,7 @@ class ProfileController extends FxController {
   bool showLoading = true, uiLoading = true;
   bool notification = true, offlineReading = false;
   late User user;
+  String? name, email;
 
   @override
   initState() {

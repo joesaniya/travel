@@ -8,9 +8,11 @@ import 'package:hotel_travel/views/bottomSheet/withdraw_money.dart';
 import 'package:hotel_travel/views/update_Password.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controllers/profile_controller.dart';
 import '../loading_effect.dart';
+import '../services/app_constants.dart';
 import '../theme/app_theme.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -29,6 +31,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    SharedPreferences.getInstance().then((sharedPrefValue) {
+      setState(() {
+        profileController.name =
+            sharedPrefValue.getString(AppConstants.KEY_ACCESS_TOKEN_Name);
+        log(profileController.name.toString());
+        profileController.email =
+            sharedPrefValue.getString(AppConstants.KEY_ACCESS_TOKEN_Email);
+        log(profileController.email.toString());
+        log('username');
+      });
+    });
     profileController =
         FxControllerStore.putOrFind<ProfileController>(ProfileController());
     theme = AppTheme.theme;
@@ -81,10 +94,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FxText.bodyLarge(profileController.user.name,
+                            FxText.bodyLarge(
+                                // profileController.user.name,
+                                profileController.name.toString(),
                                 fontWeight: 700),
                             FxSpacing.width(8),
                             FxText.bodyMedium(
+                              // profileController.email.toString()
                               profileController.user.email,
                             ),
                             FxSpacing.height(8),

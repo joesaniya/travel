@@ -28,11 +28,9 @@ class AuthController {
   }
 
   Future<bool> login(
-    String email,
-    String password,
-  ) async {
+      String email, String password, BuildContext context) async {
     try {
-      var data = await AuthService().login(email, password);
+      var data = await AuthService().login(email, password, context);
       if (data != null) {
         log(data);
         // log('token');

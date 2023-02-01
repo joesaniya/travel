@@ -136,7 +136,9 @@ class LogInController extends FxController {
     if (formKey.currentState!.validate()) {
       arrowController.forward();
       await Future.delayed(const Duration(milliseconds: 1000));
-      await AuthController().login(emailTE.text, passwordTE.text).then((value) {
+      await AuthController()
+          .login(emailTE.text, passwordTE.text, context)
+          .then((value) {
         if (value) {
           Navigator.of(context, rootNavigator: true).pushReplacement(
             MaterialPageRoute(

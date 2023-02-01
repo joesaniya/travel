@@ -1771,6 +1771,36 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                               ),
                             ],
                           )),
+                      FxSpacing.height(15),
+                      Container(
+                          decoration: BoxDecoration(
+                              // color: Color(0xffe6e1e5),
+                              color: Colors.white,
+                              // color: Color(0xffe5fdfd),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              border: Border.all(
+                                  color: Colors.grey.shade300, width: 1)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Contact Details".toUpperCase(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14.0),
+                              ),
+                              const SizedBox(height: 10.0),
+                              FxText.bodyLarge(
+                                'Sheikh Zayed Rd - Dubai - United Arab Emirates\n www.dubaiparksandresorts.com \n ph.No:+9718002629464',
+                                textAlign: TextAlign.justify,
+                                // style: TextStyle(
+                                //     fontWeight: FontWeight.w300, fontSize: 14.0),
+                              ),
+                            ],
+                          )),
                       // Text(
                       //   "Description".toUpperCase(),
                       //   style: const TextStyle(

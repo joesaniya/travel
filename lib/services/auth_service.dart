@@ -41,6 +41,7 @@ class AuthService {
             await SharedPreferences.getInstance();
         sharedPreferences.setString("token", jsondata['jwtToken']);
         sharedPreferences.setString("username", jsondata['newUser']['name']);
+        sharedPreferences.setString("useremail", jsondata['newUser']['email']);
         return response.body;
       } else {
         var jsondata = jsonDecode(response.body);
@@ -102,7 +103,7 @@ class AuthService {
   // }
 
 //login
-  Future login(String email, String Password) async {
+  Future login(String email, String Password, BuildContext context) async {
     try {
       var body = {
         "email": email,
@@ -121,6 +122,7 @@ class AuthService {
             await SharedPreferences.getInstance();
         sharedPreferences.setString("token", jsondata['jwtToken']);
         sharedPreferences.setString("username", jsondata['user']['name']);
+        sharedPreferences.setString("useremail", jsondata['user']['email']);
         return response.body;
 
         // //todo
@@ -143,6 +145,8 @@ class AuthService {
       else {
         var jsondata = jsonDecode(response.body);
         log(jsondata['error']);
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(jsondata['error'])));
       }
     } catch (e) {
       rethrow;

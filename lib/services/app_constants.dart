@@ -7,4 +7,5 @@ class AppConstants {
   // static const String KEY_ACCESS_TOKEN = 'access_token';
   static const String KEY_ACCESS_TOKEN = 'token';
   static const String KEY_ACCESS_TOKEN_Name = 'username';
+  static const String KEY_ACCESS_TOKEN_Email = 'useremail';
 }
