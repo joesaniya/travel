@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:hotel_travel/models/all_attraction_modal.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/Country_modal.dart';
@@ -182,15 +183,37 @@ class AuthService {
     }
   }
 
-  Future<List?> countryget() async {
-    const standardUrl = 'https://a.walletbot.online/api/v1/home/initial-data';
-    final response = await http.get(Uri.parse(standardUrl));
-    if (response.statusCode == 200) {
-      final standardData = countryModalFromJson(response.body);
-      final List<Country?>? standards = standardData!.countries;
-      return standards;
-    } else {
-      return <Country>[];
+//getattraction
+  Future<AllattractionModal?> getAllAttraction() async {
+    try {
+      var response = await http.get(
+        Uri.parse(
+          'https://a.walletbot.online/api/v1/attractions/all',
+        ),
+        headers: {'Content-Type': 'application/json'},
+      );
+      if (response.statusCode == 200) {
+        log(response.body);
+        return allattractionModalFromJson(response.body);
+      } else {
+        var jsondata = jsonDecode(response.body);
+        log(jsondata['error']);
+        return null;
+      }
+    } catch (e) {
+      rethrow;
     }
   }
+
+  // Future<List?> countryget() async {
+  //   const standardUrl = 'https://a.walletbot.online/api/v1/home/initial-data';
+  //   final response = await http.get(Uri.parse(standardUrl));
+  //   if (response.statusCode == 200) {
+  //     final standardData = countryModalFromJson(response.body);
+  //     final List<Country?>? standards = standardData!.countries;
+  //     return standards;
+  //   } else {
+  //     return <Country>[];
+  //   }
+  // }
 }

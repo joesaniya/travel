@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hotel_travel/models/Country_modal.dart';
+import 'package:hotel_travel/models/all_attraction_modal.dart';
 import 'package:hotel_travel/services/auth_service.dart';
 
 class AuthController {
@@ -53,6 +54,26 @@ class AuthController {
       countryList.clear();
       if (data != null) {
         countryList.add(data);
+        // isCountryListLoading = false;
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //allattractions
+  List<AllattractionModal> allattractionList = <AllattractionModal>[];
+  bool isAllAttractionListLoading = true;
+  Future getAllattractionList() async {
+    // isCountryListLoading = true;
+    try {
+      var data = await AuthService().getAllAttraction();
+      allattractionList.clear();
+      if (data != null) {
+        allattractionList.add(data);
         // isCountryListLoading = false;
         return true;
       } else {

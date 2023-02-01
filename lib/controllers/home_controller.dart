@@ -6,6 +6,7 @@ import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 
+// import 'package:hotel_travel/models/all_attraction_modal.dart';
 import '../models/category.dart';
 import '../models/product.dart';
 import '../views/hotel_travel_constants.dart';
@@ -15,6 +16,7 @@ class HomeController extends FxController {
   HomeController(this.ticker);
   List<Category>? categories;
   List<Product>? products;
+  // List<AllattractionModal> allattractionList = <AllattractionModal>[];
   bool uiLoading = true;
   late Category selectedCategory;
   late AnimationController animationController;

@@ -6,8 +6,10 @@ import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/search_screens/search_place.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../controllers/auth_controller.dart';
 import '../controllers/home_controller.dart';
 import '../loading_effect.dart';
+
 import '../models/category.dart';
 import '../models/product.dart';
 import '../services/app_constants.dart';
@@ -29,9 +31,51 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   String _tabbed = '1';
   String? name;
 
+  bool isLoading = true;
+
+  getAttraction() {
+    log('getAttraction function called');
+    Future.delayed(Duration.zero, () async {
+      // await getAllattractionList().then((value) {
+      //   if (value) {
+      //     isLoading = false;
+      //     setState(() {});
+      //   }
+      // });
+      await AuthController().getAllattractionList().then((value) {
+        log('AuthController().getAllattractionList()');
+        if (value) {
+          log('AuthController().getAllattractionList().ifvalue');
+          isLoading = false;
+          setState(() {});
+        }
+      });
+    });
+  }
+
+  // List<AllattractionModal> allattractionList = <AllattractionModal>[];
+  // bool isAllAttractionListLoading = true;
+  // Future getAllattractionList() async {
+  //   // isCountryListLoading = true;
+  //   try {
+  //     var data = await AuthService().getAllAttraction();
+  //     allattractionList.clear();
+  //     if (data != null) {
+  //       allattractionList.add(data);
+  //       // isCountryListLoading = false;
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
+
   @override
   void initState() {
     super.initState();
+    getAttraction();
     theme = AppTheme.shoppingTheme;
     theme1 = AppTheme.learningTheme;
     SharedPreferences.getInstance().then((sharedPrefValue) {
@@ -91,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     );
   }
 
+//topatt
   Widget _buildProductList() {
     List<Widget> list = [];
 
