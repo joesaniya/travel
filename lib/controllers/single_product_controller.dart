@@ -16,6 +16,12 @@ class SingleProductController extends FxController {
     sizes = ['S', 'M', 'L', 'XL'];
   }
   bool showLoading = true, uiLoading = true;
+
+  //tab
+  late TabController tabController;
+  late ScrollController scrollController;
+  //
+
   int colorSelected = 1;
   Product product;
   late AnimationController animationController, cartController, dateController;
@@ -65,10 +71,48 @@ class SingleProductController extends FxController {
     '19',
     '20'
   ];
+  Color appBarColor = Colors.transparent;
+
+  changeAppBarColor(ScrollController scrollController) {
+    if (scrollController.position.hasPixels) {
+      if (scrollController.position.pixels > 2.0) {
+        appBarColor = Colors.green;
+        // setState(() {
+        //   appBarColor = AppColor.primary;
+        // });
+      }
+      if (scrollController.position.pixels <= 2.0) {
+        appBarColor = Colors.transparent;
+        // setState(() {
+        //   appBarColor = Colors.transparent;
+        // });
+      }
+    } else {
+      appBarColor = Colors.transparent;
+      // setState(() {
+      //   appBarColor = Colors.transparent;
+      // });
+    }
+  }
+
+  showFAB(TabController tabController) {
+    int reviewTabIndex = 2;
+    if (tabController.index == reviewTabIndex) {
+      return true;
+    }
+    return false;
+  }
 
   @override
   void initState() {
     super.initState();
+    //new
+    tabController = TabController(length: 4, vsync: ticker);
+    scrollController = ScrollController(initialScrollOffset: 0.0);
+    scrollController.addListener(() {
+      changeAppBarColor(scrollController);
+    });
+    //
     dateTE = TextEditingController();
     save = false;
     fetchData();
@@ -172,6 +216,7 @@ class SingleProductController extends FxController {
     dateController.dispose();
     super.dispose();
     pageController.dispose();
+    timerAnimation.cancel();
   }
 
   bool increaseAble(Product product) {
