@@ -3,10 +3,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
+
 import 'package:intl/intl.dart';
 
 import '../models/product.dart';
-import '../views/checkout_screen.dart';
+import '../views/detail_screen/Activity_screen.dart';
 import '../views/detail_screen/single_product_screen.dart';
 import '../views/hotel_travel_constants.dart';
 
@@ -294,7 +295,9 @@ class SingleProductController extends FxController {
               opacity: animation,
               child: child,
             ),
-        pageBuilder: (_, __, ___) => const CheckOutScreen()));
+        pageBuilder: (_, __, ___) => const ActivityScreen()
+        // CheckOutScreen()
+        ));
   }
 
   void goBack() {

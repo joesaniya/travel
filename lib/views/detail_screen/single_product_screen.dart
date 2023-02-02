@@ -34,8 +34,11 @@ class _SingleProductScreenState extends State<SingleProductScreen>
   late SavedController cartController;
   late OutlineInputBorder outlineInputBorder;
 
+  // Product? product;
+
   @override
   void initState() {
+    // product = controller.products as Product;
     super.initState();
     theme = AppTheme.shoppingTheme;
     controller =
