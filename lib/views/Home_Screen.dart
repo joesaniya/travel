@@ -36,12 +36,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   getAttraction() {
     log('getAttraction function called');
     Future.delayed(Duration.zero, () async {
-      // await getAllattractionList().then((value) {
-      //   if (value) {
-      //     isLoading = false;
-      //     setState(() {});
-      //   }
-      // });
       await AuthController().getAllattractionList().then((value) {
         log('AuthController().getAllattractionList()');
         if (value != null) {
@@ -187,7 +181,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       tag: "product_image_${product.id}",
                       child: Image(
                         // image: AssetImage(product.image),
-                        image: NetworkImage(product.images.first),
+                        image: NetworkImage(
+                            'https://a.walletbot.online/${product.images.first}'),
                         // image: AssetImage(product.images.first),
                         // height: 100,
                         height: 132,
@@ -204,20 +199,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       children: [
                         Row(
                           children: [
-                            FxContainer(
-                              borderRadiusAll: 10,
-                              // padding: FxSpacing.xy(8, 4),
-                              padding: FxSpacing.xy(6, 2),
-                              // color: Color(0xff1529e8),
-                              color: Colors.blueGrey,
-                              child: FxText.bodySmall(
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                // 'Theme Park',
-                                'Park',
-                                fontWeight: 300,
-                                color: Colors.white,
-                                // color: theme.colorScheme.onPrimary,
+                            Expanded(
+                              child: FxContainer(
+                                borderRadiusAll: 10,
+                                // padding: FxSpacing.xy(8, 4),
+                                padding: FxSpacing.xy(6, 2),
+                                // color: Color(0xff1529e8),
+                                color: Colors.blueGrey,
+                                child: FxText.bodySmall(
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  // 'Theme Park',
+                                  product.category.categoryName.name,
+                                  // 'Park',
+                                  fontWeight: 300,
+                                  color: Colors.white,
+                                  // color: theme.colorScheme.onPrimary,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -564,7 +562,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: AssetImage(product.images.toString()),
+                        image: NetworkImage(
+                            'https://a.walletbot.online/${product.images.first}'
+                            // product.images.first.toString()
+                            ),
                         fit: BoxFit.fill)),
               ),
               Padding(
@@ -583,7 +584,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           color: Colors.blueGrey,
                           child: FxText.bodySmall(
                             // 'Theme Park',
-                            product.category.categoryName.toString(),
+                            product.category.categoryName.name,
                             fontWeight: 300,
                             color: Colors.white,
                             // color: theme.colorScheme.onPrimary,
@@ -690,7 +691,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               FxSpacing.width(4),
                               FxText.labelLarge(
                                 // '\$' + product.price.toString(),
-                                product.destination.name.toString(),
+                                product.destination.name.name.toString(),
                                 // product.price.toString() + " " + "AED",
                                 // "\$" + product.price.toString() + "/hour",
                                 // fontWeight: 700,
@@ -710,7 +711,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                     FxText(
-                      product.activity.adultPrice.toString(),
+                      '${product.activity.adultPrice.toString()} AED',
                       color: const Color(0xff1529e8),
                     ),
                   ],
@@ -791,7 +792,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Widget _buildBody() {
     double width = MediaQuery.of(context).size.width;
     double containerWidth = width / 2;
-    if (controller.uiLoading) {
+    // if (controller.uiLoading)
+    if (allattractionList.isEmpty) {
       return Scaffold(
           body: Padding(
         padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),

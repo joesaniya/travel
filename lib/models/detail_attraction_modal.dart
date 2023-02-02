@@ -1,17 +1,17 @@
 // To parse this JSON data, do
 //
-//     final attractionModal = attractionModalFromJson(jsonString);
+//     final detailattractionModal = detailattractionModalFromJson(jsonString);
 
 import 'dart:convert';
 
-AttractionModal attractionModalFromJson(String str) =>
-    AttractionModal.fromJson(json.decode(str));
+DetailattractionModal detailattractionModalFromJson(String str) =>
+    DetailattractionModal.fromJson(json.decode(str));
 
-String attractionModalToJson(AttractionModal data) =>
+String detailattractionModalToJson(DetailattractionModal data) =>
     json.encode(data.toJson());
 
-class AttractionModal {
-  AttractionModal({
+class DetailattractionModal {
+  DetailattractionModal({
     required this.id,
     required this.destination,
     required this.title,
@@ -90,11 +90,11 @@ class AttractionModal {
   List<Review> reviews;
   Markup markup;
   int totalRating;
-  int averageRating;
+  double averageRating;
   List<Activity> activities;
 
-  factory AttractionModal.fromJson(Map<String, dynamic> json) =>
-      AttractionModal(
+  factory DetailattractionModal.fromJson(Map<String, dynamic> json) =>
+      DetailattractionModal(
         id: json["_id"],
         destination: Destination.fromJson(json["destination"]),
         title: json["title"],
@@ -135,7 +135,7 @@ class AttractionModal {
             List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
         markup: Markup.fromJson(json["markup"]),
         totalRating: json["totalRating"],
-        averageRating: json["averageRating"],
+        averageRating: json["averageRating"]?.toDouble(),
         activities: List<Activity>.from(
             json["activities"].map((x) => Activity.fromJson(x))),
       );
@@ -206,6 +206,9 @@ class Activity {
     required this.updatedAt,
     required this.v,
     required this.isDeleted,
+    this.adultCost,
+    this.childCost,
+    this.infantCost,
   });
 
   String id;
@@ -229,6 +232,9 @@ class Activity {
   DateTime updatedAt;
   int v;
   bool isDeleted;
+  dynamic adultCost;
+  dynamic childCost;
+  dynamic infantCost;
 
   factory Activity.fromJson(Map<String, dynamic> json) => Activity(
         id: json["_id"],
@@ -252,6 +258,9 @@ class Activity {
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
         isDeleted: json["isDeleted"],
+        adultCost: json["adultCost"],
+        childCost: json["childCost"],
+        infantCost: json["infantCost"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -276,6 +285,9 @@ class Activity {
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,
         "isDeleted": isDeleted,
+        "adultCost": adultCost,
+        "childCost": childCost,
+        "infantCost": infantCost,
       };
 }
 

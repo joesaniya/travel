@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hotel_travel/models/Country_modal.dart';
 import 'package:hotel_travel/models/all_attraction_modal.dart';
+import 'package:hotel_travel/models/detail_attraction_modal.dart';
 import 'package:hotel_travel/services/auth_service.dart';
 
 class AuthController {
@@ -74,6 +75,27 @@ class AuthController {
       allattractionList.clear();
       if (data != null) {
         allattractionList.add(data);
+        // isCountryListLoading = false;
+        return data; //removed true
+      } else {
+        return null; //falseremoved
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  //detailAttractions
+  //allattractions
+  List<DetailattractionModal> detailattractionList = <DetailattractionModal>[];
+  bool isdetailAttractionListLoading = true;
+  Future<DetailattractionModal?> getDetailattractionList() async {
+    // isCountryListLoading = true;
+    try {
+      var data = await AuthService().getdetailAttraction();
+      detailattractionList.clear();
+      if (data != null) {
+        detailattractionList.add(data);
         // isCountryListLoading = false;
         return data; //removed true
       } else {
