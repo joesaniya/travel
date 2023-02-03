@@ -49,25 +49,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     });
   }
 
-  // List<AllattractionModal> allattractionList = <AllattractionModal>[];
-  // bool isAllAttractionListLoading = true;
-  // Future getAllattractionList() async {
-  //   // isCountryListLoading = true;
-  //   try {
-  //     var data = await AuthService().getAllAttraction();
-  //     allattractionList.clear();
-  //     if (data != null) {
-  //       allattractionList.add(data);
-  //       // isCountryListLoading = false;
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();

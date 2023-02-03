@@ -86,10 +86,9 @@ class AuthController {
   }
 
   //detailAttractions
-  //allattractions
   List<DetailattractionModal> detailattractionList = <DetailattractionModal>[];
   bool isdetailAttractionListLoading = true;
-  Future<DetailattractionModal?> getDetailattractionList() async {
+  Future getDetailattractionList() async {
     // isCountryListLoading = true;
     try {
       var data = await AuthService().getdetailAttraction();
@@ -97,9 +96,9 @@ class AuthController {
       if (data != null) {
         detailattractionList.add(data);
         // isCountryListLoading = false;
-        return data; //removed true
+        return true;
       } else {
-        return null; //falseremoved
+        return false;
       }
     } catch (e) {
       rethrow;
