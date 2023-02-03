@@ -10,6 +10,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../card_widgets/step_tile.dart';
+import '../../controllers/auth_controller.dart';
 import '../../controllers/single_product_controller.dart';
 import '../../models/product.dart';
 import '../../theme/app_theme.dart';
@@ -36,10 +37,25 @@ class _SingleProductScreenState extends State<SingleProductScreen>
 
   // Product? product;
 
+  bool isLoading = true;
+
+  getDetailAttraction() {
+    log('getDetail Attraction function called');
+    Future.delayed(Duration.zero, () async {
+      await AuthController().getDetailattractionList().then((value) {
+        if (value) {
+          isLoading = false;
+          setState(() {});
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     // product = controller.products as Product;
     super.initState();
+    getDetailAttraction();
     theme = AppTheme.shoppingTheme;
     controller =
         FxControllerStore.put(SingleProductController(this, widget.product));

@@ -36,41 +36,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   getAttraction() {
     log('getAttraction function called');
     Future.delayed(Duration.zero, () async {
-      // await getAllattractionList().then((value) {
-      //   if (value) {
-      //     isLoading = false;
-      //     setState(() {});
-      //   }
-      // });
       await AuthController().getAllattractionList().then((value) {
-        log('AuthController().getAllattractionList()');
         if (value) {
-          log('AuthController().getAllattractionList().ifvalue');
           isLoading = false;
           setState(() {});
         }
       });
     });
   }
-
-  // List<AllattractionModal> allattractionList = <AllattractionModal>[];
-  // bool isAllAttractionListLoading = true;
-  // Future getAllattractionList() async {
-  //   // isCountryListLoading = true;
-  //   try {
-  //     var data = await AuthService().getAllAttraction();
-  //     allattractionList.clear();
-  //     if (data != null) {
-  //       allattractionList.add(data);
-  //       // isCountryListLoading = false;
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
 
   @override
   void initState() {
@@ -514,7 +487,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   //car
-  Widget cars() {
+  Widget TopAttraction() {
     List<Widget> list = [];
 
     // list.add(FxSpacing.width(20));
@@ -1151,7 +1124,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ),
               FxSpacing.height(20),
-              cars(),
+              TopAttraction(),
               // const TopAttractionCard(),->crt
               // _buildAttractionList(),
               FxSpacing.height(20),

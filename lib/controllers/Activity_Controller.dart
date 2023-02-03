@@ -15,6 +15,7 @@ class ActivityController extends FxController {
   final List<String> TransferCodes = ['without'];
   String? selectedtransfer;
   bool addCart = false;
+  bool clickedExcursion = false;
 
   List<Cart>? carts;
 
