@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 import 'package:intl/intl.dart';
 
+import '../models/detail_attraction_modal.dart';
 import '../models/product.dart';
 import '../views/checkout_screen.dart';
-import '../views/detail_screen/single_product_screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class SingleProductController extends FxController {
   TickerProvider ticker;
-  SingleProductController(this.ticker, this.product) {
+  SingleProductController(
+    this.ticker,
+    //  this.product
+  ) {
     sizes = ['S', 'M', 'L', 'XL'];
   }
   bool showLoading = true, uiLoading = true;
@@ -23,7 +26,9 @@ class SingleProductController extends FxController {
   //
 
   int colorSelected = 1;
-  Product product;
+//  late  Product product;
+  // late DetailattractionModal product;
+  List<DetailattractionModal> allattractionList = <DetailattractionModal>[];
   late AnimationController animationController, cartController, dateController;
   late Animation<Color?> colorAnimation;
   late Animation<double> sizeAnimation,
@@ -274,10 +279,10 @@ class SingleProductController extends FxController {
     }
   }
 
-  void toggleFavorite() {
-    product.favorite = !product.favorite;
-    update();
-  }
+  // void toggleFavorite() {
+  //   product.favorite = !product.favorite;
+  //   update();
+  // }
 
   Future<void> bookNow() async {
     animationController.forward();
@@ -329,13 +334,13 @@ class SingleProductController extends FxController {
     );*/
   }
 
-  void goToSingleProduct(Product product) {
-    Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute(
-        builder: (context) => SingleProductScreen(product),
-      ),
-    );
-  }
+  // void goToSingleProduct(Product product) {
+  //   Navigator.of(context, rootNavigator: true).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => SingleProductScreen(product),
+  //     ),
+  //   );
+  // }
 
   @override
   String getTag() {

@@ -37,9 +37,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     log('getAttraction function called');
     Future.delayed(Duration.zero, () async {
       await AuthController().getAllattractionList().then((value) {
-        log('AuthController().getAllattractionList()');
         if (value != null) {
-          log('AuthController().getAllattractionList().ifvalue');
           isLoading = false;
           allattractionList.add(value);
 

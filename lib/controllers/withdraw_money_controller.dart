@@ -3,10 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
-import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
-
-import '../models/product.dart';
-
 class WithdrawMoneyController extends FxController {
   TickerProvider ticker;
   WithdrawMoneyController(this.ticker);
@@ -314,21 +310,21 @@ class WithdrawMoneyController extends FxController {
     super.dispose();
   }
 
-  void goToSingleProduct(Product product) {
-    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 500),
-        transitionsBuilder: (
-          BuildContext context,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-          Widget child,
-        ) =>
-            FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
-        pageBuilder: (_, __, ___) => SingleProductScreen(product)));
-  }
+  // void goToSingleProduct(Product product) {
+  //   Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+  //       transitionDuration: const Duration(milliseconds: 500),
+  //       transitionsBuilder: (
+  //         BuildContext context,
+  //         Animation<double> animation,
+  //         Animation<double> secondaryAnimation,
+  //         Widget child,
+  //       ) =>
+  //           FadeTransition(
+  //             opacity: animation,
+  //             child: child,
+  //           ),
+  //       pageBuilder: (_, __, ___) => SingleProductScreen(product)));
+  // }
 
   void openEndDrawer() {
     scaffoldKey.currentState?.openEndDrawer();

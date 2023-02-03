@@ -7,6 +7,7 @@ import 'package:flutx/flutx.dart';
 
 import 'package:hotel_travel/models/all_attraction_modal.dart';
 import '../models/product.dart';
+import '../views/detail_screen/single_product_screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class HomeController extends FxController {
@@ -142,24 +143,19 @@ class HomeController extends FxController {
   void goToSingleProduct(Datum product) {
     log(product.id);
     log('message');
-    // Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-    //         transitionDuration: const Duration(milliseconds: 500),
-    //         transitionsBuilder: (
-    //           BuildContext context,
-    //           Animation<double> animation,
-    //           Animation<double> secondaryAnimation,
-    //           Widget child,
-    //         ) =>
-    //             FadeTransition(
-    //               opacity: animation,
-    //               child: child,
-    //             ),
-    //         pageBuilder: (_, __, ___) => SingleProductScreen(product))
-
-    // PageRouteBuilder(
-    //     transitionDuration: const Duration(seconds: 1),
-    //     pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-    // );
+    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionsBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) =>
+            FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+        pageBuilder: (_, __, ___) => SingleProductScreen(product.id)));
   }
 
   void goToSubscription() {

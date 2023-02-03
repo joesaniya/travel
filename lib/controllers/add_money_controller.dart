@@ -3,10 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
-import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
-
-import '../models/product.dart';
-
 class addMoneyController extends FxController {
   TickerProvider ticker;
   addMoneyController(this.ticker);
@@ -314,13 +310,13 @@ class addMoneyController extends FxController {
     super.dispose();
   }
 
-  void goToSingleProduct(Product product) {
-    Navigator.of(context, rootNavigator: true).push(
-      PageRouteBuilder(
-          transitionDuration: const Duration(seconds: 1),
-          pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-    );
-  }
+  // void goToSingleProduct(Product product) {
+  //   Navigator.of(context, rootNavigator: true).push(
+  //     PageRouteBuilder(
+  //         transitionDuration: const Duration(seconds: 1),
+  //         pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+  //   );
+  // }
 
   void openEndDrawer() {
     scaffoldKey.currentState?.openEndDrawer();

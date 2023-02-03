@@ -209,11 +209,12 @@ class AuthService {
 
   // //detailAttraction
 
-  Future<DetailattractionModal?> getdetailAttraction() async {
+  Future<DetailattractionModal?> getdetailAttraction(
+      {required productid}) async {
     try {
       var response = await http.get(
         Uri.parse(
-          'https://a.walletbot.online/api/v1/attractions/single/63afca1b5896ed6d0f297449',
+          'https://a.walletbot.online/api/v1/attractions/single/${productid}',
         ),
         headers: {'Content-Type': 'application/json'},
       );
