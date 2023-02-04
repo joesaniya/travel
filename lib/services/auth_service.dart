@@ -214,7 +214,7 @@ class AuthService {
     try {
       var response = await http.get(
         Uri.parse(
-          'https://a.walletbot.online/api/v1/attractions/single/${productid}',
+          'https://a.walletbot.online/api/v1/attractions/single/$productid',
         ),
         headers: {'Content-Type': 'application/json'},
       );
