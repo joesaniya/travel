@@ -10,6 +10,7 @@ import '../models/Country_modal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/atteraction_model.dart';
+import 'app_constants.dart';
 
 class AuthService {
   // var jsonResponse;
@@ -41,11 +42,14 @@ class AuthService {
 
       if (response.statusCode == 200) {
         var jsondata = jsonDecode(response.body);
+        print("Profile Data => $jsondata");
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString("token", jsondata['jwtToken']);
         sharedPreferences.setString("username", jsondata['newUser']['name']);
         sharedPreferences.setString("useremail", jsondata['newUser']['email']);
+        sharedPreferences.setString(AppConstants.KEY_ACCESS_TOKEN_countryId,
+            jsondata['newUser']['country']);
         return response.body;
       } else {
         var jsondata = jsonDecode(response.body);
@@ -120,13 +124,18 @@ class AuthService {
           ),
           headers: {'Content-Type': 'application/json'},
           body: jsonEncode(body));
+
+      print('Response => ${response.body}');
       if (response.statusCode == 200) {
         var jsondata = jsonDecode(response.body);
+        print("Profile Data => $jsondata");
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString("token", jsondata['jwtToken']);
         sharedPreferences.setString("username", jsondata['user']['name']);
         sharedPreferences.setString("useremail", jsondata['user']['email']);
+        sharedPreferences.setString(AppConstants.KEY_ACCESS_TOKEN_countryId,
+            jsondata['user']['country']);
         return response.body;
 
         // //todo
@@ -174,7 +183,15 @@ class AuthService {
         headers: {'Content-Type': 'application/json'},
       );
       if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
         log(response.body);
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString(
+            AppConstants.KEY_ACCESS_TOKEN_CurrenciesList,
+            jsonEncode(jsondata['currencies']));
+        // sharedPreferences.setString("countrycode", countryModalFromJson(response.body).toJson() );
+
         return countryModalFromJson(response.body);
       } else {
         var jsondata = jsonDecode(response.body);

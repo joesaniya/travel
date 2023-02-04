@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 
 import '../models/atteraction_model.dart';
 import '../views/checkout_screen.dart';
+import '../../controllers/attraction_Controller.dart';
 
 class DetailController extends FxController {
   TickerProvider ticker;
@@ -96,6 +97,26 @@ class DetailController extends FxController {
       //   appBarColor = Colors.transparent;
       // });
     }
+  }
+
+  bool isLoading = true;
+
+  getDetailAttraction(productid, setState) {
+    log('getDetail Attraction function called');
+    Future.delayed(Duration.zero, () async {
+      await AttractionController()
+          .getDetailattractionList(productid: productid)
+          .then((value) {
+        log('Details => $value');
+        if (value != null) {
+          isLoading = false;
+          // detailattraction = value;
+          setState(() {
+            detailattraction = value;
+          });
+        }
+      });
+    });
   }
 
   showFAB(TabController tabController) {

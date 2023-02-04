@@ -255,7 +255,9 @@ class RegisterController extends FxController {
       // log('isempty');
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("please select country code")));
-    } else if (phoneTE.text.isEmpty || phoneTE.text.length != 10) {
+    } else if (phoneTE.text.isEmpty
+        // || phoneTE.text.length != 10
+        ) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Please enter 10digit number code")));
     } else if (passwordTE.text.isEmpty) {

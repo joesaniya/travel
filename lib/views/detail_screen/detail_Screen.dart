@@ -6,7 +6,6 @@ import 'package:hotel_travel/controllers/Detail_controller.dart';
 import 'package:hotel_travel/views/detail_screen/review_Screen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../controllers/attraction_Controller.dart';
 import '../../loading_effect.dart';
 import '../../theme/app_theme.dart';
 
@@ -27,26 +26,8 @@ class _DetailScreenState extends State<DetailScreen>
   late ThemeData theme;
   late OutlineInputBorder outlineInputBorder;
   late DetailController controller;
-  bool isLoading = true;
 
   // List<DetailattractionModal> detailattraction = <DetailattractionModal>[];
-
-  getDetailAttraction() {
-    log('getDetail Attraction function called');
-    Future.delayed(Duration.zero, () async {
-      await AttractionController()
-          .getDetailattractionList(productid: widget.productid)
-          .then((value) {
-        log('Details => $value');
-        if (value != null) {
-          isLoading = false;
-          setState(() {
-            controller.detailattraction = value;
-          });
-        }
-      });
-    });
-  }
 
   @override
   void initState() {
@@ -55,7 +36,7 @@ class _DetailScreenState extends State<DetailScreen>
       this,
       //  widget.productid
     ));
-    getDetailAttraction();
+    controller.getDetailAttraction(widget.productid, setState);
     theme = AppTheme.shoppingTheme;
 
     outlineInputBorder = const OutlineInputBorder(
@@ -138,15 +119,19 @@ class _DetailScreenState extends State<DetailScreen>
                         itemCount:
                             controller.detailattraction.first.images.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            child: Image(
-                              image: NetworkImage(
-                                  'https://a.walletbot.online/${controller.detailattraction.first.images[index]}'),
-                              height: MediaQuery.of(context).size.height / 3,
-                              width: MediaQuery.of(context).size.width,
-                              fit: BoxFit.fill,
-                            ),
-                          );
+                          return Hero(
+                              tag:
+                                  "product_image_${controller.detailattraction.first.images.first}",
+                              child: Container(
+                                child: Image(
+                                  image: NetworkImage(
+                                      'https://a.walletbot.online/${controller.detailattraction.first.images[index]}'),
+                                  height:
+                                      MediaQuery.of(context).size.height / 3,
+                                  width: MediaQuery.of(context).size.width,
+                                  fit: BoxFit.fill,
+                                ),
+                              ));
                         }),
                   ),
                   Positioned(
@@ -224,11 +209,15 @@ class _DetailScreenState extends State<DetailScreen>
                             ],
                           ),
                           FxSpacing.height(10),
-                          FxText.titleMedium(
-                              // controller.product.title,
-                              controller.detailattraction.first.title,
-                              fontWeight: 600,
-                              letterSpacing: 0),
+                          Hero(
+                            tag:
+                                "product_title_${controller.detailattraction.first.title}",
+                            child: FxText.titleMedium(
+                                // controller.product.title,
+                                controller.detailattraction.first.title,
+                                fontWeight: 600,
+                                letterSpacing: 0),
+                          ),
                           Container(
                             margin: const EdgeInsets.only(top: 4),
                             child: Row(
@@ -325,11 +314,15 @@ class _DetailScreenState extends State<DetailScreen>
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              FxText.bodyMedium(
-                                  controller
-                                      .detailattraction.first.averageRating
-                                      .toString(),
-                                  fontWeight: 700),
+                              Hero(
+                                tag:
+                                    "product_image_${controller.detailattraction.first.averageRating}",
+                                child: FxText.bodyMedium(
+                                    controller
+                                        .detailattraction.first.averageRating
+                                        .toString(),
+                                    fontWeight: 700),
+                              ),
                               Container(
                                   margin: const EdgeInsets.only(left: 4),
                                   child: FxStarRating(rating: 4.1))

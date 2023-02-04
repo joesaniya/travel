@@ -252,7 +252,7 @@ class _SearchPlaceState extends State<SearchPlace>
                                       //     .countries!
                                       countryList.isEmpty ||
                                               countryList
-                                                  .first.destinations!.isEmpty
+                                                  .first.destinations.isEmpty
                                           ? []
 
                                               // _countryCodes
@@ -271,10 +271,10 @@ class _SearchPlaceState extends State<SearchPlace>
                                                     ),
                                                   )))
                                               .toList()
-                                          : countryList.first.destinations!
+                                          : countryList.first.destinations
                                               .map((e) => SearchFieldListItem(
                                                   // e,
-                                                  e!.name.toString(),
+                                                  e.name.toString(),
                                                   child: Padding(
                                                     padding: const EdgeInsets
                                                             .symmetric(

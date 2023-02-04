@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutx/flutx.dart';
+import 'package:hotel_travel/services/auth_service.dart';
 import 'package:hotel_travel/views/search_screens/search_place.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -28,20 +30,48 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   late HomeController controller;
   String _tabbed = '1';
-  String? name;
+  String? name, currencies, countryCode;
+  SharedPreferences? sharedPreferences;
 
   bool isLoading = true;
   List<AllattractionModal> allattractionList = <AllattractionModal>[];
 
-  getAttraction() {
+  String? currency() {
+    if (currencies != null) {
+      List<dynamic> countriesList = jsonDecode(currencies!);
+      String? isoCode;
+
+      log("Country list => $countriesList");
+      print('''
+Country Code => $countryCode
+''');
+      for (var val in countriesList) {
+        if (val['country']['_id'] == countryCode) {
+          isoCode = val['isocode'];
+          break;
+        }
+      }
+      return isoCode;
+    }
+    return null;
+  }
+
+  getAttraction() async {
+    await AuthService().getCountry();
     log('getAttraction function called');
+    sharedPreferences = await SharedPreferences.getInstance();
     Future.delayed(Duration.zero, () async {
       await AttractionController().getAllattractionList().then((value) {
         if (value != null) {
           isLoading = false;
           allattractionList.add(value);
 
-          setState(() {});
+          setState(() {
+            countryCode = sharedPreferences!
+                .getString(AppConstants.KEY_ACCESS_TOKEN_countryId);
+            currencies = sharedPreferences!
+                .getString(AppConstants.KEY_ACCESS_TOKEN_CurrenciesList);
+          });
         }
       });
     });
@@ -50,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     getAttraction();
     theme = AppTheme.shoppingTheme;
     theme1 = AppTheme.learningTheme;
@@ -113,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     // child: Image(image: NetworkImage(product.images.first)),
                     child: Hero(
-                      // tag: "product_image_${product.id}",
-                      tag: "excursion_id",
+                      tag: "product_image_${product.images.first}",
+                      // tag: "excursion_id",
                       child: Image(
                         // image: AssetImage(product.image),
                         image: NetworkImage(
@@ -190,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                         FxSpacing.height(8),
                         Hero(
-                          tag: "excursion_title",
+                          tag: "product_title_${product.title}",
                           // child: FxText.bodyLarge(
                           //   product.name,
                           //   // fontWeight: 500,
@@ -204,8 +235,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                         FxSpacing.height(4),
                         Hero(
-                          // tag: "${product.duration}",
-                          tag: 'Excursion_duration',
+                          tag: "${product.duration}",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
                             "${product.duration} AED",
@@ -218,8 +248,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Hero(
-                              tag: "excursion_rating",
-                              // tag: "${product.averageRating}",
+                              tag: "${product.averageRating}",
                               child: Row(
                                 children: [
                                   const Icon(
@@ -468,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ],
                     ),
                     FxText(
-                      '${product.activity.adultPrice.toString()} AED',
+                      '${currency() ?? '\$'} ${product.activity.adultPrice.toString()}',
                       color: const Color(0xff1529e8),
                     ),
                   ],

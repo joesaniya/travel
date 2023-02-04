@@ -225,10 +225,10 @@ class _RegisterScreenState extends State<RegisterScreen>
                                 // controller.countryCodes.map
                                 // _countryCodes.map
                                 countryList.isNotEmpty &&
-                                        countryList.first.countries!.isNotEmpty
-                                    ? countryList.first.countries!.map((value) {
+                                        countryList.first.countries.isNotEmpty
+                                    ? countryList.first.countries.map((value) {
                                         return DropdownMenuItem<String>(
-                                            value: value!.id.toString(),
+                                            value: value.id.toString(),
                                             child: Center(
                                               child: Text(
                                                 value.phonecode.toString(),
