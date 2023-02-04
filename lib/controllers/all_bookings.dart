@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutx/flutx.dart';
-import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 
 import '../models/category.dart';
 import '../models/product.dart';
@@ -12,7 +11,7 @@ import '../views/hotel_travel_constants.dart';
 
 class AllBookingController extends FxController {
   TickerProvider ticker;
- AllBookingController(this.ticker);
+  AllBookingController(this.ticker);
   List<Category>? categories;
   List<Product>? products;
   bool uiLoading = true;
@@ -140,23 +139,23 @@ class AllBookingController extends FxController {
   void goToSingleProduct(Product product) {
     log(product.name);
     log('message');
-    Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 500),
-            transitionsBuilder: (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child,
-            ) =>
-                FadeTransition(
-                  opacity: animation,
-                  child: child,
-                ),
-            pageBuilder: (_, __, ___) => SingleProductScreen(product))
-        // PageRouteBuilder(
-        //     transitionDuration: const Duration(seconds: 1),
-        //     pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-        );
+    // Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
+    //         transitionDuration: const Duration(milliseconds: 500),
+    //         transitionsBuilder: (
+    //           BuildContext context,
+    //           Animation<double> animation,
+    //           Animation<double> secondaryAnimation,
+    //           Widget child,
+    //         ) =>
+    //             FadeTransition(
+    //               opacity: animation,
+    //               child: child,
+    //             ),
+    //         pageBuilder: (_, __, ___) => SingleProductScreen(product))
+    //     // PageRouteBuilder(
+    //     //     transitionDuration: const Duration(seconds: 1),
+    //     //     pageBuilder: (_, __, ___) => SingleProductScreen(product)),
+    //     );
   }
 
   void goToSubscription() {

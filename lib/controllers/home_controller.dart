@@ -4,21 +4,21 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:flutx/flutx.dart';
-import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 
-// import 'package:hotel_travel/models/all_attraction_modal.dart';
-import '../models/category.dart';
+import 'package:hotel_travel/models/all_attraction_modal.dart';
 import '../models/product.dart';
+
+import '../views/detail_screen/detail_Screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class HomeController extends FxController {
   TickerProvider ticker;
   HomeController(this.ticker);
-  List<Category>? categories;
+  // List<Category>? categories;
   List<Product>? products;
-  // List<AllattractionModal> allattractionList = <AllattractionModal>[];
+  List<AllattractionModal> allattractionList = <AllattractionModal>[];
   bool uiLoading = true;
-  late Category selectedCategory;
+  // late Category selectedCategory;
   late AnimationController animationController;
   late AnimationController bellController;
   late Animation<double> scaleAnimation,
@@ -117,9 +117,9 @@ class HomeController extends FxController {
   }
 
   void fetchData() {
-    categories = HotelTravelCache.categories;
-    products = HotelTravelCache.products;
-    selectedCategory = categories!.first;
+    // categories = HotelTravelCache.categories;
+    // products = HotelTravelCache.products;
+    // selectedCategory = categories!.first;
     log('selectedCategory');
     // log(selectedCategory.)
     // uiLoading = false;
@@ -136,31 +136,29 @@ class HomeController extends FxController {
     update();
   }
 
-  void changeSelectedCategory(Category category) {
-    selectedCategory = category;
-    update();
-  }
+  // void changeSelectedCategory(Category category) {
+  //   selectedCategory = category;
+  //   update();
+  // }
 
-  void goToSingleProduct(Product product) {
-    log(product.name);
+  void goToSingleProduct(Datum product) {
+    log(product.id);
     log('message');
     Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 500),
-            transitionsBuilder: (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-              Widget child,
-            ) =>
-                FadeTransition(
-                  opacity: animation,
-                  child: child,
-                ),
-            pageBuilder: (_, __, ___) => SingleProductScreen(product))
-        // PageRouteBuilder(
-        //     transitionDuration: const Duration(seconds: 1),
-        //     pageBuilder: (_, __, ___) => SingleProductScreen(product)),
-        );
+        transitionDuration: const Duration(milliseconds: 500),
+        transitionsBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) =>
+            FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+        pageBuilder: (_, __, ___) => DetailScreen(product.id)
+        // SingleProductScreen(product.id)
+        ));
   }
 
   void goToSubscription() {

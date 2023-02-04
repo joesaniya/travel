@@ -6,9 +6,10 @@ import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/bottomSheet/Filter_Sheet.dart';
 import 'package:hotel_travel/views/bottomSheet/categories_Sheet.dart';
 
+import '../controllers/attraction_Controller.dart';
 import '../controllers/search_Home_controller.dart';
 import '../loading_effect.dart';
-import '../models/product.dart';
+import '../models/all_attraction_modal.dart';
 import '../theme/app_theme.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -25,9 +26,27 @@ class _SearchScreenState extends State<SearchScreen>
   late ThemeData theme, theme1;
 
   late HomeSearchController controller;
+  bool isLoading = true;
+  List<AllattractionModal> allattractionList = <AllattractionModal>[];
+
+  getAttraction() {
+    log('getAttraction function called');
+    Future.delayed(Duration.zero, () async {
+      await AttractionController().getAllattractionList().then((value) {
+        if (value != null) {
+          isLoading = false;
+          allattractionList.add(value);
+
+          setState(() {});
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    getAttraction();
     theme = AppTheme.shoppingTheme;
     theme1 = AppTheme.learningTheme;
 
@@ -53,7 +72,8 @@ class _SearchScreenState extends State<SearchScreen>
   }
 
   Widget _buildBody() {
-    if (controller.uiLoading) {
+    // if (controller.uiLoading)
+    if (allattractionList.isEmpty) {
       return Scaffold(
           body: Padding(
         padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
@@ -202,7 +222,8 @@ class _SearchScreenState extends State<SearchScreen>
             //content
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: _buildProductList(),
+              // child: _buildProductList(),
+              child: _buildProductListUi(),
             ),
           ],
         ),
@@ -210,26 +231,23 @@ class _SearchScreenState extends State<SearchScreen>
     }
   }
 
-  Widget _buildProductList() {
-    String heroKey = FxTextUtils.randomString(10); //new page nav
+  //topatt
+  Widget _buildProductListUi() {
     List<Widget> list = [];
 
-    for (Product product in controller.products!) {
-      log(product.name);
-      log(controller.products!.length.toString());
+    // for (Product product in controller.products!)
+    for (var product in allattractionList.first.attractions.data) {
       list.add(FadeTransition(
         opacity: controller.fadeAnimation,
         child: InkWell(
           onTap: () {
+            log('clicked');
             controller.goToSingleProduct(product);
-            // Navigator.push(
-            //     context,
-            //     PageRouteBuilder(
-            //         transitionDuration: Duration(milliseconds: 500),
-            //         pageBuilder: (_, __, ___) =>
-            //             GrocerySingleProductScreen(product, heroKey)));
           },
           child: Container(
+            // onTap: () {
+            //   controller.goToSingleProduct(product);
+            // },
             // borderRadiusAll: 4,
             // // paddingAll: 16,
             // height: 120,
@@ -259,10 +277,14 @@ class _SearchScreenState extends State<SearchScreen>
                       borderRadius: BorderRadius.circular(10),
                     ),
                     clipBehavior: Clip.antiAliasWithSaveLayer,
+                    // child: Image(image: NetworkImage(product.images.first)),
                     child: Hero(
-                      tag: "product_image_${product.name}",
+                      tag: "product_image_${product.images}",
                       child: Image(
-                        image: AssetImage(product.image),
+                        // image: AssetImage(product.image),
+                        image: NetworkImage(
+                            'https://a.walletbot.online/${product.images.first}'),
+                        // image: AssetImage(product.images.first),
                         // height: 100,
                         height: 132,
                         width: 150,
@@ -278,20 +300,23 @@ class _SearchScreenState extends State<SearchScreen>
                       children: [
                         Row(
                           children: [
-                            FxContainer(
-                              borderRadiusAll: 10,
-                              // padding: FxSpacing.xy(8, 4),
-                              padding: FxSpacing.xy(6, 2),
-                              // color: Color(0xff1529e8),
-                              color: Colors.blueGrey,
-                              child: FxText.bodySmall(
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                // 'Theme Park',
-                                'Park',
-                                fontWeight: 300,
-                                color: Colors.white,
-                                // color: theme.colorScheme.onPrimary,
+                            Expanded(
+                              child: FxContainer(
+                                borderRadiusAll: 10,
+                                // padding: FxSpacing.xy(8, 4),
+                                padding: FxSpacing.xy(6, 2),
+                                // color: Color(0xff1529e8),
+                                color: Colors.blueGrey,
+                                child: FxText.bodySmall(
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  // 'Theme Park',
+                                  product.category.categoryName.name,
+                                  // 'Park',
+                                  fontWeight: 300,
+                                  color: Colors.white,
+                                  // color: theme.colorScheme.onPrimary,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -330,13 +355,13 @@ class _SearchScreenState extends State<SearchScreen>
                         ),
                         FxSpacing.height(8),
                         Hero(
-                          tag: "product_${product.name}",
+                          tag: "product_${product.title}",
                           // child: FxText.bodyLarge(
                           //   product.name,
                           //   // fontWeight: 500,
                           // ),
                           child: FxText.bodyLarge(
-                            product.name,
+                            product.title,
                             fontWeight: 800,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
@@ -344,10 +369,10 @@ class _SearchScreenState extends State<SearchScreen>
                         ),
                         FxSpacing.height(4),
                         Hero(
-                          tag: "${product.name}_${product.price}",
+                          tag: "${product.duration}_${product.durationType}",
                           child: FxText.labelLarge(
                             // '\$' + product.price.toString(),
-                            "${product.price} AED",
+                            "${product.duration} AED",
                             // "\$" + product.price.toString() + "/hour",
                             fontWeight: 700,
                           ),
@@ -357,7 +382,8 @@ class _SearchScreenState extends State<SearchScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Hero(
-                              tag: "${product.name}_${product.rating}",
+                              tag:
+                                  "${product.averageRating}_${product.totalReviews}",
                               child: Row(
                                 children: [
                                   const Icon(
@@ -401,6 +427,198 @@ class _SearchScreenState extends State<SearchScreen>
       children: list,
     );
   }
+
+  // Widget _buildProductList() {
+  //   String f = FxTextUtils.randomString(10); //new page nav
+  //   List<Widget> list = [];
+
+  //   for (Product product in controller.products!) {
+  //     log(product.name);
+  //     log(controller.products!.length.toString());
+  //     list.add(FadeTransition(
+  //       opacity: controller.fadeAnimation,
+  //       child: InkWell(
+  //         onTap: () {
+  //           controller.goToSingleProduct(product);
+  //           // Navigator.push(
+  //           //     context,
+  //           //     PageRouteBuilder(
+  //           //         transitionDuration: Duration(milliseconds: 500),
+  //           //         pageBuilder: (_, __, ___) =>
+  //           //             GrocerySingleProductScreen(product, heroKey)));
+  //         },
+  //         child: Container(
+  //           // borderRadiusAll: 4,
+  //           // // paddingAll: 16,
+  //           // height: 120,
+  //           height: 132,
+  //           decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: const BorderRadius.all(Radius.circular(10)),
+  //               border: Border.all(color: Colors.grey.shade300, width: 1)),
+  //           margin: const EdgeInsets.only(
+  //             bottom: 20,
+  //           ),
+  //           // //margin: EdgeInsets.all(8),
+  //           // // color: Colors.green,
+  //           // margin: FxSpacing.bottom(20),
+
+  //           child: Container(
+  //             margin: const EdgeInsets.all(8),
+  //             child: Row(
+  //               children: [
+  //                 Container(
+  //                   // margin: EdgeInsets.all(8),
+  //                   // paddingAll: 0,
+  //                   // borderRadiusAll: 4,
+  //                   // margin: EdgeInsets.all(8),
+
+  //                   decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                   ),
+  //                   clipBehavior: Clip.antiAliasWithSaveLayer,
+  //                   child: Hero(
+  //                     tag: "product_image_${product.name}",
+  //                     child: Image(
+  //                       image: AssetImage(product.image),
+  //                       // height: 100,
+  //                       height: 132,
+  //                       width: 150,
+  //                       fit: BoxFit.cover,
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 FxSpacing.width(20),
+  //                 Expanded(
+  //                   child: Column(
+  //                     crossAxisAlignment: CrossAxisAlignment.start,
+  //                     mainAxisAlignment: MainAxisAlignment.start,
+  //                     children: [
+  //                       Row(
+  //                         children: [
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               overflow: TextOverflow.ellipsis,
+  //                               maxLines: 1,
+  //                               // 'Theme Park',
+  //                               'Park',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             width: 5,
+  //                           ),
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               'Ticket',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                           const SizedBox(
+  //                             width: 5,
+  //                           ),
+  //                           FxContainer(
+  //                             borderRadiusAll: 10,
+  //                             // padding: FxSpacing.xy(8, 4),
+  //                             padding: FxSpacing.xy(6, 2),
+  //                             // color: Color(0xff1529e8),
+  //                             color: Colors.blueGrey,
+  //                             child: FxText.bodySmall(
+  //                               'Offer',
+  //                               fontWeight: 300,
+  //                               color: Colors.white,
+  //                               // color: theme.colorScheme.onPrimary,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                       FxSpacing.height(8),
+  //                       Hero(
+  //                         tag: "product_${product.name}",
+  //                         // child: FxText.bodyLarge(
+  //                         //   product.name,
+  //                         //   // fontWeight: 500,
+  //                         // ),
+  //                         child: FxText.bodyLarge(
+  //                           product.name,
+  //                           fontWeight: 800,
+  //                           overflow: TextOverflow.ellipsis,
+  //                           maxLines: 2,
+  //                         ),
+  //                       ),
+  //                       FxSpacing.height(4),
+  //                       Hero(
+  //                         tag: "${product.name}_${product.price}",
+  //                         child: FxText.labelLarge(
+  //                           // '\$' + product.price.toString(),
+  //                           "${product.price} AED",
+  //                           // "\$" + product.price.toString() + "/hour",
+  //                           fontWeight: 700,
+  //                         ),
+  //                       ),
+  //                       FxSpacing.height(6),
+  //                       Row(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Hero(
+  //                             tag: "${product.name}_${product.rating}",
+  //                             child: Row(
+  //                               children: [
+  //                                 const Icon(
+  //                                   // FeatherIcons.star,
+  //                                   Icons.star,
+  //                                   color: Colors.yellow,
+  //                                   size: 12,
+  //                                 ),
+  //                                 FxSpacing.width(4),
+  //                                 FxText.bodySmall(
+  //                                   '4.5',
+  //                                   fontWeight: 600,
+  //                                   color: Colors.black,
+  //                                 ),
+  //                               ],
+  //                             ),
+  //                           ),
+  //                           // FxContainer.bordered(
+  //                           //   paddingAll: 4,
+  //                           //   borderRadiusAll: 4,
+  //                           //   child: Icon(
+  //                           //     FeatherIcons.plus,
+  //                           //     size: 14,
+  //                           //     color: theme.colorScheme.onBackground,
+  //                           //   ),
+  //                           // ),
+  //                         ],
+  //                       ),
+  //                     ],
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ));
+  //   }
+
+  //   return Column(
+  //     children: list,
+  //   );
+  // }
 
   Widget endDrawer() {
     return Container(

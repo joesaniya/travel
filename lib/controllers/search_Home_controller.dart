@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 
-import 'package:hotel_travel/views/detail_screen/single_product_screen.dart';
 import 'package:intl/intl.dart';
 
+import '../models/all_attraction_modal.dart';
 import '../models/product.dart';
+import '../views/detail_screen/detail_Screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class HomeSearchController extends FxController {
@@ -139,7 +140,7 @@ class HomeSearchController extends FxController {
     }
   }
 
-  void goToSingleProduct(Product product) {
+  void goToSingleProduct(Datum product) {
     Navigator.of(context, rootNavigator: true).push(PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 500),
         transitionsBuilder: (
@@ -152,7 +153,7 @@ class HomeSearchController extends FxController {
               opacity: animation,
               child: child,
             ),
-        pageBuilder: (_, __, ___) => SingleProductScreen(product)));
+        pageBuilder: (_, __, ___) => DetailScreen(product.id)));
   }
 
   void openEndDrawer() {
