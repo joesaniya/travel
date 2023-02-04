@@ -10,7 +10,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../../controllers/attraction_Controller.dart';
 import '../../controllers/single_product_controller.dart';
 import '../../loading_effect.dart';
-import '../../models/detail_attraction_modal.dart';
+
+import '../../models/atteraction_model.dart';
 import '../../models/product.dart';
 import '../../theme/app_theme.dart';
 

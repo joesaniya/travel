@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutx/flutx.dart';
 import 'package:intl/intl.dart';
 
-import '../models/detail_attraction_modal.dart';
+import '../models/atteraction_model.dart';
 import '../views/checkout_screen.dart';
 
 class DetailController extends FxController {

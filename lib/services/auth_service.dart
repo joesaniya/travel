@@ -3,11 +3,13 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hotel_travel/models/all_attraction_modal.dart';
-import 'package:hotel_travel/models/detail_attraction_modal.dart';
+
 import 'package:http/http.dart' as http;
 
 import '../models/Country_modal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/atteraction_model.dart';
 
 class AuthService {
   // var jsonResponse;

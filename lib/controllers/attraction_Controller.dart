@@ -1,5 +1,5 @@
 import 'package:hotel_travel/models/all_attraction_modal.dart';
-import 'package:hotel_travel/models/detail_attraction_modal.dart';
+import '../models/atteraction_model.dart';
 
 import '../services/attraction_Service.dart';
 

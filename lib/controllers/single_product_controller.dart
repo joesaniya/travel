@@ -6,7 +6,7 @@ import 'package:flutx/flutx.dart';
 
 import 'package:intl/intl.dart';
 
-import '../models/detail_attraction_modal.dart';
+import '../models/atteraction_model.dart';
 import '../models/product.dart';
 import '../views/detail_screen/Activity_screen.dart';
 import '../views/hotel_travel_constants.dart';
