@@ -6,7 +6,7 @@ import 'package:flutx/flutx.dart';
 import 'package:hotel_travel/views/bottomSheet/Filter_Sheet.dart';
 import 'package:hotel_travel/views/bottomSheet/categories_Sheet.dart';
 
-import '../controllers/auth_controller.dart';
+import '../controllers/attraction_Controller.dart';
 import '../controllers/search_Home_controller.dart';
 import '../loading_effect.dart';
 import '../models/all_attraction_modal.dart';
@@ -32,10 +32,8 @@ class _SearchScreenState extends State<SearchScreen>
   getAttraction() {
     log('getAttraction function called');
     Future.delayed(Duration.zero, () async {
-      await AuthController().getAllattractionList().then((value) {
-        log('AuthController().getAllattractionList()');
+      await AttractionController().getAllattractionList().then((value) {
         if (value != null) {
-          log('AuthController().getAllattractionList().ifvalue');
           isLoading = false;
           allattractionList.add(value);
 

@@ -7,7 +7,7 @@ import 'package:flutx/flutx.dart';
 
 import 'package:hotel_travel/models/all_attraction_modal.dart';
 import '../models/product.dart';
-import '../views/detail_screen/single_product_screen.dart';
+import '../views/detail_Screen.dart';
 import '../views/hotel_travel_constants.dart';
 
 class HomeController extends FxController {
@@ -155,7 +155,9 @@ class HomeController extends FxController {
               opacity: animation,
               child: child,
             ),
-        pageBuilder: (_, __, ___) => SingleProductScreen(product.id)));
+        pageBuilder: (_, __, ___) => DetailScreen(product.id)
+        // SingleProductScreen(product.id)
+        ));
   }
 
   void goToSubscription() {

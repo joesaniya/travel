@@ -6,18 +6,17 @@ import 'package:flutx/flutx.dart';
 import 'package:intl/intl.dart';
 
 import '../models/detail_attraction_modal.dart';
-import '../models/product.dart';
 import '../views/checkout_screen.dart';
-import '../views/hotel_travel_constants.dart';
 
-class SingleProductController extends FxController {
+class DetailController extends FxController {
   TickerProvider ticker;
-  SingleProductController(
-    this.ticker,
-    //  this.product
-  ) {
-    sizes = ['S', 'M', 'L', 'XL'];
-  }
+  DetailController(this.ticker);
+
+  // List<DetailattractionModal> detailAttractions = <DetailattractionModal>[];
+
+//  late  Product product;
+  // late DetailattractionModal product;
+  List<DetailattractionModal> detailattraction = <DetailattractionModal>[];
   bool showLoading = true, uiLoading = true;
 
   //tab
@@ -25,10 +24,9 @@ class SingleProductController extends FxController {
   late ScrollController scrollController;
   //
 
-  int colorSelected = 1;
 //  late  Product product;
   // late DetailattractionModal product;
-  List<DetailattractionModal> detailattraction = <DetailattractionModal>[];
+
   late AnimationController animationController, cartController, dateController;
   late Animation<Color?> colorAnimation;
   late Animation<double> sizeAnimation,
@@ -48,7 +46,7 @@ class SingleProductController extends FxController {
   late List<String> sizes;
   String selectedSize = 'M';
 
-  List<Product>? products;
+  // List<Product>? products;
   late double order, tax = 30, offer = 50, total;
 
   String? selectedtransfer;
@@ -123,7 +121,7 @@ class SingleProductController extends FxController {
     //
     dateTE = TextEditingController();
     save = false;
-    fetchData();
+    // fetchData();
     dateController = AnimationController(
         vsync: ticker, duration: const Duration(milliseconds: 50));
     timerAnimation = Timer.periodic(const Duration(seconds: 4), (Timer timer) {
@@ -227,38 +225,38 @@ class SingleProductController extends FxController {
     timerAnimation.cancel();
   }
 
-  bool increaseAble(Product product) {
-    return product.person < 9;
-    // return product.person < product.person;
-    // return cart.quantity < cart.product.quantity;
-  }
+  // bool increaseAble(Product product) {
+  //   return product.person < 9;
+  //   // return product.person < product.person;
+  //   // return cart.quantity < cart.product.quantity;
+  // }
 
-  bool decreaseAble(Product product) {
-    return product.person > 1;
-  }
+  // bool decreaseAble(Product product) {
+  //   return product.person > 1;
+  // }
 
-  void increment(Product product) {
-    if (!increaseAble(product)) return;
-    product.person++;
-    calculateBilling();
-    update();
-  }
+  // void increment(Product product) {
+  //   if (!increaseAble(product)) return;
+  //   product.person++;
+  //   calculateBilling();
+  //   update();
+  // }
 
-  void decrement(Product product) {
-    if (!decreaseAble(product)) return;
-    product.person--;
-    calculateBilling();
-    update();
-  }
+  // void decrement(Product product) {
+  //   if (!decreaseAble(product)) return;
+  //   product.person--;
+  //   calculateBilling();
+  //   update();
+  // }
 
-  void calculateBilling() {
-    order = 0;
-    for (Product product in products!) {
-      order = order + (product.price * product.person);
-    }
+  // void calculateBilling() {
+  //   order = 0;
+  //   for (Product product in products!) {
+  //     order = order + (product.price * product.person);
+  //   }
 
-    total = order + tax - offer;
-  }
+  //   total = order + tax - offer;
+  // }
 
   Future<void> dateselect() async {
     DateTime? pickedDate = await showDatePicker(
@@ -314,11 +312,11 @@ class SingleProductController extends FxController {
     update();
   }
 
-  void fetchData() async {
-    log('fetch data');
-    products = HotelTravelCache.products;
-    log(products!.length.toString());
-  }
+  // void fetchData() async {
+  //   log('fetch data');
+  //   products = HotelTravelCache.products;
+  //   log(products!.length.toString());
+  // }
 
   void fetchloader() async {
     await Future.delayed(const Duration(seconds: 4));
@@ -347,6 +345,6 @@ class SingleProductController extends FxController {
 
   @override
   String getTag() {
-    return "single_product_controller";
+    return "Detail_controller";
   }
 }

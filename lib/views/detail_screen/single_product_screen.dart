@@ -7,8 +7,9 @@ import 'package:hotel_travel/controllers/saved_controller.dart';
 import 'package:hotel_travel/views/detail_screen/review_Screen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../controllers/auth_controller.dart';
+import '../../controllers/attraction_Controller.dart';
 import '../../controllers/single_product_controller.dart';
+import '../../loading_effect.dart';
 import '../../models/detail_attraction_modal.dart';
 import '../../models/product.dart';
 import '../../theme/app_theme.dart';
@@ -35,18 +36,18 @@ class _SingleProductScreenState extends State<SingleProductScreen>
 
   bool isLoading = true;
 
-  List<DetailattractionModal> allattractionList = <DetailattractionModal>[];
+  List<DetailattractionModal> detailattraction = <DetailattractionModal>[];
 
   getDetailAttraction() {
     log('getDetail Attraction function called');
     Future.delayed(Duration.zero, () async {
-      await AuthController()
+      await AttractionController()
           .getDetailattractionList(productid: widget.productid)
           .then((value) {
-        if (value) {
-          isLoading = false;
-          setState(() {});
-        }
+        // if (value) {
+        //   isLoading = false;
+        //   setState(() {});
+        // }
       });
     });
   }
@@ -100,7 +101,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                 FxText.bodyMedium(
                   // '\$' + controller.order.precise,
                   // controller.product.title,
-                  controller.allattractionList.first.title,
+                  controller.detailattraction.first.title,
                   fontWeight: 700,
                 ),
               ],
@@ -576,7 +577,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                   ),
                   FxText.bodyMedium(
                     // '\$' + controller.order.precise,
-                    controller.allattractionList.first.title,
+                    controller.detailattraction.first.title,
                     fontWeight: 700,
                   ),
                 ],
@@ -947,21 +948,20 @@ class _SingleProductScreenState extends State<SingleProductScreen>
   }
 
   Widget _buildnew() {
-    if (allattractionList.isEmpty) {
-      return const Scaffold(
-        body: CircularProgressIndicator(),
-        //     body: Padding(
-        //   padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
-        //   child: LoadingEffect.getHomeLoadingScreen
-        //       // getProductLoadingScreen->profile
-        //       //getDatingHomeScreen->detail
+    if (detailattraction.isEmpty) {
+      return Scaffold(
+          // body: CircularProgressIndicator(),
+          body: Padding(
+        padding: FxSpacing.top(FxSpacing.safeAreaTop(context) + 20),
+        child: LoadingEffect.getHomeLoadingScreen
+            // getProductLoadingScreen->profile
+            //getDatingHomeScreen->detail
 
-        //       (
-        //     context,
-        //     // theme, theme.colorScheme
-        //   ),
-        // )
-      );
+            (
+          context,
+          // theme, theme.colorScheme
+        ),
+      ));
     } else {
       return Scaffold(
           backgroundColor: const Color(0xfff5f5f5),
@@ -1069,7 +1069,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 color: Colors.blueGrey,
                                 child: FxText.bodySmall(
                                   // 'Theme Park',
-                                  controller.allattractionList.first.title,
+                                  controller.detailattraction.first.title,
                                   // controller.product.bookingType.toString(),
                                   fontWeight: 300,
                                   color: Colors.white,
@@ -1113,7 +1113,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                           FxSpacing.height(10),
                           FxText.titleMedium(
                               // controller.product.title,
-                              controller.allattractionList.first.title,
+                              controller.detailattraction.first.title,
                               fontWeight: 600,
                               letterSpacing: 0),
                           Container(
@@ -1128,8 +1128,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 Container(
                                     margin: const EdgeInsets.only(left: 2),
                                     child: FxText.bodySmall(
-                                        controller
-                                            .allattractionList.first.title,
+                                        controller.detailattraction.first.title,
                                         fontWeight: 500)),
                               ],
                             ),
@@ -1199,7 +1198,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                         FxText.bodyMedium("Price", fontWeight: 500),
                         FxText.bodyMedium(
                             // "350 \$",
-                            '${controller.allattractionList.first.title} AED',
+                            '${controller.detailattraction.first.title} AED',
                             // controller.product.price.toString(),
                             fontWeight: 700)
                       ],
@@ -1214,7 +1213,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               FxText.bodyMedium(
-                                  controller.allattractionList.first.title,
+                                  controller.detailattraction.first.title,
                                   fontWeight: 700),
                               Container(
                                   margin: const EdgeInsets.only(left: 4),

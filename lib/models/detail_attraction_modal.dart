@@ -17,8 +17,8 @@ class DetailattractionModal {
     required this.title,
     required this.category,
     required this.bookingType,
-    required this.startDate,
-    required this.endDate,
+    this.startDate,
+    this.endDate,
     required this.offDays,
     required this.durationType,
     required this.duration,
@@ -58,8 +58,8 @@ class DetailattractionModal {
   String title;
   Category category;
   String bookingType;
-  DateTime startDate;
-  DateTime endDate;
+  DateTime? startDate;
+  DateTime? endDate;
   List<dynamic> offDays;
   String durationType;
   int duration;
@@ -100,8 +100,12 @@ class DetailattractionModal {
         title: json["title"],
         category: Category.fromJson(json["category"]),
         bookingType: json["bookingType"],
-        startDate: DateTime.parse(json["startDate"]),
-        endDate: DateTime.parse(json["endDate"]),
+        startDate: json["startDate"] != null
+            ? DateTime.parse(json["startDate"])
+            : null,
+        endDate: json["endDate"] != null
+            ? DateTime.parse(json["endDate"] ?? '')
+            : null,
         offDays: List<dynamic>.from(json["offDays"].map((x) => x)),
         durationType: json["durationType"],
         duration: json["duration"],
@@ -146,8 +150,8 @@ class DetailattractionModal {
         "title": title,
         "category": category.toJson(),
         "bookingType": bookingType,
-        "startDate": startDate.toIso8601String(),
-        "endDate": endDate.toIso8601String(),
+        "startDate": startDate!.toIso8601String(),
+        "endDate": endDate!.toIso8601String(),
         "offDays": List<dynamic>.from(offDays.map((x) => x)),
         "durationType": durationType,
         "duration": duration,

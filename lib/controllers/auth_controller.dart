@@ -64,44 +64,4 @@ class AuthController {
       rethrow;
     }
   }
-
-  //allattractions
-  List<AllattractionModal> allattractionList = <AllattractionModal>[];
-  bool isAllAttractionListLoading = true;
-  Future<AllattractionModal?> getAllattractionList() async {
-    // isCountryListLoading = true;
-    try {
-      var data = await AuthService().getAllAttraction();
-      allattractionList.clear();
-      if (data != null) {
-        allattractionList.add(data);
-        // isCountryListLoading = false;
-        return data; //removed true
-      } else {
-        return null; //falseremoved
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  //detailAttractions
-  List<DetailattractionModal> detailattractionList = <DetailattractionModal>[];
-  bool isdetailAttractionListLoading = true;
-  Future getDetailattractionList({required productid}) async {
-    // isCountryListLoading = true;
-    try {
-      var data = await AuthService().getdetailAttraction(productid: productid);
-      detailattractionList.clear();
-      if (data != null) {
-        detailattractionList.add(data);
-        // isCountryListLoading = false;
-        return true;
-      } else {
-        return false;
-      }
-    } catch (e) {
-      rethrow;
-    }
-  }
 }
